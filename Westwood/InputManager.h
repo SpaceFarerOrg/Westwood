@@ -1,7 +1,7 @@
 #pragma once
 #include "KeyCodes.h"
 #include <map>
-#include <windows.h>
+#include "SFML\Window\Window.hpp"
 #include "SFML\System\Vector2.hpp"
 
 class CInputManager
@@ -11,10 +11,10 @@ public:
 
 	static CInputManager& GetInstance();
 
-	void Init(HWND aClientWindow);
-	void Update(const MSG& aWindowsMessage);
-	void UpdateKeys(const MSG& aWindowsMessage);
-	void UpdateMouse(const MSG& aWindowsMessage);
+	void Init(sf::Window* aClientWindow);
+	void Update(const sf::Event& aWindowsMessage);
+	void UpdateKeys(const sf::Event& aWindowsMessage);
+	void UpdateMouse(const sf::Event& aWindowsMessage);
 	void OncePerFrameUpdate();
 
 	bool IsKeyPressed(EKeyCode aKey);
@@ -30,8 +30,11 @@ private:
 	std::map<EKeyCode, EKeyState> myKeyStates;
 	std::map<EKeyCode, EKeyState> myPreviousKeyStates;
 
+	std::map<EKeyCode, EKeyState> myMouseButtonStates;
+	std::map<EKeyCode, EKeyState> myPreviousMouseButtonStates;
+
 	float myWheelDelta;
 
-	HWND myHWND;
+	sf::Window* myHWND;
 };
 

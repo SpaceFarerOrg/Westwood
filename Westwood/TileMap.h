@@ -5,11 +5,15 @@
 
 class CTileMap
 {
+
+	friend class CWorldEditor;
+
 public:
 	void Load(nlohmann::json& a_tileMapJson);
 	void Render();
 
 	bool IsPositionWalkable(const sf::Vector2f& a_position) const;
+
 private:
 	struct STileData
 	{
@@ -20,6 +24,11 @@ private:
 		short m_tileIndex;
 		bool m_isPassable : 1;
 	};
+
+	void SetTile(const sf::Vector2f& a_position, STileData a_newTile);
+	short ConvertPositionToTileIndex(const sf::Vector2f& a_position) const;
+	sf::Vector2f GetTilePosition(short a_tileIndex) const;
+
 private:
 	ETextures m_texture;
 	unsigned int m_tileCount;

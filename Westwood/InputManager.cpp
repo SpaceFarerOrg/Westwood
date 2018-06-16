@@ -18,26 +18,26 @@ CInputManager & CInputManager::GetInstance()
 	return instance;
 }
 
-void CInputManager::Init(HWND aClientWindow)
+void CInputManager::Init(sf::Window* aClientWindow)
 {
 	myHWND = aClientWindow;
 	CreateKeyStates(myKeyStates);
 	myPreviousKeyStates = myKeyStates;
 }
 
-void CInputManager::Update(const MSG& aWindowsMessage)
+void CInputManager::Update(const sf::Event& aWindowsMessage)
 {
 	UpdateKeys(aWindowsMessage);
 	UpdateMouse(aWindowsMessage);
 }
 
-void CInputManager::UpdateKeys(const MSG & aWindowsMessage)
+void CInputManager::UpdateKeys(const sf::Event & aWindowsMessage)
 {
-	switch (aWindowsMessage.message)
+	switch (aWindowsMessage.type)
 	{
-	case WM_KEYDOWN:
+	case sf::Event::KeyPressed:
 	{
-		EKeyCode key = static_cast<EKeyCode>(aWindowsMessage.wParam);
+		EKeyCode key = static_cast<EKeyCode>(aWindowsMessage.key.code);
 
 		if (myKeyStates.find(key) != myKeyStates.end())
 		{
@@ -46,9 +46,9 @@ void CInputManager::UpdateKeys(const MSG & aWindowsMessage)
 
 		break;
 	}
-	case WM_KEYUP:
+	case sf::Event::KeyReleased:
 	{
-		EKeyCode key = static_cast<EKeyCode>(aWindowsMessage.wParam);
+		EKeyCode key = static_cast<EKeyCode>(aWindowsMessage.key.code);
 
 		if (myKeyStates.find(key) != myKeyStates.end())
 		{
@@ -57,79 +57,81 @@ void CInputManager::UpdateKeys(const MSG & aWindowsMessage)
 
 		break;
 	}
-	case WM_LBUTTONDOWN:
+	case sf::Event::MouseButtonPressed:
 	{
-		EKeyCode key = EKeyCode::MouseLeft;
-
-		myKeyStates[key] = EKeyState::Down;
+		EKeyCode key;
+		
+		switch (aWindowsMessage.mouseButton.button)
+		{
+		case sf::Mouse::Left:
+			key = EKeyCode::MouseLeft;
+			myMouseButtonStates[key] = EKeyState::Down;
+			break;
+		case sf::Mouse::Right:
+			key = EKeyCode::MouseRight;
+			myMouseButtonStates[key] = EKeyState::Down;
+			break;
+		case sf::Mouse::Middle:
+			key = EKeyCode::MouseMiddle;
+			myMouseButtonStates[key] = EKeyState::Down;
+			break;
+		}
 
 		break;
 	}
-	case WM_LBUTTONUP:
+	case sf::Event::MouseButtonReleased:
 	{
-		EKeyCode key = EKeyCode::MouseLeft;
+		EKeyCode key;
 
-		myKeyStates[key] = EKeyState::Up;
-
-		break;
-	}
-	case WM_MBUTTONDOWN:
-	{
-		EKeyCode key = EKeyCode::MouseMiddle;
-
-		myKeyStates[key] = EKeyState::Down;
-
-		break;
-	}
-	case WM_MBUTTONUP:
-	{
-		EKeyCode key = EKeyCode::MouseMiddle;
-
-		myKeyStates[key] = EKeyState::Up;
-
-		break;
-	}
-	case WM_RBUTTONDOWN:
-	{
-		EKeyCode key = EKeyCode::MouseRight;
-
-		myKeyStates[key] = EKeyState::Down;
-
-		break;
-	}
-	case WM_RBUTTONUP:
-	{
-		EKeyCode key = EKeyCode::MouseRight;
-
-		myKeyStates[key] = EKeyState::Up;
-
+		switch (aWindowsMessage.mouseButton.button)
+		{
+		case sf::Mouse::Left:
+			key = EKeyCode::MouseLeft;
+			myMouseButtonStates[key] = EKeyState::Up;
+			break;
+		case sf::Mouse::Right:
+			key = EKeyCode::MouseRight;
+			myMouseButtonStates[key] = EKeyState::Up;
+			break;
+		case sf::Mouse::Middle:
+			key = EKeyCode::MouseMiddle;
+			myMouseButtonStates[key] = EKeyState::Up;
+			break;
+		}
 		break;
 	}
 	}
 }
 
-void CInputManager::UpdateMouse(const MSG & aWindowsMessage)
+void CInputManager::UpdateMouse(const sf::Event & aWindowsMessage)
 {
-	if (aWindowsMessage.message == WM_MOUSEWHEEL)
+	if (aWindowsMessage.type == sf::Event::MouseWheelScrolled)
 	{
-		myWheelDelta = static_cast<float>(GET_WHEEL_DELTA_WPARAM(aWindowsMessage.wParam)) / static_cast<float>(WHEEL_DELTA);
+		myWheelDelta = aWindowsMessage.mouseWheelScroll.delta;
 	}
 }
 
 void CInputManager::OncePerFrameUpdate()
 {
 	myPreviousKeyStates = myKeyStates;
+	myPreviousMouseButtonStates = myMouseButtonStates;
 	myWheelDelta = 0.0f;
 }
 
 bool CInputManager::IsKeyPressed(EKeyCode aKey)
 {
-	return myKeyStates[aKey] == EKeyState::Down && myPreviousKeyStates[aKey] == EKeyState::Up;
+	if (static_cast<int>(aKey) - 200 <= 0)
+		return myKeyStates[aKey] == EKeyState::Down && myPreviousKeyStates[aKey] == EKeyState::Up;
+	else
+		return myMouseButtonStates[aKey] == EKeyState::Down && myPreviousMouseButtonStates[aKey] == EKeyState::Up;
 }
 
 bool CInputManager::IsKeyDown(EKeyCode aKey)
 {
-	return myKeyStates[aKey] == EKeyState::Down;
+	if (static_cast<int>(aKey) - 200 <= 0)
+		return myKeyStates[aKey] == EKeyState::Down;
+	else
+		return myMouseButtonStates[aKey] == EKeyState::Down;
 }
 
 int CInputManager::GetScrollWheelDelta()
@@ -139,11 +141,11 @@ int CInputManager::GetScrollWheelDelta()
 
 sf::Vector2f CInputManager::GetMousePosFloat()
 {
-	sf::Vector2i mPos = sf::Mouse::getPosition(sf::Window(myHWND));
+	sf::Vector2i mPos = sf::Mouse::getPosition(*myHWND);
 	return sf::Vector2f(mPos.x, mPos.y);
 }
 
 sf::Vector2i CInputManager::GetMousePosInt()
 {
-	return sf::Mouse::getPosition(sf::Window(myHWND));
+	return sf::Mouse::getPosition(*myHWND);
 }

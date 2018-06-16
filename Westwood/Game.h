@@ -4,6 +4,7 @@
 #include "GameWorld.h"
 #include "TextureBank.h"
 #include "WindowEventHandler.h"
+#include "WorldEditor.h"
 
 class CGame
 {
@@ -19,6 +20,7 @@ private:
 	CGameWorld m_gameWorld;
 	CTextureBank m_textureBank;
 	sf::Clock m_deltaTimer;
+	CWorldEditor m_worldEditor;
 
 	bool m_shouldRun : 1;
 };

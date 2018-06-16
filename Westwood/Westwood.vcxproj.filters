@@ -18,6 +18,8 @@
       <Filter>Character</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="WindowEventHandler.cpp" />
+    <ClCompile Include="WorldEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -43,6 +45,8 @@
     </ClInclude>
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="KeyCodes.h" />
+    <ClInclude Include="WindowEventHandler.h" />
+    <ClInclude Include="WorldEditor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">

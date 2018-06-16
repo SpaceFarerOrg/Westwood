@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <SFML\Graphics\Sprite.hpp>
+#include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\RenderWindow.hpp>
 
 class CRenderer
@@ -15,8 +16,10 @@ public:
 	sf::RenderWindow& GetWindow();
 
 	static void PushRenderCommand(const sf::Sprite& a_renderCommand);
+	static void PushRenderCommand(const sf::RectangleShape& a_renderCommand);
 private:
 	static std::vector<sf::Sprite> m_renderQueue;
+	static std::vector<sf::RectangleShape> m_rectangleQueue;
 	
 	sf::RenderWindow m_renderWindow;
 	sf::RenderTarget* m_currentRenderTarget;

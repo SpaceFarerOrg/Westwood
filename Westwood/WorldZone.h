@@ -5,6 +5,8 @@
 
 class CWorldZone
 {
+	friend class CWorldEditor;
+
 public:
 	void LoadZone(nlohmann::json& a_zoneJson);
 	void Render();

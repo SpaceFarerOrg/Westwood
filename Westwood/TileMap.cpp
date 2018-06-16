@@ -53,6 +53,20 @@ void CTileMap::Render()
 
 bool CTileMap::IsPositionWalkable(const sf::Vector2f & a_position) const
 {
+	short tileIndex = ConvertPositionToTileIndex(a_position);
+
+	return m_tiles[tileIndex].m_isPassable;
+}
+
+void CTileMap::SetTile(const sf::Vector2f & a_position, STileData a_newTile)
+{
+	short tileIndex = ConvertPositionToTileIndex(a_position);
+
+	m_tiles[tileIndex] = a_newTile;
+}
+
+short CTileMap::ConvertPositionToTileIndex(const sf::Vector2f & a_position) const
+{
 	sf::Vector2i positionInTiles;
 	positionInTiles.x = static_cast<int>(a_position.x / m_tileWidth);
 	positionInTiles.y = static_cast<int>(a_position.y / m_tileHeight);
@@ -60,5 +74,15 @@ bool CTileMap::IsPositionWalkable(const sf::Vector2f & a_position) const
 	short tileIndex = m_width * positionInTiles.y;
 	tileIndex -= m_width - positionInTiles.x;
 
-	return m_tiles[tileIndex].m_isPassable;
+	return tileIndex;
+}
+
+sf::Vector2f CTileMap::GetTilePosition(short a_tileIndex) const
+{
+	sf::Vector2f rv;
+
+	rv.x = (a_tileIndex % m_width) * m_tileWidth;
+	rv.y = (a_tileIndex / m_width) * m_tileHeight;
+
+	return rv;
 }

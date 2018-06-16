@@ -24,7 +24,9 @@ void CGame::Update()
 
 	m_windowEventHandler.RunEventHandling();
 
+	m_worldEditor.Update(m_gameWorld.GetCurrentZone());
 	m_gameWorld.Render();
+	m_worldEditor.Render(&m_renderer.GetWindow());
 
 	m_renderer.RenderToWindow();
 
