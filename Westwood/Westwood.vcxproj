@@ -137,6 +137,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="WindowEventHandler.cpp" />
     <ClCompile Include="WorldZone.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClInclude Include="TextureBank.h" />
     <ClInclude Include="TileInteraction.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="WindowEventHandler.h" />
     <ClInclude Include="WorldZone.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

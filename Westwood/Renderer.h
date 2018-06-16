@@ -12,6 +12,8 @@ public:
 	void Initialize();
 	void RenderToWindow();
 
+	sf::RenderWindow& GetWindow();
+
 	static void PushRenderCommand(const sf::Sprite& a_renderCommand);
 private:
 	static std::vector<sf::Sprite> m_renderQueue;
