@@ -5,6 +5,8 @@
 #include "TextureBank.h"
 #include "WindowEventHandler.h"
 #include "TilesetBank.h"
+#include "AvatarCollection.h"
+#include "Player.h"
 
 class CGame
 {
@@ -19,11 +21,13 @@ private:
 	CRenderer m_renderer;
 	CGameWorld m_gameWorld;
 
+	CAvatarCollection m_avatarCollection;
 	CTextureBank m_textureBank;
 	CTilesetBank m_tilesetBank;
 	
 	sf::Clock m_deltaTimer;
 
+	CPlayer m_player;
 
 	bool m_shouldRun : 1;
 };

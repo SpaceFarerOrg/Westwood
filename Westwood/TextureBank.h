@@ -10,6 +10,7 @@
 enum class ETextures
 {
 	TestTileset,
+	PlayerCharacter,
 	Count,
 };
 

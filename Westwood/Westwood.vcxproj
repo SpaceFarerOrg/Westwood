@@ -133,10 +133,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
+    <ClCompile Include="AvatarCollection.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Serializable.cpp" />
     <ClCompile Include="TextureBank.cpp" />
@@ -148,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
+    <ClInclude Include="AvatarCollection.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="InputManager.h" />

@@ -4,13 +4,8 @@
 class CAvatar
 {
 public:
-	struct SCharacterData
-	{
-
-	};
-public:
-	void Load(const char* a_avatarPath);
 	void SetDirection(const sf::Vector2f& a_direction);
+	void SetMovementSpeed(float a_movementSpeed);
 
 	void SetDeltaTime(float a_deltaTime);
 
@@ -18,6 +13,8 @@ public:
 	void AllowMove(bool a_moveWasAllowed);
 
 	const short GetCurrentZone() const;
+
+	void Draw();
 private:
 	sf::Vector2f CalculateFuturePosition() const;
 

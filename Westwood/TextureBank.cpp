@@ -11,6 +11,7 @@ CTextureBank::CTextureBank()
 void CTextureBank::LoadAllTextures()
 {
 	LoadTexture(ETextures::TestTileset, "debugSpriteSheet");
+	LoadTexture(ETextures::PlayerCharacter, "debugPlayerSprite");
 }
 
 short CTextureBank::LoadUnorderedTexture(const char * a_textureName)

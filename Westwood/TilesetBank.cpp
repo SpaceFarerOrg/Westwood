@@ -25,7 +25,7 @@ void CTilesetBank::LoadAllTilesets()
 
 		m_tilesets.back().LoadFromJson(tilesetJson);
 
-		m_tilesetNameToIndexLUT[tilesetJson["name"].get<std::string>()] = m_tilesets.size() - 1;
+		m_tilesetNameToIndexLUT[tilesetJson["name"].get<std::string>()] = static_cast<short>(m_tilesets.size() - 1);
 	}
 }
 

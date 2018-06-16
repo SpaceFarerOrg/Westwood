@@ -43,11 +43,12 @@ void CTileMap::Render()
 bool CTileMap::IsPositionWalkable(const sf::Vector2f & a_position) const
 {
 	sf::Vector2i positionInTiles;
-	positionInTiles.x = static_cast<int>(a_position.x / m_tileWidth);
-	positionInTiles.y = static_cast<int>(a_position.y / m_tileHeight);
+	positionInTiles.x = static_cast<int>(a_position.x / m_tileWidth) + 1;
+	positionInTiles.y = static_cast<int>(a_position.y / m_tileHeight) + 1;
 
 	short tileIndex = m_width * positionInTiles.y;
 	tileIndex -= m_width - positionInTiles.x;
+	tileIndex -= 1;
 
 	return m_tileset->GetTileData(m_tiles[tileIndex]).m_isPassable;
 }

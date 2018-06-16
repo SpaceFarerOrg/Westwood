@@ -26,6 +26,10 @@
     <ClCompile Include="Tileset.cpp">
       <Filter>World Editor</Filter>
     </ClCompile>
+    <ClCompile Include="AvatarCollection.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Character\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -63,6 +67,9 @@
     <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="TileData.h">
       <Filter>Game World</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarCollection.h">
+      <Filter>Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,11 @@ void CAvatar::SetDirection(const sf::Vector2f & a_direction)
 	m_currentDirection = a_direction;
 }
 
+void CAvatar::SetMovementSpeed(float a_movementSpeed)
+{
+	m_movementSpeed = a_movementSpeed;
+}
+
 void CAvatar::SetDeltaTime(float a_deltaTime)
 {
 	m_currentDeltaTime = a_deltaTime;
@@ -34,6 +39,20 @@ const short CAvatar::GetCurrentZone() const
 {
 	return m_currentZone;
 }
+
+#include <SFML\Graphics\Sprite.hpp>
+#include "Renderer.h"
+#include "TextureBank.h"
+void CAvatar::Draw()
+{
+	sf::Sprite sprite;
+	sprite.setTexture(CTextureBank::GetTexture(ETextures::PlayerCharacter));
+
+	sprite.setPosition(m_position);
+
+	CRenderer::PushRenderCommand(sprite);
+}
+
 
 sf::Vector2f CAvatar::CalculateFuturePosition() const
 {
