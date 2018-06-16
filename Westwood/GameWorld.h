@@ -12,6 +12,7 @@ public:
 
 	void ChangeZone(short a_newZone);
 	void Update(float a_deltaTime);
+	CWorldZone& GetCurrentZone();
 
 	void AddAvatarToWorld(CAvatar& a_avatar);
 private:

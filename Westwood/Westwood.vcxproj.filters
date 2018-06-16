@@ -17,19 +17,9 @@
     <ClCompile Include="Avatar.cpp">
       <Filter>Character</Filter>
     </ClCompile>
-    <ClCompile Include="WindowEventHandler.cpp" />
-    <ClCompile Include="Serializable.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="TilesetBank.cpp">
-      <Filter>World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Tileset.cpp">
-      <Filter>World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="AvatarCollection.cpp" />
-    <ClCompile Include="Player.cpp">
-      <Filter>Character\Player</Filter>
-    </ClCompile>
+    <ClCompile Include="WindowEventHandler.cpp" />
+    <ClCompile Include="WorldEditor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -53,16 +43,6 @@
     <ClInclude Include="Avatar.h">
       <Filter>Character</Filter>
     </ClInclude>
-    <ClInclude Include="WindowEventHandler.h" />
-    <ClInclude Include="Serializable.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Tileset.h">
-      <Filter>World Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="TilesetBank.h">
-      <Filter>World Editor</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="TileData.h">
@@ -74,6 +54,8 @@
     <ClInclude Include="Character.h">
       <Filter>Character</Filter>
     </ClInclude>
+    <ClInclude Include="WindowEventHandler.h" />
+    <ClInclude Include="WorldEditor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -84,12 +66,6 @@
     </Filter>
     <Filter Include="Character\Player">
       <UniqueIdentifier>{62137775-fb7c-4807-86d0-687ec6c14e74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{fbd423ef-4172-4a10-b517-c0d34d59c323}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World Editor">
-      <UniqueIdentifier>{0dbccb45-751b-4771-8908-c9d7223e8ee6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

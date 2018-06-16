@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -146,6 +146,7 @@
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="TilesetBank.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />
+    <ClCompile Include="WorldEditor.cpp" />
     <ClCompile Include="WorldZone.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="TilesetBank.h" />
     <ClInclude Include="WindowEventHandler.h" />
+    <ClInclude Include="WorldEditor.h" />
     <ClInclude Include="WorldZone.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

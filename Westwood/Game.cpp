@@ -31,11 +31,13 @@ void CGame::Update()
 
 	m_windowEventHandler.RunEventHandling();
 
+	m_worldEditor.Update(m_gameWorld.GetCurrentZone());
 	m_player.Update();
 
 	m_gameWorld.Update(deltaTime);
 
 	m_gameWorld.Render();
+	m_worldEditor.Render(&m_renderer.GetWindow());
 
 	m_avatarCollection.RenderAvatars();
 

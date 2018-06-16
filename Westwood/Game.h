@@ -4,6 +4,7 @@
 #include "GameWorld.h"
 #include "TextureBank.h"
 #include "WindowEventHandler.h"
+#include "WorldEditor.h"
 #include "TilesetBank.h"
 #include "AvatarCollection.h"
 #include "Player.h"
@@ -26,6 +27,7 @@ private:
 	CTilesetBank m_tilesetBank;
 	
 	sf::Clock m_deltaTimer;
+	CWorldEditor m_worldEditor;
 
 	CPlayer m_player;
 

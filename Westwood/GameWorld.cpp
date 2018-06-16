@@ -36,6 +36,11 @@ void CGameWorld::Update(float a_deltaTime)
 	UpdateAllAvatars(a_deltaTime);
 }
 
+CWorldZone & CGameWorld::GetCurrentZone()
+{
+	return m_worldZones[m_currentZone];
+}
+
 void CGameWorld::AddAvatarToWorld(CAvatar & a_avatar)
 {
 	m_allAvatars.push_back(&a_avatar);
