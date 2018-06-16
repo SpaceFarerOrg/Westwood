@@ -17,7 +17,8 @@
     <ClCompile Include="Avatar.cpp">
       <Filter>Character</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="WindowEventHandler.cpp" />
+    <ClCompile Include="Serializable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -41,8 +42,10 @@
     <ClInclude Include="Avatar.h">
       <Filter>Character</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="KeyCodes.h" />
+    <ClInclude Include="WindowEventHandler.h" />
+    <ClInclude Include="Serializable.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -53,6 +56,9 @@
     </Filter>
     <Filter Include="Character\Player">
       <UniqueIdentifier>{62137775-fb7c-4807-86d0-687ec6c14e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{fbd423ef-4172-4a10-b517-c0d34d59c323}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

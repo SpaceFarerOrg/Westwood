@@ -133,9 +133,9 @@
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameWorld.cpp" />
-    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Serializable.cpp" />
     <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />
@@ -145,10 +145,9 @@
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameWorld.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Serializable.h" />
     <ClInclude Include="TextureBank.h" />
     <ClInclude Include="TileInteraction.h" />
     <ClInclude Include="TileMap.h" />
