@@ -17,6 +17,7 @@
     <ClCompile Include="Avatar.cpp">
       <Filter>Character</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -40,6 +41,8 @@
     <ClInclude Include="Avatar.h">
       <Filter>Character</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">

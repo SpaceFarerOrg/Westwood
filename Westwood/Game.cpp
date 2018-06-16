@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "InputManager.h"
 
 void CGame::Initialize()
 {

@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "InputManager.h"
 
 CRenderer::CRenderer()
 	: m_currentRenderTarget(nullptr)
@@ -14,6 +15,7 @@ void CRenderer::Initialize()
 	sf::VideoMode videoMode = sf::VideoMode::getDesktopMode();
 
 	m_renderWindow.create(videoMode, "Game", sf::Style::Close);
+	CInputManager::GetInstance().Init(m_renderWindow.getSystemHandle());
 }
 
 void CRenderer::RenderToWindow()
