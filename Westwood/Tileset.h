@@ -12,7 +12,7 @@ public:
 
 	const STileData& GetTileData(short a_tileIndex) const;
 
-	void DrawTileAtPosition(short a_tile, const sf::Vector2f& a_position);
+	void DrawTileAtPosition(short a_tileIndex, const sf::Vector2f& a_position);
 private:
 	STileData* m_tiles;
 	short m_columns;

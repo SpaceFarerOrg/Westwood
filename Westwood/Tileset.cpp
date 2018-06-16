@@ -32,7 +32,7 @@ const STileData & CTileset::GetTileData(short a_tileIndex) const
 	return m_tiles[a_tileIndex];
 }
 
-void CTileset::DrawTileAtPosition(short a_tile, const sf::Vector2f & a_position)
+void CTileset::DrawTileAtPosition(short a_tileIndex, const sf::Vector2f & a_position)
 {
 	sf::Sprite tileRenderCommand;
 	sf::IntRect textureRectangle;
@@ -40,8 +40,8 @@ void CTileset::DrawTileAtPosition(short a_tile, const sf::Vector2f & a_position)
 
 	textureRectangle.width = m_tileWidth;
 	textureRectangle.height = m_tileHeight;
-	textureRectangle.left = (a_tile % m_columns) * m_tileWidth;
-	textureRectangle.top = (a_tile / m_columns) * m_tileHeight;
+	textureRectangle.left = (a_tileIndex % m_columns) * m_tileWidth;
+	textureRectangle.top = (a_tileIndex / m_columns) * m_tileHeight;
 
 	tileRenderCommand.setTextureRect(textureRectangle);
 	tileRenderCommand.setPosition(a_position);
