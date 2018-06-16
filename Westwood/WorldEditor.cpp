@@ -42,7 +42,7 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 
 	if (inputManager.IsKeyPressed(EKeyCode::MouseLeft))
 	{
-		CTileMap::STileData tileData;
+		STileData tileData;
 		tileData.m_allowedInteraction = ETileInteraction::Count;
 		tileData.m_isPassable = true;
 		tileData.m_tileIndex = 0;
