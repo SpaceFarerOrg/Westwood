@@ -17,9 +17,26 @@
     <ClCompile Include="Avatar.cpp">
       <Filter>Character</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />
-    <ClCompile Include="WorldEditor.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="WorldEditor.cpp">
+      <Filter>Game World\Tileset &amp; Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TilesetBank.cpp">
+      <Filter>Game World\Tileset &amp; Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Tileset.cpp">
+      <Filter>Game World\Tileset &amp; Map</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="AvatarCollection.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -43,8 +60,6 @@
     <ClInclude Include="Avatar.h">
       <Filter>Character</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="TileData.h">
       <Filter>Game World</Filter>
     </ClInclude>
@@ -55,7 +70,24 @@
       <Filter>Character</Filter>
     </ClInclude>
     <ClInclude Include="WindowEventHandler.h" />
-    <ClInclude Include="WorldEditor.h" />
+    <ClInclude Include="WorldEditor.h">
+      <Filter>Game World\Tileset &amp; Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TilesetBank.h">
+      <Filter>Game World\Tileset &amp; Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Tileset.h">
+      <Filter>Game World\Tileset &amp; Map</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyCodes.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -66,6 +98,12 @@
     </Filter>
     <Filter Include="Character\Player">
       <UniqueIdentifier>{62137775-fb7c-4807-86d0-687ec6c14e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game World\Tileset &amp; Map">
+      <UniqueIdentifier>{070aef58-b0b4-49d8-a7a2-314771e12413}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{db7d5ff2-6ae5-4b8c-992d-04572161e66f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
