@@ -15,10 +15,17 @@ void CTileset::LoadFromJson(nlohmann::json & a_tilesetJson)
 
 	m_texture = CTextureBank::LoadUnorderedTexture(a_tilesetJson["name"].get<std::string>().c_str());
 
-	for (short i = 0; i < m_tileCount; ++i)
+	for (short tileIndex = 0; tileIndex < m_tileCount; ++tileIndex)
 	{
-		m_tiles[i].m_tileIndex = i;
-		m_tiles[i].m_isPassable = a_tilesetJson["tileproperties"][std::to_string(i)]["passable"].get<bool>();
+		m_tiles[tileIndex].m_tileIndex = tileIndex;
+
+		m_tiles[tileIndex].m_textureRect.width = m_tileWidth;
+		m_tiles[tileIndex].m_textureRect.height = m_tileHeight;
+		m_tiles[tileIndex].m_textureRect.left = (tileIndex % m_columns) * m_tileWidth;
+		m_tiles[tileIndex].m_textureRect.top = (tileIndex / m_columns) * m_tileHeight;
+
+
+		m_tiles[tileIndex].m_isPassable = a_tilesetJson["tileproperties"][std::to_string(tileIndex)]["passable"].get<bool>();
 	}
 }
 
@@ -35,15 +42,9 @@ const STileData & CTileset::GetTileData(short a_tileIndex) const
 void CTileset::DrawTileAtPosition(short a_tileIndex, const sf::Vector2f & a_position)
 {
 	sf::Sprite tileRenderCommand;
-	sf::IntRect textureRectangle;
 	tileRenderCommand.setTexture(CTextureBank::GetUnorderedTexture(m_texture));
 
-	textureRectangle.width = m_tileWidth;
-	textureRectangle.height = m_tileHeight;
-	textureRectangle.left = (a_tileIndex % m_columns) * m_tileWidth;
-	textureRectangle.top = (a_tileIndex / m_columns) * m_tileHeight;
-
-	tileRenderCommand.setTextureRect(textureRectangle);
+	tileRenderCommand.setTextureRect(m_tiles[a_tileIndex].m_textureRect);
 	tileRenderCommand.setPosition(a_position);
 
 	CRenderer::PushRenderCommand(tileRenderCommand);
