@@ -1,0 +1,8 @@
+{
+  "zones": [
+    {
+      "name": "startingArea",
+      "tileMap": "startingArea.json"
+    }
+  ]
+}

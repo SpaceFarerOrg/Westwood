@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="WorldZone.cpp">
+      <Filter>Game World</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWorld.cpp">
+      <Filter>Game World</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Game World</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureBank.cpp" />
+    <ClCompile Include="Avatar.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="GameWorld.h">
+      <Filter>Game World</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Game World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldZone.h">
+      <Filter>Game World</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBank.h" />
+    <ClInclude Include="TileInteraction.h">
+      <Filter>Game World</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Avatar.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Game World">
+      <UniqueIdentifier>{92bc2ea6-1379-4373-ac6c-88ee2477a736}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{61f33282-8b8a-4f13-845e-f711752f6982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Player">
+      <UniqueIdentifier>{62137775-fb7c-4807-86d0-687ec6c14e74}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
