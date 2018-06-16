@@ -2,6 +2,7 @@
 #include "KeyCodes.h"
 #include <map>
 #include <windows.h>
+#include "SFML\System\Vector2.hpp"
 
 class CInputManager
 {
@@ -20,6 +21,8 @@ public:
 	bool IsKeyDown(EKeyCode aKey);
 
 	int GetScrollWheelDelta();
+	sf::Vector2f GetMousePosFloat();
+	sf::Vector2i GetMousePosInt();
 
 private:
 	CInputManager();

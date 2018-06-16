@@ -1,4 +1,6 @@
 #include "InputManager.h"
+#include "SFML\Window\Mouse.hpp"
+#include "SFML\Window.hpp"
 
 CInputManager::CInputManager()
 {
@@ -133,4 +135,15 @@ bool CInputManager::IsKeyDown(EKeyCode aKey)
 int CInputManager::GetScrollWheelDelta()
 {
 	return myWheelDelta;
+}
+
+sf::Vector2f CInputManager::GetMousePosFloat()
+{
+	sf::Vector2i mPos = sf::Mouse::getPosition(sf::Window(myHWND));
+	return sf::Vector2f(mPos.x, mPos.y);
+}
+
+sf::Vector2i CInputManager::GetMousePosInt()
+{
+	return sf::Mouse::getPosition(sf::Window(myHWND));
 }
