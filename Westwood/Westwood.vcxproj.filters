@@ -19,6 +19,13 @@
     </ClCompile>
     <ClCompile Include="WindowEventHandler.cpp" />
     <ClCompile Include="Serializable.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="TilesetBank.cpp">
+      <Filter>World Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Tileset.cpp">
+      <Filter>World Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -45,6 +52,17 @@
     <ClInclude Include="WindowEventHandler.h" />
     <ClInclude Include="Serializable.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Tileset.h">
+      <Filter>World Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="TilesetBank.h">
+      <Filter>World Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="KeyCodes.h" />
+    <ClInclude Include="TileData.h">
+      <Filter>Game World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

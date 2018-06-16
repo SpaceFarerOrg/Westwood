@@ -2,6 +2,7 @@
 
 std::array<sf::Texture, static_cast<size_t>(ETextures::Count)> CTextureBank::m_bank;
 std::unordered_map<std::string, ETextures> CTextureBank::m_textureNameToIndexLUT;
+std::vector<sf::Texture> CTextureBank::m_unorderedBank;
 
 CTextureBank::CTextureBank()
 {
@@ -12,9 +13,25 @@ void CTextureBank::LoadAllTextures()
 	LoadTexture(ETextures::TestTileset, "debugSpriteSheet");
 }
 
+short CTextureBank::LoadUnorderedTexture(const char * a_textureName)
+{
+	sf::String textureName = a_textureName;
+	sf::String completePath = "graphics/" + textureName + ".png";
+
+	m_unorderedBank.push_back(sf::Texture());
+	m_unorderedBank.back().loadFromFile(completePath);
+
+	return m_unorderedBank.size() - 1;
+}
+
 const sf::Texture & CTextureBank::GetTexture(ETextures a_textureToGet)
 {
 	return m_bank[static_cast<size_t>(a_textureToGet)];
+}
+
+const sf::Texture & CTextureBank::GetUnorderedTexture(short a_textureID)
+{
+	return m_unorderedBank[a_textureID];
 }
 
 const ETextures CTextureBank::GetTextureIndex(const char* a_textureName)

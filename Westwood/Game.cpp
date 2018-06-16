@@ -11,6 +11,7 @@ void CGame::Initialize()
 {
 	m_renderer.Initialize();
 	m_textureBank.LoadAllTextures();
+	m_tilesetBank.LoadAllTilesets();
 
 	m_gameWorld.Load("data/gameWorld.json");
 

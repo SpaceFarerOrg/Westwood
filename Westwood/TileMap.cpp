@@ -1,9 +1,12 @@
 #include "TileMap.h"
 #include "Renderer.h"
 #include <SFML\Graphics\Sprite.hpp>
+#include "TilesetBank.h"
 
 void CTileMap::Load(nlohmann::json & a_tileMapJson)
 {
+	m_tileset = &CTilesetBank::GetTileset(0);
+
 	m_width = a_tileMapJson["width"].get<short>();
 	m_height = a_tileMapJson["height"].get<short>();
 	m_tileWidth = a_tileMapJson["tilewidth"].get<short>();
@@ -11,7 +14,7 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson)
 
 	m_tileCount = m_width * m_height;
 
-	m_tiles = new STileData[m_tileCount];
+	m_tiles = new short[m_tileCount];
 
 	//Todo: Make this scaleable with layers
 	for (unsigned int i = 0; i < m_tileCount; ++i)
@@ -22,33 +25,19 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson)
 	m_texture = CTextureBank::GetTextureIndex(a_tileMapJson["tilesets"][0]["name"].get<std::string>().c_str()); //SCALE WITH LAYERS!!!
 
 	const sf::Texture& tilesheetTexture = CTextureBank::GetTexture(m_texture);
-
-	m_tilesheetTileCountX = tilesheetTexture.getSize().x / m_tileWidth;
 }
 
 void CTileMap::Render()
 {
-	sf::Sprite tileRenderCommand;
 	sf::Vector2f tilePosition;
-	sf::IntRect textureRectangle;
-	tileRenderCommand.setTexture(CTextureBank::GetTexture(m_texture));
 
 	for (unsigned int i = 0; i < m_tileCount; ++i)
 	{
 		tilePosition.x = static_cast<float>((i % m_width) * m_tileWidth);
 		tilePosition.y = static_cast<float>((i / m_width) * m_tileHeight);
 
-		textureRectangle.width = m_tileWidth;
-		textureRectangle.height = m_tileHeight;
-		textureRectangle.left = (m_tiles[i] % m_tilesheetTileCountX) * m_tileWidth;
-		textureRectangle.top = (m_tiles[i] / m_tilesheetTileCountX) * m_tileHeight;
-
-		tileRenderCommand.setTextureRect(textureRectangle);
-		tileRenderCommand.setPosition(tilePosition);
-
-		CRenderer::PushRenderCommand(tileRenderCommand);
+		m_tileset->DrawTileAtPosition(m_tiles[i], tilePosition);
 	}
-
 }
 
 bool CTileMap::IsPositionWalkable(const sf::Vector2f & a_position) const
@@ -60,5 +49,5 @@ bool CTileMap::IsPositionWalkable(const sf::Vector2f & a_position) const
 	short tileIndex = m_width * positionInTiles.y;
 	tileIndex -= m_width - positionInTiles.x;
 
-	return m_tiles[tileIndex].m_isPassable;
+	return m_tileset->GetTileData(m_tiles[tileIndex]).m_isPassable;
 }

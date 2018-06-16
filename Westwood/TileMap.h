@@ -2,6 +2,8 @@
 #include "TextureBank.h"
 #include "TileInteraction.h"
 #include <json.hpp>
+#include "TileData.h"
+#include "Tileset.h"
 
 class CTileMap
 {
@@ -11,21 +13,12 @@ public:
 
 	bool IsPositionWalkable(const sf::Vector2f& a_position) const;
 private:
-	struct STileData
-	{
-		operator short() const { return m_tileIndex; };
-		void operator =(short a_index) { m_tileIndex = a_index; };
+	CTileset* m_tileset;
 
-		ETileInteraction m_allowedInteraction;
-		short m_tileIndex;
-		bool m_isPassable : 1;
-	};
-private:
 	ETextures m_texture;
 	unsigned int m_tileCount;
-	STileData* m_tiles;
+	short* m_tiles;
 
-	short m_tilesheetTileCountX;
 	
 	short m_tileHeight;
 	short m_tileWidth;
