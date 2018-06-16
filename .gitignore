@@ -1,5 +1,8 @@
 /trash/
+.vs/*
+*.suo
 *.user
 *.ilk
 *.pdb
 *.exe
+*.ipch

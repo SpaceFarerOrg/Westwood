@@ -60,5 +60,8 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{fbd423ef-4172-4a10-b517-c0d34d59c323}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World Editor">
+      <UniqueIdentifier>{0dbccb45-751b-4771-8908-c9d7223e8ee6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
