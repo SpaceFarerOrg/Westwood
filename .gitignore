@@ -3,3 +3,9 @@
 *.ilk
 *.pdb
 *.exe
+.vs/Westwood/v15/ipch/AutoPCH/dbb9348ced9f6246/MAIN.ipch
+.vs/Westwood/v15/ipch/AutoPCH/c34d254d898a49ee/WORLDEDITOR.ipch
+.vs/Westwood/v15/ipch/AutoPCH/a35d2b7575615c51/WORLDZONE.ipch
+.vs/Westwood/v15/ipch/AutoPCH/960026ddc0d71b65/TILEMAP.ipch
+.vs/Westwood/v15/Browse.VC.db
+.vs/Westwood/v15/.suo
