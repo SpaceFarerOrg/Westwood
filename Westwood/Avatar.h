@@ -9,8 +9,10 @@ public:
 
 	void SetDeltaTime(float a_deltaTime);
 
+	const sf::Vector2f& GetPosition() const;
+
 	sf::Vector2f GetFuturePosition() const;
-	void AllowMove(bool a_moveWasAllowed);
+	void AllowMoveTo(const sf::Vector2f& a_allowedNewPosition);
 
 	const short GetCurrentZone() const;
 

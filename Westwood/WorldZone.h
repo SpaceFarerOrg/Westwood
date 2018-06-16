@@ -9,7 +9,7 @@ public:
 	void LoadZone(nlohmann::json& a_zoneJson);
 	void Render();
 
-	bool IsMoveToPositionAllowed(const sf::Vector2f& a_positionToCheck) const;
+	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 private:
 	sf::String m_zoneName;
 	CTileMap m_tileMap;

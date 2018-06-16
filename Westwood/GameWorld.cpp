@@ -48,10 +48,11 @@ void CGameWorld::UpdateAllAvatars(float a_deltaTime)
 		m_avatarsInCurrentZone[i]->SetDeltaTime(a_deltaTime);
 
 		sf::Vector2f avatarsFuturePosition = m_avatarsInCurrentZone[i]->GetFuturePosition();
+		sf::Vector2f avatarsCurrentPosition = m_avatarsInCurrentZone[i]->GetPosition();
 
-		bool shouldAllowMove = m_worldZones[m_currentZone].IsMoveToPositionAllowed(avatarsFuturePosition);
+		sf::Vector2f allowedMove = m_worldZones[m_currentZone].CheckForAllowedMove(avatarsFuturePosition, avatarsCurrentPosition);
 
-		m_avatarsInCurrentZone[i]->AllowMove(shouldAllowMove);
+		m_avatarsInCurrentZone[i]->AllowMoveTo(allowedMove);
 	}
 
 	//Todo: Update all Avatars in a different zone than the current one (will make NPCs seem more lively)

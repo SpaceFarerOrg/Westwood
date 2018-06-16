@@ -20,9 +20,9 @@ void CWorldZone::Render()
 	m_tileMap.Render();
 }
 
-bool CWorldZone::IsMoveToPositionAllowed(const sf::Vector2f & a_positionToCheck) const
+sf::Vector2f CWorldZone::CheckForAllowedMove(const sf::Vector2f & a_targetPosition, const sf::Vector2f& a_currentPosition) const
 {
-	bool allowed = m_tileMap.IsPositionWalkable(a_positionToCheck);
+	sf::Vector2f allowedPosition = m_tileMap.CheckForAllowedMove(a_targetPosition, a_currentPosition);
 
-	return allowed;
+	return std::move(allowedPosition);
 }
