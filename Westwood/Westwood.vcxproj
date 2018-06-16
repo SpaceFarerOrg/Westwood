@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="InputManager.h" />

@@ -71,6 +71,9 @@
     <ClInclude Include="AvatarCollection.h">
       <Filter>Character</Filter>
     </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
