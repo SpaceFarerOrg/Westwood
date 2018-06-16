@@ -40,11 +40,29 @@ void CTileMap::Render()
 	}
 }
 
-bool CTileMap::IsPositionWalkable(const sf::Vector2f & a_position) const
+sf::Vector2f CTileMap::CheckForAllowedMove(const sf::Vector2f & a_targetPosition, const sf::Vector2f& a_currentPosition) const
+{
+	sf::Vector2f allowedMove = a_currentPosition;
+
+	if (IsTileWalkable({ a_targetPosition.x, a_currentPosition.y }))
+	{
+		allowedMove.x = a_targetPosition.x;
+	}
+	if (IsTileWalkable({ a_currentPosition.x, a_targetPosition.y }))
+	{
+		allowedMove.y = a_targetPosition.y;
+	}
+
+	return std::move(allowedMove);
+}
+
+bool CTileMap::IsTileWalkable(const sf::Vector2f & a_position) const
 {
 	short tileIndex = ConvertPositionToTileIndex(a_position);
 
-	return m_tileset->GetTileData(m_tiles[tileIndex]).m_isPassable;
+	bool isWalkable = m_tileset->GetTileData(m_tiles[tileIndex]).m_isPassable;
+
+	return isWalkable;
 }
 
 void CTileMap::SetTile(const sf::Vector2f & a_position, STileData a_newTile)
@@ -76,3 +94,4 @@ sf::Vector2f CTileMap::GetTilePosition(short a_tileIndex) const
 
 	return rv;
 }
+

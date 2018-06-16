@@ -14,15 +14,16 @@ public:
 	void Load(nlohmann::json& a_tileMapJson);
 	void Render();
 
-	bool IsPositionWalkable(const sf::Vector2f& a_position) const;
+	bool IsTileWalkable(const sf::Vector2f& a_position) const;
+	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 
 private:
-
 	void SetTile(const sf::Vector2f& a_position, STileData a_newTile);
 	short ConvertPositionToTileIndex(const sf::Vector2f& a_position) const;
 	sf::Vector2f GetTilePosition(short a_tileIndex) const;
 
 private:
+	CTileset* m_tileset;
 	ETextures m_texture;
 	unsigned int m_tileCount;
 	short* m_tiles;
@@ -32,5 +33,4 @@ private:
 	
 	short m_width;
 	short m_height;
-	CTileset* m_tileset;
 };

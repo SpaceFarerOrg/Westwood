@@ -21,18 +21,19 @@ void CAvatar::SetDeltaTime(float a_deltaTime)
 	m_currentDeltaTime = a_deltaTime;
 }
 
+const sf::Vector2f & CAvatar::GetPosition() const
+{
+	return m_position;
+}
+
 sf::Vector2f CAvatar::GetFuturePosition() const
 {
 	return std::move(CalculateFuturePosition());
 }
 
-void CAvatar::AllowMove(bool a_moveWasAllowed)
+void CAvatar::AllowMoveTo(const sf::Vector2f& a_allowedNewPosition)
 {
-	//Only update the position to the one desired if the move was allowed from the world
-	if (a_moveWasAllowed)
-	{
-		m_position = CalculateFuturePosition();
-	}
+	m_position = a_allowedNewPosition;
 }
 
 const short CAvatar::GetCurrentZone() const
