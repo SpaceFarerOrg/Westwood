@@ -23,4 +23,6 @@ void CWorldZone::Render()
 bool CWorldZone::IsMoveToPositionAllowed(const sf::Vector2f & a_positionToCheck) const
 {
 	bool allowed = m_tileMap.IsPositionWalkable(a_positionToCheck);
+
+	return allowed;
 }

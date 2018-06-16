@@ -21,7 +21,7 @@ private:
 
 	short m_currentZone;
 	std::vector<CWorldZone> m_worldZones;
-	std::vector<CAvatar&> m_allAvatars;
-	std::vector<CAvatar&> m_avatarsInCurrentZone;
-	std::vector<CAvatar&> m_avatarsInOtherZones;
+	std::vector<CAvatar*> m_allAvatars;
+	std::vector<CAvatar*> m_avatarsInCurrentZone;
+	std::vector<CAvatar*> m_avatarsInOtherZones;
 };

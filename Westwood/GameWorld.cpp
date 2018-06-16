@@ -38,20 +38,20 @@ void CGameWorld::Update(float a_deltaTime)
 
 void CGameWorld::AddAvatarToWorld(CAvatar & a_avatar)
 {
-	m_allAvatars.push_back(a_avatar);
+	m_allAvatars.push_back(&a_avatar);
 }
 
 void CGameWorld::UpdateAllAvatars(float a_deltaTime)
 {
 	for (size_t i = 0; i < m_avatarsInCurrentZone.size(); ++i)
 	{
-		m_avatarsInCurrentZone[i].SetDeltaTime(a_deltaTime);
+		m_avatarsInCurrentZone[i]->SetDeltaTime(a_deltaTime);
 
-		sf::Vector2f avatarsFuturePosition = m_avatarsInCurrentZone[i].GetFuturePosition();
+		sf::Vector2f avatarsFuturePosition = m_avatarsInCurrentZone[i]->GetFuturePosition();
 
 		bool shouldAllowMove = m_worldZones[m_currentZone].IsMoveToPositionAllowed(avatarsFuturePosition);
 
-		m_avatarsInCurrentZone[i].AllowMove(shouldAllowMove);
+		m_avatarsInCurrentZone[i]->AllowMove(shouldAllowMove);
 	}
 
 	//Todo: Update all Avatars in a different zone than the current one (will make NPCs seem more lively)
@@ -65,7 +65,7 @@ void CGameWorld::RecalculateAvatarsInZone()
 
 	for (size_t i = 0; i < m_allAvatars.size(); ++i)
 	{
-		if (m_allAvatars[i].GetCurrentZone() == m_currentZone)
+		if (m_allAvatars[i]->GetCurrentZone() == m_currentZone)
 		{
 			m_avatarsInCurrentZone.push_back(m_allAvatars[i]);
 		}
