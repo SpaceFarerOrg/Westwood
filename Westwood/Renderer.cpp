@@ -34,6 +34,11 @@ void CRenderer::RenderToWindow()
 	m_renderWindow.display();
 }
 
+sf::RenderWindow & CRenderer::GetWindow()
+{
+	return m_renderWindow;
+}
+
 std::vector<sf::Sprite> CRenderer::m_renderQueue;
 
 void CRenderer::PushRenderCommand(const sf::Sprite & a_renderCommand)
