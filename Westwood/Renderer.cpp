@@ -47,14 +47,14 @@ void CRenderer::RenderToWindow()
 		m_currentRenderTarget->draw(command);
 	}
 
+	sf::View view = m_renderWindow.getView();
+
+	m_renderWindow.setView(m_renderWindow.getDefaultView());
+	
 	for (sf::Text& command : m_textQueue)
 	{
 		m_currentRenderTarget->draw(command);
 	}
-
-	sf::View view = m_renderWindow.getView();
-
-	m_renderWindow.setView(m_renderWindow.getDefaultView());
 
 	for (sf::Sprite& command : m_UIRenderQueue)
 	{
