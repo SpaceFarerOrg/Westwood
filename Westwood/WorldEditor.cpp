@@ -60,14 +60,17 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 	rect.setFillColor(sf::Color(100, 50, 50, 100));
 	CRenderer::PushRenderCommand(rect);
 
-	if (inputManager.IsKeyPressed(EKeyCode::MouseLeft))
+	if (m_drawingMode == EDrawingMode::Pencil)
 	{
-		STileData tileData;
-		tileData.m_allowedInteraction = ETileInteraction::Count;
-		tileData.m_isPassable = true;
-		tileData.m_tileIndex = 0;
-		
-		a_worldZone.m_tileMap.SetTile(tileIndex, tileData);
+		if (inputManager.IsKeyDown(EKeyCode::MouseLeft))
+		{
+			STileData tileData;
+			tileData.m_allowedInteraction = ETileInteraction::Count;
+			tileData.m_isPassable = true;
+			tileData.m_tileIndex = 0;
+
+			a_worldZone.m_tileMap.SetTile(tileIndex, tileData);
+		}
 	}
 
 	sf::View view = m_renderWindow->getView();
@@ -128,6 +131,11 @@ bool CWorldEditor::IsInEditMode()
 	return m_editMode;
 }
 
+void CWorldEditor::SetDrawingMode(EDrawingMode a_drawingMode)
+{
+	m_drawingMode = a_drawingMode;
+}
+
 void CWorldEditor::AddButtons()
 {
 	CUIButton& button = m_buttonManager.AddButton();
@@ -136,4 +144,6 @@ void CWorldEditor::AddButtons()
 	button.left = 0;
 	button.width = 64;
 	button.height = 64;
+	button.SetAssociatedObject(this);
+	button.SetFunction([](void* a_object) { reinterpret_cast<CWorldEditor*>(a_object)->SetDrawingMode(EDrawingMode::Pencil); });
 }

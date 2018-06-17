@@ -11,6 +11,12 @@ namespace sf
 class CWorldEditor
 {
 public:
+
+	enum class EDrawingMode
+	{
+		Pencil
+	};
+
 	CWorldEditor(sf::RenderWindow* a_renderWindow);
 	~CWorldEditor();
 
@@ -18,6 +24,8 @@ public:
 	void Update(CWorldZone& a_worldZone);
 	void Render();
 	bool IsInEditMode();
+	
+	void SetDrawingMode(EDrawingMode a_drawingMode);
 
 private:
 	void AddButtons();
@@ -27,6 +35,8 @@ private:
 	sf::Vector2f m_zoom;
 	sf::Vector2f m_originalSize;
 	CButtonManager m_buttonManager;
+	EDrawingMode m_drawingMode;
+
 	bool m_editMode : 1;
 };
 

@@ -13,6 +13,11 @@ CUIButton::~CUIButton()
 {
 }
 
+void CUIButton::SetFunction(std::function<void(void* a_object)> a_onPressed)
+{
+	m_onPressed = a_onPressed;
+}
+
 void CUIButton::Update()
 {
 	CInputManager& inputManager = CInputManager::GetInstance();
@@ -22,6 +27,7 @@ void CUIButton::Update()
 		if (contains(inputManager.GetMousePosFloat()))
 		{
 			std::cout << "Click!" << std::endl;
+			m_onPressed(m_associatedObject);
 		}
 	}
 }
@@ -35,4 +41,9 @@ void CUIButton::Render()
 	shape.setPosition(top, left);
 
 	CRenderer::PushUIRenderCommand(shape);
+}
+
+void CUIButton::SetAssociatedObject(void * a_object)
+{
+	m_associatedObject = a_object;
 }
