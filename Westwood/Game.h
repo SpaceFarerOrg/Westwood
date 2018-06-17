@@ -19,7 +19,6 @@ public:
 	bool ShouldRun() const;
 private:
 	CWindowEventHandler m_windowEventHandler;
-	CRenderer m_renderer;
 	CGameWorld m_gameWorld;
 
 	CAvatarCollection m_avatarCollection;

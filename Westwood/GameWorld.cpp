@@ -17,11 +17,15 @@ void CGameWorld::Load(const char * a_worldPath)
 		m_worldZones.push_back(CWorldZone());
 		m_worldZones.back().LoadZone(worldJson["zones"][i]);
 	}
+
+	m_calendar.SetTime({ 23,0 }, CGameCalendar::ESeason::Spring, 1);
 }
 
 void CGameWorld::Render()
 {
 	m_worldZones[m_currentZone].Render();
+
+	m_calendar.RenderCalendar();
 }
 
 void CGameWorld::ChangeZone(short a_newZone)
@@ -31,8 +35,26 @@ void CGameWorld::ChangeZone(short a_newZone)
 	RecalculateAvatarsInZone();
 }
 
+#include "InputManager.h"
 void CGameWorld::Update(float a_deltaTime)
 {
+	if (CInputManager::GetInstance().IsKeyDown(EKeyCode::F1))
+	{
+		float multiplier = 100.f;
+
+		if (CInputManager::GetInstance().IsKeyDown(EKeyCode::LeftShift))
+		{
+			multiplier *= 50.f;
+		}
+
+		m_calendar.SetTimePassageMultiplier(multiplier);
+	}
+	else
+	{
+		m_calendar.SetTimePassageMultiplier(1.f);
+	}
+
+	m_calendar.Update(a_deltaTime);
 	UpdateAllAvatars(a_deltaTime);
 }
 

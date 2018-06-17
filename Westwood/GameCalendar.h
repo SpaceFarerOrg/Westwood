@@ -10,7 +10,8 @@ public:
 		Spring,
 		Summer,
 		Fall,
-		Winter
+		Winter,
+		Count
 	};
 
 	enum class EDay
@@ -29,6 +30,8 @@ public:
 
 	void EndDay();
 	void Update(float a_dt);
+	void RenderCalendar();
+
 
 	void SetTime(const CClock::STimePoint& a_timePoint, ESeason a_season, unsigned short a_day);
 
@@ -36,6 +39,9 @@ public:
 	ESeason GetCurrentSeason() const;
 	short GetCurrentDate() const;
 	const CClock::STimePoint& GetCurrentTime() const;
+
+	void SetTimePassageMultiplier(float a_multiplier);
+
 private:
 	void EnterNewSeason();
 	CClock m_clock;
@@ -44,6 +50,12 @@ private:
 	unsigned short m_currentDate;
 	std::array<EDay, 28> m_dateToDayLUT;
 
+	std::array<sf::String, static_cast<size_t>(EDay::Count)> m_dayStringLUT;
+	std::array<sf::String, static_cast<size_t>(ESeason::Count)> m_seasonStringLUT;
+	void SetDayName(EDay a_day, const char* a_name);
+	void SetSeasonName(ESeason, const char* a_name);
+
+	float m_timePassageMultiplier;
 	float m_currentMinuteTime;
 	float m_lengthOfMinute;
 
