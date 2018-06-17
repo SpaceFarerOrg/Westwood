@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Renderer.h"
 #include "InputManager.h"
 
 CPlayer::CPlayer(CAvatar & a_avatar)
@@ -28,4 +29,6 @@ void CPlayer::Update()
 	}
 
 	m_avatar.SetDirection(direction);
+
+	CRenderer::GetInstance().SetCameraTarget(m_avatar.GetPosition());
 }

@@ -18,7 +18,7 @@ void CGameWorld::Load(const char * a_worldPath)
 		m_worldZones.back().LoadZone(worldJson["zones"][i]);
 	}
 
-	m_calendar.SetTime({ 23,0 }, CGameCalendar::ESeason::Spring, 1);
+	m_calendar.SetTime({ 6,0 }, CGameCalendar::ESeason::Spring, 1);
 }
 
 void CGameWorld::Render()
