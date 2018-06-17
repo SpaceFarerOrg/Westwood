@@ -12,7 +12,12 @@ CGame::CGame()
 void CGame::Initialize()
 {
 	m_renderer.Initialize();
+
+	/*Load all graphical objects into the bank*/
 	m_textureBank.LoadAllTextures();
+	m_textureBank.LoadAllFonts();
+	/*End gfx load*/
+
 	m_tilesetBank.LoadAllTilesets();
 
 	m_gameWorld.Load("data/gameWorld.json");

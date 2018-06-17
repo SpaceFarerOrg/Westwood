@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "WorldZone.h"
+#include "GameCalendar.h"
 
 class CAvatar;
 
@@ -16,6 +17,8 @@ public:
 
 	void AddAvatarToWorld(CAvatar& a_avatar);
 private:
+	CGameCalendar m_calendar;
+
 	void UpdateAllAvatars(float a_deltaTime);
 
 	void RecalculateAvatarsInZone();

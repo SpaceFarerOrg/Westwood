@@ -1,6 +1,7 @@
 #include "TextureBank.h"
 
 std::array<sf::Texture, static_cast<size_t>(ETextures::Count)> CTextureBank::m_bank;
+std::array<sf::Font, static_cast<size_t>(EFonts::Count)> CTextureBank::m_fontBank;
 std::unordered_map<std::string, ETextures> CTextureBank::m_textureNameToIndexLUT;
 std::vector<sf::Texture> CTextureBank::m_unorderedBank;
 
@@ -12,6 +13,11 @@ void CTextureBank::LoadAllTextures()
 {
 	LoadTexture(ETextures::TestTileset, "debugSpriteSheet");
 	LoadTexture(ETextures::PlayerCharacter, "debugPlayerSprite");
+}
+
+void CTextureBank::LoadAllFonts()
+{
+	LoadFont(EFonts::Debug, "debug");
 }
 
 short CTextureBank::LoadUnorderedTexture(const char * a_textureName)
@@ -40,6 +46,11 @@ const ETextures CTextureBank::GetTextureIndex(const char* a_textureName)
 	return m_textureNameToIndexLUT[a_textureName];
 }
 
+const sf::Font & CTextureBank::GetFont(EFonts a_font)
+{
+	return m_fontBank[static_cast<size_t>(a_font)];
+}
+
 void CTextureBank::LoadTexture(ETextures a_texture, const sf::String& a_pathRelativeToGraphics)
 {
 	sf::String completePath = "graphics/" + a_pathRelativeToGraphics + ".png";
@@ -47,4 +58,13 @@ void CTextureBank::LoadTexture(ETextures a_texture, const sf::String& a_pathRela
 	m_textureNameToIndexLUT[a_pathRelativeToGraphics] = a_texture;
 
 	m_bank[static_cast<size_t>(a_texture)].loadFromFile(completePath);
+}
+
+void CTextureBank::LoadFont(EFonts a_font, const sf::String & a_pathRelativeToFonts)
+{
+	sf::String fullPath = "graphics/fonts/";
+	fullPath += a_pathRelativeToFonts;
+	fullPath += ".ttf";
+
+	m_fontBank[static_cast<size_t>(a_font)].loadFromFile(fullPath);
 }
