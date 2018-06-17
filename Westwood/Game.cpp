@@ -4,6 +4,7 @@
 CGame::CGame()
 	:m_windowEventHandler(m_renderer.GetWindow())
 	, m_player(m_avatarCollection.CreateNewAvatar())
+	, m_worldEditor(&m_renderer.GetWindow())
 {
 	
 }
@@ -15,6 +16,7 @@ void CGame::Initialize()
 	m_tilesetBank.LoadAllTilesets();
 
 	m_gameWorld.Load("data/gameWorld.json");
+	m_worldEditor.Initialize();
 
 	m_shouldRun = true;
 
@@ -37,7 +39,7 @@ void CGame::Update()
 	m_gameWorld.Update(deltaTime);
 
 	m_gameWorld.Render();
-	m_worldEditor.Render(&m_renderer.GetWindow());
+	m_worldEditor.Render();
 
 	m_avatarCollection.RenderAvatars();
 

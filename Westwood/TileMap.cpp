@@ -27,6 +27,10 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson)
 	const sf::Texture& tilesheetTexture = CTextureBank::GetTexture(m_texture);
 }
 
+void CTileMap::Save()
+{
+}
+
 void CTileMap::Render()
 {
 	sf::Vector2f tilePosition;
@@ -65,18 +69,16 @@ bool CTileMap::IsTileWalkable(const sf::Vector2f & a_position) const
 	return isWalkable;
 }
 
-void CTileMap::SetTile(const sf::Vector2f & a_position, STileData a_newTile)
+void CTileMap::SetTile(short a_tileIndex, STileData a_newTile)
 {
-	short tileIndex = ConvertPositionToTileIndex(a_position);
-
-	m_tiles[tileIndex] = a_newTile;
+	m_tiles[a_tileIndex] = a_newTile;
 }
 
-short CTileMap::ConvertPositionToTileIndex(const sf::Vector2f & a_position) const
+short CTileMap::ConvertPositionToTileIndex(const sf::Vector2f & a_position, const sf::Vector2f& a_zoomFactor) const
 {
 	sf::Vector2i positionInTiles;
-	positionInTiles.x = static_cast<int>(a_position.x / m_tileWidth) + 1;
-	positionInTiles.y = static_cast<int>(a_position.y / m_tileHeight) + 1;
+	positionInTiles.x = static_cast<int>(a_position.x / m_tileWidth * a_zoomFactor.x) + 1;
+	positionInTiles.y = static_cast<int>(a_position.y / m_tileHeight * a_zoomFactor.y) + 1;
 
 	short tileIndex = m_width * positionInTiles.y;
 	tileIndex -= m_width - positionInTiles.x;

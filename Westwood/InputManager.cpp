@@ -23,6 +23,11 @@ void CInputManager::Init(sf::Window* aClientWindow)
 	myHWND = aClientWindow;
 	CreateKeyStates(myKeyStates);
 	myPreviousKeyStates = myKeyStates;
+
+	myMouseButtonStates.insert(std::make_pair(EKeyCode::MouseLeft, EKeyState::Up));
+	myMouseButtonStates.insert(std::make_pair(EKeyCode::MouseMiddle, EKeyState::Up));
+	myMouseButtonStates.insert(std::make_pair(EKeyCode::MouseRight, EKeyState::Up));
+	myPreviousMouseButtonStates = myMouseButtonStates;
 }
 
 void CInputManager::Update(const sf::Event& aWindowsMessage)

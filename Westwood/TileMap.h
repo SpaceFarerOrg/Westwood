@@ -12,14 +12,15 @@ class CTileMap
 
 public:
 	void Load(nlohmann::json& a_tileMapJson);
+	void Save();
 	void Render();
 
 	bool IsTileWalkable(const sf::Vector2f& a_position) const;
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 
 private:
-	void SetTile(const sf::Vector2f& a_position, STileData a_newTile);
-	short ConvertPositionToTileIndex(const sf::Vector2f& a_position) const;
+	void SetTile(short a_tileIndex, STileData a_newTile);
+	short ConvertPositionToTileIndex(const sf::Vector2f& a_position, const sf::Vector2f& a_zoomFactor = { 1,1 }) const;
 	sf::Vector2f GetTilePosition(short a_tileIndex) const;
 
 private:
