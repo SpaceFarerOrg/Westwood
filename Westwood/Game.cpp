@@ -2,16 +2,16 @@
 #include "InputManager.h"
 
 CGame::CGame()
-	:m_windowEventHandler(m_renderer.GetWindow())
+	:m_windowEventHandler(CRenderer::GetInstance().GetWindow())
 	, m_player(m_avatarCollection.CreateNewAvatar())
-	, m_worldEditor(&m_renderer.GetWindow())
+	, m_worldEditor(&CRenderer::GetInstance().GetWindow())
 {
 	
 }
 
 void CGame::Initialize()
 {
-	m_renderer.Initialize();
+	CRenderer::GetInstance().Initialize();
 
 	/*Load all graphical objects into the bank*/
 	m_textureBank.LoadAllTextures();
@@ -48,7 +48,7 @@ void CGame::Update()
 
 	m_avatarCollection.RenderAvatars();
 
-	m_renderer.RenderToWindow();
+	CRenderer::GetInstance().RenderToWindow();
 
 	if (m_windowEventHandler.GetHasClosed())
 	{

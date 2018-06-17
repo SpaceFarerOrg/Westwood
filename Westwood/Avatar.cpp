@@ -51,7 +51,7 @@ void CAvatar::Draw()
 
 	sprite.setPosition(m_position);
 
-	CRenderer::PushRenderCommand(sprite);
+	CRenderer::GetInstance().PushRenderCommand(sprite);
 }
 
 

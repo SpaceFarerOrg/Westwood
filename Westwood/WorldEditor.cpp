@@ -58,7 +58,7 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 	rect.setSize({(float)a_worldZone.m_tileMap.m_tileWidth, (float)a_worldZone.m_tileMap.m_tileHeight});
 	rect.setPosition(currentBox);
 	rect.setFillColor(sf::Color(100, 50, 50, 100));
-	CRenderer::PushRenderCommand(rect);
+	CRenderer::GetInstance().PushRenderCommand(rect);
 
 	if (inputManager.IsKeyPressed(EKeyCode::MouseLeft))
 	{
@@ -112,12 +112,12 @@ void CWorldEditor::Render()
 		rect.setFillColor(sf::Color::Transparent);
 		rect.setOutlineColor(sf::Color::Red);
 
-		CRenderer::PushUIRenderCommand(rect);
+		CRenderer::GetInstance().PushUIRenderCommand(rect);
 
 		sf::RectangleShape background;
 		background.setSize({ (float)m_renderWindow->getView().getSize().x, (float)m_renderWindow->getView().getSize().y / 10.f });
 		background.setFillColor(sf::Color(50, 50, 75, 255));
-		CRenderer::PushUIRenderCommand(background);
+		CRenderer::GetInstance().PushUIRenderCommand(background);
 
 		m_buttonManager.Render();
 	}

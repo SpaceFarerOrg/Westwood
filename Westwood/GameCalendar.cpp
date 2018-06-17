@@ -75,9 +75,9 @@ void CGameCalendar::RenderCalendar()
 	currentTextToRender.setString(stringToRender);
 
 	currentTextToRender.setOrigin(currentTextToRender.getGlobalBounds().width, 0.f);
-	currentTextToRender.setPosition(CRenderer::GetWindowDimensions().x - 100, 0);
+	currentTextToRender.setPosition(CRenderer::GetInstance().GetWindowDimensions().x - 100, 0);
 
-	CRenderer::PushRenderCommand(currentTextToRender);
+	CRenderer::GetInstance().PushRenderCommand(currentTextToRender);
 }
 
 void CGameCalendar::SetTime(const CClock::STimePoint & a_timePoint, ESeason a_season, unsigned short a_day)

@@ -1,15 +1,6 @@
 #include "Renderer.h"
 #include "InputManager.h"
 
-/*Declaration of static members*/
-std::vector<sf::Sprite> CRenderer::m_renderQueue;
-std::vector<sf::RectangleShape> CRenderer::m_rectangleQueue;
-std::vector<sf::Text> CRenderer::m_textQueue;
-std::vector<sf::Sprite> CRenderer::m_UIRenderQueue;
-std::vector<sf::RectangleShape> CRenderer::m_UIRectangleQueue;
-
-sf::Vector2f CRenderer::m_currentWindowDimensions;
-/*End static member declaration*/
 
 CRenderer::CRenderer()
 	: m_currentRenderTarget(nullptr)
@@ -18,6 +9,13 @@ CRenderer::CRenderer()
 
 CRenderer::~CRenderer()
 {
+}
+
+CRenderer & CRenderer::GetInstance()
+{
+	static CRenderer instance;
+
+	return instance;
 }
 
 void CRenderer::Initialize()

@@ -34,5 +34,5 @@ void CUIButton::Render()
 	shape.setSize({ width, height });
 	shape.setPosition(top, left);
 
-	CRenderer::PushUIRenderCommand(shape);
+	CRenderer::GetInstance().PushUIRenderCommand(shape);
 }

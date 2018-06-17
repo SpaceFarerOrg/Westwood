@@ -47,5 +47,5 @@ void CTileset::DrawTileAtPosition(short a_tileIndex, const sf::Vector2f & a_posi
 	tileRenderCommand.setTextureRect(m_tiles[a_tileIndex].m_textureRect);
 	tileRenderCommand.setPosition(a_position);
 
-	CRenderer::PushRenderCommand(tileRenderCommand);
+	CRenderer::GetInstance().PushRenderCommand(tileRenderCommand);
 }
