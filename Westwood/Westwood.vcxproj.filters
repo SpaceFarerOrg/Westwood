@@ -43,6 +43,8 @@
     <ClCompile Include="GameCalendar.cpp">
       <Filter>Game World\Time</Filter>
     </ClCompile>
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="ButtonManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -97,6 +99,8 @@
     <ClInclude Include="GameClock.h">
       <Filter>Game World\Time</Filter>
     </ClInclude>
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="ButtonManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">

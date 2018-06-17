@@ -20,6 +20,8 @@ void CWorldEditor::Initialize()
 {
 	m_zoom = m_renderWindow->getView().getSize();
 	m_originalSize = m_zoom;
+
+	AddButtons();
 }
 
 void CWorldEditor::Update(CWorldZone& a_worldZone)
@@ -36,6 +38,8 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 	{
 		return;
 	}
+
+	m_buttonManager.Update();
 
 	sf::Vector2f mPos = inputManager.GetMousePosFloat();
 
@@ -68,14 +72,14 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 
 	sf::View view = m_renderWindow->getView();
 	bool shouldUpdateView = false;
-	float scrollDelta = static_cast<float>(inputManager.GetScrollWheelDelta());
-
-	if (scrollDelta != 0)
-	{
-		m_zoom *= 1.f - 0.05f * scrollDelta;
-		view.setSize(m_zoom);
-		shouldUpdateView = true;
-	}
+	//float scrollDelta = static_cast<float>(inputManager.GetScrollWheelDelta());
+	//
+	//if (scrollDelta != 0)
+	//{
+	//	m_zoom *= 1.f - 0.05f * scrollDelta;
+	//	view.setSize(m_zoom);
+	//	shouldUpdateView = true;
+	//}
 
 	if (inputManager.IsKeyDown(EKeyCode::MouseMiddle))
 	{
@@ -108,11 +112,28 @@ void CWorldEditor::Render()
 		rect.setFillColor(sf::Color::Transparent);
 		rect.setOutlineColor(sf::Color::Red);
 
-		CRenderer::PushRenderCommand(rect);
+		CRenderer::PushUIRenderCommand(rect);
+
+		sf::RectangleShape background;
+		background.setSize({ (float)m_renderWindow->getView().getSize().x, (float)m_renderWindow->getView().getSize().y / 10.f });
+		background.setFillColor(sf::Color(50, 50, 75, 255));
+		CRenderer::PushUIRenderCommand(background);
+
+		m_buttonManager.Render();
 	}
 }
 
 bool CWorldEditor::IsInEditMode()
 {
 	return m_editMode;
+}
+
+void CWorldEditor::AddButtons()
+{
+	CUIButton& button = m_buttonManager.AddButton();
+
+	button.top = 0;
+	button.left = 0;
+	button.width = 64;
+	button.height = 64;
 }

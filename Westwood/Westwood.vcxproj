@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarCollection.cpp" />
+    <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCalendar.cpp" />
     <ClCompile Include="GameClock.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="TilesetBank.cpp" />
+    <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />
     <ClCompile Include="WorldEditor.cpp" />
     <ClCompile Include="WorldZone.cpp" />
@@ -154,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
+    <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCalendar.h" />
     <ClInclude Include="GameClock.h" />
@@ -169,6 +172,7 @@
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="TilesetBank.h" />
+    <ClInclude Include="UIButton.h" />
     <ClInclude Include="WindowEventHandler.h" />
     <ClInclude Include="WorldEditor.h" />
     <ClInclude Include="WorldZone.h" />
