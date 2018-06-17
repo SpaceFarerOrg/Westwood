@@ -26,17 +26,16 @@ CGameCalendar::CGameCalendar()
 void CGameCalendar::EndDay()
 {
 	m_currentDate++;
-
-	m_currentDay = m_dateToDayLUT[m_currentDate - 1];
-	
 	m_currentMinuteTime = 0.f;
-
 	m_clock = { 0,0 };
-
-	if (m_currentDate / 28 == 1)
+	
+	if (m_currentDate / 29 == 1)
 	{
 		EnterNewSeason();
 	}
+
+	m_currentDay = m_dateToDayLUT[m_currentDate - 1];
+
 }
 
 void CGameCalendar::Update(float a_dt)

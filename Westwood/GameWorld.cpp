@@ -40,7 +40,14 @@ void CGameWorld::Update(float a_deltaTime)
 {
 	if (CInputManager::GetInstance().IsKeyDown(EKeyCode::F1))
 	{
-		m_calendar.SetTimePassageMultiplier(100.f);
+		float multiplier = 100.f;
+
+		if (CInputManager::GetInstance().IsKeyDown(EKeyCode::LeftShift))
+		{
+			multiplier *= 50.f;
+		}
+
+		m_calendar.SetTimePassageMultiplier(multiplier);
 	}
 	else
 	{
