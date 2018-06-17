@@ -1,8 +1,10 @@
 /trash/
+.vs/*
 *.user
 *.ilk
 *.pdb
 *.exe
+*.db
 .vs/Westwood/v15/ipch/AutoPCH/dbb9348ced9f6246/MAIN.ipch
 .vs/Westwood/v15/ipch/AutoPCH/c34d254d898a49ee/WORLDEDITOR.ipch
 .vs/Westwood/v15/ipch/AutoPCH/a35d2b7575615c51/WORLDZONE.ipch
