@@ -5,6 +5,8 @@
 std::vector<sf::Sprite> CRenderer::m_renderQueue;
 std::vector<sf::RectangleShape> CRenderer::m_rectangleQueue;
 std::vector<sf::Text> CRenderer::m_textQueue;
+std::vector<sf::Sprite> CRenderer::m_UIRenderQueue;
+std::vector<sf::RectangleShape> CRenderer::m_UIRectangleQueue;
 
 sf::Vector2f CRenderer::m_currentWindowDimensions;
 /*End static member declaration*/
@@ -50,6 +52,24 @@ void CRenderer::RenderToWindow()
 		m_currentRenderTarget->draw(command);
 	}
 
+	sf::View view = m_renderWindow.getView();
+
+	m_renderWindow.setView(m_renderWindow.getDefaultView());
+
+	for (sf::Sprite& command : m_UIRenderQueue)
+	{
+		m_currentRenderTarget->draw(command);
+	}
+
+	for (sf::RectangleShape& command : m_UIRectangleQueue)
+	{
+		m_currentRenderTarget->draw(command);
+	}
+
+	m_renderWindow.setView(view);
+
+	m_UIRenderQueue.clear();
+	m_UIRectangleQueue.clear();
 	m_renderQueue.clear();
 	m_rectangleQueue.clear();
 	m_textQueue.clear();
@@ -61,7 +81,6 @@ sf::RenderWindow & CRenderer::GetWindow()
 {
 	return m_renderWindow;
 }
-
 
 void CRenderer::PushRenderCommand(const sf::Sprite & a_renderCommand)
 {
@@ -81,4 +100,14 @@ void CRenderer::PushRenderCommand(const sf::Text& a_renderCommand)
 const sf::Vector2f & CRenderer::GetWindowDimensions()
 {
 	return m_currentWindowDimensions;
+}
+
+void CRenderer::PushUIRenderCommand(const sf::Sprite & a_renderCommand)
+{
+	m_UIRenderQueue.push_back(a_renderCommand);
+}
+
+void CRenderer::PushUIRenderCommand(const sf::RectangleShape & a_renderCommand)
+{
+	m_UIRectangleQueue.push_back(a_renderCommand);
 }

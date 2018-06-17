@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/System/Vector2.hpp"
+#include "ButtonManager.h"
 
 class CWorldZone;
 namespace sf
@@ -19,10 +20,13 @@ public:
 	bool IsInEditMode();
 
 private:
+	void AddButtons();
+
 	sf::RenderWindow* m_renderWindow;
 	sf::Vector2f m_prevMPos;
 	sf::Vector2f m_zoom;
 	sf::Vector2f m_originalSize;
+	CButtonManager m_buttonManager;
 	bool m_editMode : 1;
 };
 
