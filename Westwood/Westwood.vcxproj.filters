@@ -37,6 +37,10 @@
     <ClCompile Include="AvatarCollection.cpp">
       <Filter>Character</Filter>
     </ClCompile>
+    <ClCompile Include="GameCalendar.cpp" />
+    <ClCompile Include="GameClock.cpp">
+      <Filter>Game World\Time</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -66,9 +70,6 @@
     <ClInclude Include="AvatarCollection.h">
       <Filter>Character</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Character</Filter>
-    </ClInclude>
     <ClInclude Include="WindowEventHandler.h" />
     <ClInclude Include="WorldEditor.h">
       <Filter>Game World\Tileset &amp; Map</Filter>
@@ -88,6 +89,12 @@
     <ClInclude Include="Serializable.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="GameCalendar.h">
+      <Filter>Game World\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClock.h">
+      <Filter>Game World\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -104,6 +111,9 @@
     </Filter>
     <Filter Include="Utility">
       <UniqueIdentifier>{db7d5ff2-6ae5-4b8c-992d-04572161e66f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game World\Time">
+      <UniqueIdentifier>{129ae4a3-cf08-4b8a-a690-95d49475bb71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

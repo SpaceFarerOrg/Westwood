@@ -135,6 +135,8 @@
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarCollection.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameCalendar.cpp" />
+    <ClCompile Include="GameClock.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -153,6 +155,8 @@
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameCalendar.h" />
+    <ClInclude Include="GameClock.h" />
     <ClInclude Include="GameWorld.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="KeyCodes.h" />
