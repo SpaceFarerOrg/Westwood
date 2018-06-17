@@ -37,8 +37,10 @@
     <ClCompile Include="AvatarCollection.cpp">
       <Filter>Character</Filter>
     </ClCompile>
-    <ClCompile Include="GameCalendar.cpp" />
     <ClCompile Include="GameClock.cpp">
+      <Filter>Game World\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCalendar.cpp">
       <Filter>Game World\Time</Filter>
     </ClCompile>
   </ItemGroup>
