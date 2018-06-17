@@ -26,6 +26,9 @@ public:
 	const sf::Vector2f& GetWindowDimensions();
 
 	void SetCameraTarget(const sf::Vector2f& a_targetPosition);
+	void SetShouldIgnoreCameraTarget(bool a_shouldIgnore);
+
+	sf::View GetCamera();
 private:
 	CRenderer();
 	~CRenderer();
@@ -43,4 +46,5 @@ private:
 
 	sf::Vector2f m_cameraTarget;
 	sf::View m_camera;
+	bool m_shouldIgnoreCameraTarget;
 };

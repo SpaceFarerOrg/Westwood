@@ -29,6 +29,7 @@ void CRenderer::Initialize()
 	m_currentWindowDimensions.y = static_cast<float>(videoMode.height);
 
 	m_camera.setSize(m_currentWindowDimensions);
+	m_shouldIgnoreCameraTarget = false;
 }
 
 void CRenderer::RenderToWindow()
@@ -113,7 +114,20 @@ const sf::Vector2f & CRenderer::GetWindowDimensions()
 
 void CRenderer::SetCameraTarget(const sf::Vector2f & a_targetPosition)
 {
-	m_cameraTarget = a_targetPosition;
+	if (m_shouldIgnoreCameraTarget == false)
+	{
+		m_cameraTarget = a_targetPosition;
+	}
+}
+
+void CRenderer::SetShouldIgnoreCameraTarget(bool a_shouldIgnore)
+{
+	m_shouldIgnoreCameraTarget = a_shouldIgnore;
+}
+
+sf::View CRenderer::GetCamera()
+{
+	return m_camera;
 }
 
 void CRenderer::PushUIRenderCommand(const sf::Sprite & a_renderCommand)

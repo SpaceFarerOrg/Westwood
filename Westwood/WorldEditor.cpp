@@ -4,6 +4,8 @@
 #include "WorldZone.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "Renderer.h"
+#include "TilesetBank.h"
+#include "Tileset.h"
 
 CWorldEditor::CWorldEditor(sf::RenderWindow* a_renderWindow)
 {
@@ -28,6 +30,7 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 {
 	a_worldZone.m_tileMap;
 	CInputManager& inputManager = CInputManager::GetInstance();
+	CRenderer::GetInstance().SetShouldIgnoreCameraTarget(m_editMode);
 
 	if (inputManager.IsKeyPressed(EKeyCode::F3))
 	{
@@ -73,7 +76,7 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 		}
 	}
 
-	sf::View view = m_renderWindow->getView();
+	sf::View view = CRenderer::GetInstance().GetCamera();
 	bool shouldUpdateView = false;
 	//float scrollDelta = static_cast<float>(inputManager.GetScrollWheelDelta());
 	//
@@ -97,10 +100,13 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 
 	if (shouldUpdateView)
 	{
-		m_renderWindow->setView(view);
+		//m_renderWindow->setView(view);
+		CRenderer::GetInstance().SetShouldIgnoreCameraTarget(false);
+		CRenderer::GetInstance().SetCameraTarget(view.getCenter());
 	}
 
 	m_prevMPos = inputManager.GetMousePosFloat();
+	CRenderer::GetInstance().SetShouldIgnoreCameraTarget(m_editMode);
 }
 
 void CWorldEditor::Render()
@@ -123,6 +129,8 @@ void CWorldEditor::Render()
 		CRenderer::GetInstance().PushUIRenderCommand(background);
 
 		m_buttonManager.Render();
+
+		CTileset& currentTileset = CTilesetBank::GetTileset(0);
 	}
 }
 
