@@ -24,6 +24,8 @@ public:
 	void PushUIRenderCommand(const sf::RectangleShape& a_renderCommand);
 	
 	const sf::Vector2f& GetWindowDimensions();
+
+	void SetCameraTarget(const sf::Vector2f& a_targetPosition);
 private:
 	CRenderer();
 	~CRenderer();
@@ -38,4 +40,7 @@ private:
 
 	sf::RenderWindow m_renderWindow;
 	sf::RenderTarget* m_currentRenderTarget;
+
+	sf::Vector2f m_cameraTarget;
+	sf::View m_camera;
 };

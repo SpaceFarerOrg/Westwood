@@ -27,6 +27,8 @@ void CRenderer::Initialize()
 
 	m_currentWindowDimensions.x = static_cast<float>(videoMode.width);
 	m_currentWindowDimensions.y = static_cast<float>(videoMode.height);
+
+	m_camera.setSize(m_currentWindowDimensions);
 }
 
 void CRenderer::RenderToWindow()
@@ -34,6 +36,11 @@ void CRenderer::RenderToWindow()
 	m_currentRenderTarget = &m_renderWindow;
 
 	m_currentRenderTarget->clear(sf::Color(50,150,255,255));
+
+	/*Camera space rendering*/
+	m_renderWindow.setView(m_camera);
+
+	m_camera.setCenter(m_cameraTarget);
 
 	for (sf::Sprite& command : m_renderQueue)
 	{
@@ -45,6 +52,9 @@ void CRenderer::RenderToWindow()
 		m_currentRenderTarget->draw(command);
 	}
 
+	/*End camera space rendering*/
+
+	/*Screen space rendering*/
 	sf::View view = m_renderWindow.getView();
 
 	m_renderWindow.setView(m_renderWindow.getDefaultView());
@@ -65,6 +75,7 @@ void CRenderer::RenderToWindow()
 	}
 
 	m_renderWindow.setView(view);
+	/*End Screen space rendering*/
 
 	m_UIRenderQueue.clear();
 	m_UIRectangleQueue.clear();
@@ -98,6 +109,11 @@ void CRenderer::PushRenderCommand(const sf::Text& a_renderCommand)
 const sf::Vector2f & CRenderer::GetWindowDimensions()
 {
 	return m_currentWindowDimensions;
+}
+
+void CRenderer::SetCameraTarget(const sf::Vector2f & a_targetPosition)
+{
+	m_cameraTarget = a_targetPosition;
 }
 
 void CRenderer::PushUIRenderCommand(const sf::Sprite & a_renderCommand)
