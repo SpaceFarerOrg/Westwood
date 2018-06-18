@@ -154,6 +154,7 @@
     <ClCompile Include="WorldZone.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
     <ClInclude Include="ButtonManager.h" />

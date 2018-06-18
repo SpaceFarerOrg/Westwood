@@ -103,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="ButtonManager.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -122,6 +125,9 @@
     </Filter>
     <Filter Include="Game World\Time">
       <UniqueIdentifier>{129ae4a3-cf08-4b8a-a690-95d49475bb71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{333a8296-7aed-45f2-a4f9-a30f7fe2d0ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
