@@ -24,11 +24,16 @@ void CWorldEditor::Initialize()
 	m_originalSize = m_zoom;
 
 	AddButtons();
+	m_tileSelector.width = (float)m_renderWindow->getView().getSize().x / 3.f;
+	m_tileSelector.height = (float)m_renderWindow->getView().getSize().y / 12.f;
+	m_tileSelector.left = (float)m_renderWindow->getView().getSize().x / 2.f;
+	m_tileSelector.top = 0.5f * fabs(m_tileSelector.height - (float)m_renderWindow->getView().getSize().y / 10.f);
 }
 
 void CWorldEditor::Update(CWorldZone& a_worldZone)
 {
-	a_worldZone.m_tileMap;
+	m_tileSelector.SetTilesetPointer(a_worldZone.m_tileMap.m_tileset);
+
 	CInputManager& inputManager = CInputManager::GetInstance();
 	CRenderer::GetInstance().SetShouldIgnoreCameraTarget(m_editMode);
 
@@ -129,8 +134,7 @@ void CWorldEditor::Render()
 		CRenderer::GetInstance().PushUIRenderCommand(background);
 
 		m_buttonManager.Render();
-
-		CTileset& currentTileset = CTilesetBank::GetTileset(0);
+		m_tileSelector.Render();
 	}
 }
 
@@ -146,12 +150,63 @@ void CWorldEditor::SetDrawingMode(EDrawingMode a_drawingMode)
 
 void CWorldEditor::AddButtons()
 {
-	CUIButton& button = m_buttonManager.AddButton();
+	float borderMiddle = 0.5f * ((float)m_renderWindow->getView().getSize().y / 10.f);
+	float buttonIncrement = (float)m_renderWindow->getView().getSize().x / 30.f;
+	int buttonNumber = 1;
 
-	button.top = 0;
-	button.left = 0;
-	button.width = 64;
-	button.height = 64;
-	button.SetAssociatedObject(this);
-	button.SetFunction([](void* a_object) { reinterpret_cast<CWorldEditor*>(a_object)->SetDrawingMode(EDrawingMode::Pencil); });
+	{
+		CUIButton& button = m_buttonManager.AddButton();
+
+		button.top = 0;
+		button.left = 0;
+		button.width = 64;
+		button.height = 64;
+
+		button.SetPosition(buttonIncrement * buttonNumber++, borderMiddle);
+		button.SetAssociatedObject(this);
+		button.SetFunction([](void* a_object) { reinterpret_cast<CWorldEditor*>(a_object)->SetDrawingMode(EDrawingMode::Pencil); });
+		button.AddSubText("Pencil");
+	}
+
+	{
+		CUIButton& button = m_buttonManager.AddButton();
+
+		button.top = 0;
+		button.left = 0;
+		button.width = 64;
+		button.height = 64;
+
+		button.SetPosition(buttonIncrement * buttonNumber++, borderMiddle);
+		button.SetAssociatedObject(this);
+		button.SetFunction([](void* a_object) { reinterpret_cast<CWorldEditor*>(a_object)->SetDrawingMode(EDrawingMode::Line); });
+		button.AddSubText("Line");
+	}
+
+	{
+		CUIButton& button = m_buttonManager.AddButton();
+
+		button.top = 0;
+		button.left = 0;
+		button.width = 64;
+		button.height = 64;
+
+		button.SetPosition(buttonIncrement * buttonNumber++, borderMiddle);
+		button.SetAssociatedObject(this);
+		button.SetFunction([](void* a_object) { reinterpret_cast<CWorldEditor*>(a_object)->SetDrawingMode(EDrawingMode::Rectangle); });
+		button.AddSubText("Rectangle");
+	}
+
+	{
+		CUIButton& button = m_buttonManager.AddButton();
+
+		button.top = 0;
+		button.left = 0;
+		button.width = 64;
+		button.height = 64;
+
+		button.SetPosition(buttonIncrement * buttonNumber++, borderMiddle);
+		button.SetAssociatedObject(this);
+		button.SetFunction([](void* a_object) { reinterpret_cast<CWorldEditor*>(a_object)->SetDrawingMode(EDrawingMode::Circle); });
+		button.AddSubText("Circle");
+	}
 }

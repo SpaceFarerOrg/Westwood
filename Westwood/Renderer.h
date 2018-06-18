@@ -22,6 +22,7 @@ public:
 	void PushRenderCommand(const sf::Text& a_renderCommand);
 	void PushUIRenderCommand(const sf::Sprite& a_renderCommand);
 	void PushUIRenderCommand(const sf::RectangleShape& a_renderCommand);
+	void PushUIRenderCommand(const sf::Text& a_renderCommand);
 	
 	const sf::Vector2f& GetWindowDimensions();
 
@@ -32,12 +33,27 @@ public:
 private:
 	CRenderer();
 	~CRenderer();
+
+	enum class ERenderCommandType
+	{
+		Sprite,
+		RectangleShape,
+		Text
+	};
+
+	struct SRenderCommand
+	{
+		ERenderCommandType m_type;
+
+		sf::Sprite m_spriteData;
+		sf::RectangleShape m_rectShapeData;
+		sf::Text m_textData;
+	};
+
+	void RenderQueue(std::vector<SRenderCommand>& a_renderQueue);
 	
-	std::vector<sf::Sprite> m_renderQueue;
-	std::vector<sf::RectangleShape> m_rectangleQueue;
-	std::vector<sf::Sprite> m_UIRenderQueue;
-	std::vector<sf::Text> m_textQueue;
-	std::vector<sf::RectangleShape> m_UIRectangleQueue;
+	std::vector<SRenderCommand> m_renderCommands;
+	std::vector<SRenderCommand> m_UIRenderCommands;
 	
 	sf::Vector2f m_currentWindowDimensions;
 
