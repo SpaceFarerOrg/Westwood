@@ -24,6 +24,8 @@ private:
 	sf::Vector2f GetTilePosition(short a_tileIndex) const;
 
 private:
+	std::array<bool, 8> GetNeighbouringTiles(short a_tileIndex, short a_tileIndexInMap);
+
 	CTileset* m_tileset;
 	ETextures m_texture;
 	unsigned int m_tileCount;

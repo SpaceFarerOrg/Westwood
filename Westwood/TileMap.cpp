@@ -40,7 +40,14 @@ void CTileMap::Render()
 		tilePosition.x = static_cast<float>((i % m_width) * m_tileWidth);
 		tilePosition.y = static_cast<float>((i / m_width) * m_tileHeight);
 
-		m_tileset->DrawTileAtPosition(m_tiles[i], tilePosition);
+		short tileIndex = m_tiles[i];
+
+		if (m_tileset->GetTileData(m_tiles[i]).m_isAdaptive)
+		{
+			tileIndex = m_tileset->CalculateAdaptiveTile(m_tiles[i], GetNeighbouringTiles(m_tiles[i], i));
+		}
+
+		m_tileset->DrawTileAtPosition(tileIndex, tilePosition);
 	}
 }
 
@@ -95,5 +102,21 @@ sf::Vector2f CTileMap::GetTilePosition(short a_tileIndex) const
 	rv.y = (a_tileIndex / m_width) * m_tileHeight;
 
 	return rv;
+}
+
+std::array<bool, 8> CTileMap::GetNeighbouringTiles(short a_tileIndex, short a_tileIndexInMap)
+{
+	std::array<bool, 8> neighbours;
+
+	neighbours[0] = m_tiles[a_tileIndexInMap - m_width - 1] == a_tileIndex; //Top left
+	neighbours[1] = m_tiles[a_tileIndexInMap - m_width] == a_tileIndex;; //Top
+	neighbours[2] = m_tiles[a_tileIndexInMap - m_width + 1] == a_tileIndex;; //Top right
+	neighbours[3] = m_tiles[a_tileIndexInMap - 1] == a_tileIndex;; // Left
+	neighbours[4] = m_tiles[a_tileIndexInMap + 1] == a_tileIndex;; // Right
+	neighbours[5] = m_tiles[a_tileIndexInMap + m_width - 1] == a_tileIndex;; //Bottom left
+	neighbours[6] = m_tiles[a_tileIndexInMap + m_width] == a_tileIndex;; //Bottom
+	neighbours[7] = m_tiles[a_tileIndexInMap + m_width + 1] == a_tileIndex;; //Bottom right
+
+	return std::move(neighbours);
 }
 
