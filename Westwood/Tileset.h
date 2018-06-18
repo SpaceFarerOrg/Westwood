@@ -6,6 +6,8 @@
 
 class CTileset
 {
+	friend class CTileSelector;
+
 public:
 	void LoadFromJson(nlohmann::json& a_tilesetJson);
 	void Unload();

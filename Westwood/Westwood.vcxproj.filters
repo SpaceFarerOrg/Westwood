@@ -47,6 +47,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Character\Player</Filter>
     </ClCompile>
+    <ClCompile Include="TileSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -106,6 +107,7 @@
     <ClInclude Include="Animation.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="TileSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">

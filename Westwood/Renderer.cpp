@@ -29,6 +29,7 @@ void CRenderer::Initialize()
 	m_currentWindowDimensions.y = static_cast<float>(videoMode.height);
 
 	m_camera.setSize(m_currentWindowDimensions);
+	m_shouldIgnoreCameraTarget = false;
 }
 
 void CRenderer::RenderToWindow()
@@ -42,15 +43,7 @@ void CRenderer::RenderToWindow()
 
 	m_camera.setCenter(m_cameraTarget);
 
-	for (sf::Sprite& command : m_renderQueue)
-	{
-		m_currentRenderTarget->draw(command);
-	}
-
-	for (sf::RectangleShape& command : m_rectangleQueue)
-	{
-		m_currentRenderTarget->draw(command);
-	}
+	RenderQueue(m_renderCommands);
 
 	/*End camera space rendering*/
 
@@ -58,30 +51,11 @@ void CRenderer::RenderToWindow()
 	sf::View view = m_renderWindow.getView();
 
 	m_renderWindow.setView(m_renderWindow.getDefaultView());
-	
-	for (sf::Text& command : m_textQueue)
-	{
-		m_currentRenderTarget->draw(command);
-	}
 
-	for (sf::Sprite& command : m_UIRenderQueue)
-	{
-		m_currentRenderTarget->draw(command);
-	}
-
-	for (sf::RectangleShape& command : m_UIRectangleQueue)
-	{
-		m_currentRenderTarget->draw(command);
-	}
+	RenderQueue(m_UIRenderCommands);
 
 	m_renderWindow.setView(view);
 	/*End Screen space rendering*/
-
-	m_UIRenderQueue.clear();
-	m_UIRectangleQueue.clear();
-	m_renderQueue.clear();
-	m_rectangleQueue.clear();
-	m_textQueue.clear();
 
 	m_renderWindow.display();
 }
@@ -93,17 +67,26 @@ sf::RenderWindow & CRenderer::GetWindow()
 
 void CRenderer::PushRenderCommand(const sf::Sprite & a_renderCommand)
 {
-	m_renderQueue.push_back(a_renderCommand);
+	SRenderCommand rc;
+	rc.m_type = ERenderCommandType::Sprite;
+	rc.m_spriteData = a_renderCommand;
+	m_renderCommands.push_back(rc);
 }
 
 void CRenderer::PushRenderCommand(const sf::RectangleShape & a_renderCommand)
 {
-	m_rectangleQueue.push_back(a_renderCommand);
+	SRenderCommand rc;
+	rc.m_type = ERenderCommandType::RectangleShape;
+	rc.m_rectShapeData = a_renderCommand;
+	m_renderCommands.push_back(rc);
 }
 
 void CRenderer::PushRenderCommand(const sf::Text& a_renderCommand)
 {
-	m_textQueue.push_back(a_renderCommand);
+	SRenderCommand rc;
+	rc.m_type = ERenderCommandType::Text;
+	rc.m_textData = a_renderCommand;
+	m_renderCommands.push_back(rc);
 }
 
 const sf::Vector2f & CRenderer::GetWindowDimensions()
@@ -113,15 +96,63 @@ const sf::Vector2f & CRenderer::GetWindowDimensions()
 
 void CRenderer::SetCameraTarget(const sf::Vector2f & a_targetPosition)
 {
-	m_cameraTarget = a_targetPosition;
+	if (m_shouldIgnoreCameraTarget == false)
+	{
+		m_cameraTarget = a_targetPosition;
+	}
+}
+
+void CRenderer::SetShouldIgnoreCameraTarget(bool a_shouldIgnore)
+{
+	m_shouldIgnoreCameraTarget = a_shouldIgnore;
+}
+
+sf::View CRenderer::GetCamera()
+{
+	return m_camera;
 }
 
 void CRenderer::PushUIRenderCommand(const sf::Sprite & a_renderCommand)
 {
-	m_UIRenderQueue.push_back(a_renderCommand);
+	SRenderCommand rc;
+	rc.m_type = ERenderCommandType::Sprite;
+	rc.m_spriteData = a_renderCommand;
+	m_UIRenderCommands.push_back(rc);
 }
 
 void CRenderer::PushUIRenderCommand(const sf::RectangleShape & a_renderCommand)
 {
-	m_UIRectangleQueue.push_back(a_renderCommand);
+	SRenderCommand rc;
+	rc.m_type = ERenderCommandType::RectangleShape;
+	rc.m_rectShapeData = a_renderCommand;
+	m_UIRenderCommands.push_back(rc);
+}
+
+void CRenderer::PushUIRenderCommand(const sf::Text & a_renderCommand)
+{
+	SRenderCommand rc;
+	rc.m_type = ERenderCommandType::Text;
+	rc.m_textData = a_renderCommand;
+	m_UIRenderCommands.push_back(rc);
+}
+
+void CRenderer::RenderQueue(std::vector<SRenderCommand>& a_renderQueue)
+{
+	for (SRenderCommand& command : a_renderQueue)
+	{
+		switch (command.m_type)
+		{
+		case ERenderCommandType::Sprite:
+			m_currentRenderTarget->draw(command.m_spriteData);
+			break;
+		case ERenderCommandType::Text:
+			m_currentRenderTarget->draw(command.m_textData);
+			break;
+		case ERenderCommandType::RectangleShape:
+			m_currentRenderTarget->draw(command.m_rectShapeData);
+			break;
+		}
+	}
+
+	a_renderQueue.clear();
 }

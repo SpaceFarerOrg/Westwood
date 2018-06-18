@@ -146,6 +146,7 @@
     <ClCompile Include="Serializable.cpp" />
     <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="TileSelector.cpp" />
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="TilesetBank.cpp" />
     <ClCompile Include="UIButton.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="TileData.h" />
     <ClInclude Include="TileInteraction.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TileSelector.h" />
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="TilesetBank.h" />
     <ClInclude Include="UIButton.h" />

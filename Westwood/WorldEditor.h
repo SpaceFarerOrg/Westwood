@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/System/Vector2.hpp"
 #include "ButtonManager.h"
+#include "TileSelector.h"
 
 class CWorldZone;
 namespace sf
@@ -14,7 +15,10 @@ public:
 
 	enum class EDrawingMode
 	{
-		Pencil
+		Pencil,
+		Line,
+		Rectangle,
+		Circle
 	};
 
 	CWorldEditor(sf::RenderWindow* a_renderWindow);
@@ -36,6 +40,7 @@ private:
 	sf::Vector2f m_originalSize;
 	CButtonManager m_buttonManager;
 	EDrawingMode m_drawingMode;
+	CTileSelector m_tileSelector;
 
 	bool m_editMode : 1;
 };
