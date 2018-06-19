@@ -26,12 +26,17 @@ void CTileset::LoadFromJson(nlohmann::json & a_tilesetJson)
 
 		nlohmann::json tileData = a_tilesetJson["tileproperties"][std::to_string(tileIndex)];
 		
-		m_tiles[tileIndex].m_isPassable = false;
+		m_tiles[tileIndex].SetInteractionAllowance(ETileInteraction::Pass,false);
+		m_tiles[tileIndex].SetInteractionAllowance(ETileInteraction::Dig, false);
 		m_tiles[tileIndex].m_isAdaptive = false;
 
 		if (tileData.find("passable") != tileData.end())
 		{
-			m_tiles[tileIndex].m_isPassable = tileData["passable"].get<bool>();
+			m_tiles[tileIndex].SetInteractionAllowance(ETileInteraction::Pass, true);
+		}
+		if (tileData.find("plowable") != tileData.end())
+		{
+			m_tiles[tileIndex].SetInteractionAllowance(ETileInteraction::Dig, true);
 		}
 		if (tileData.find("adaptive") != tileData.end())
 		{

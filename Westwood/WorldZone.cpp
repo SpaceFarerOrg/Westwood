@@ -26,3 +26,8 @@ sf::Vector2f CWorldZone::CheckForAllowedMove(const sf::Vector2f & a_targetPositi
 
 	return std::move(allowedPosition);
 }
+
+void CWorldZone::PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f & a_interactionPosition)
+{
+	m_tileMap.PerformInteraction(a_interactionPosition, a_interaction);
+}

@@ -19,8 +19,6 @@ void CTilesetBank::LoadAllTilesets()
 			continue;
 
 		std::wstring pathString = fileP.c_str();
-		
-		
 
 		nlohmann::json tilesetJson;
 

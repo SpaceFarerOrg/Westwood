@@ -74,12 +74,24 @@ void CGameWorld::UpdateAllAvatars(float a_deltaTime)
 	{
 		m_avatarsInCurrentZone[i]->SetDeltaTime(a_deltaTime);
 
+		/*Move logic*/
 		sf::Vector2f avatarsFuturePosition = m_avatarsInCurrentZone[i]->GetFuturePosition();
 		sf::Vector2f avatarsCurrentPosition = m_avatarsInCurrentZone[i]->GetPosition();
 
 		sf::Vector2f allowedMove = m_worldZones[m_currentZone].CheckForAllowedMove(avatarsFuturePosition, avatarsCurrentPosition);
 
 		m_avatarsInCurrentZone[i]->AllowMoveTo(allowedMove);
+		/*End Move*/
+
+		/*Interaction Logic*/
+		sf::Vector2f interactionPosition;
+		ETileInteraction interaction;
+
+		if (m_avatarsInCurrentZone[i]->HasPerformedWorldInteraction(interaction, interactionPosition))
+		{
+			m_worldZones[m_currentZone].PerformWorldInteraction(interaction, interactionPosition);
+		}
+		/*End interaction*/
 	}
 
 	//Todo: Update all Avatars in a different zone than the current one (will make NPCs seem more lively)

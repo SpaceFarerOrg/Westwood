@@ -11,11 +11,8 @@
     {
      "0":
         {
-         "passable":true
-        },
-     "1":
-        {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "10":
         {
@@ -976,11 +973,8 @@
     {
      "0":
         {
-         "passable":"bool"
-        },
-     "1":
-        {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "10":
         {

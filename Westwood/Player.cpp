@@ -28,6 +28,11 @@ void CPlayer::Update()
 		direction.y += 1.f;
 	}
 
+	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::Space))
+	{
+		m_avatar.PerformWorldInteraction(ETileInteraction::Dig, m_avatar.GetPosition());
+	}
+
 	m_avatar.SetDirection(direction);
 
 	CRenderer::GetInstance().SetCameraTarget(m_avatar.GetPosition());

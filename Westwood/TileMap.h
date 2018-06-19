@@ -16,20 +16,27 @@ public:
 	void Render();
 
 	bool IsTileWalkable(const sf::Vector2f& a_position) const;
+
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 
+	void PerformInteraction(const sf::Vector2f& a_positionToPerformInteractionOn, ETileInteraction a_interaction);
 private:
 	void SetTile(short a_tileIndex, STileData a_newTile);
 	short ConvertPositionToTileIndex(const sf::Vector2f& a_position, const sf::Vector2f& a_zoomFactor = { 1,1 }) const;
 	sf::Vector2f GetTilePosition(short a_tileIndex) const;
 
 private:
-	std::array<bool, 8> GetNeighbouringTiles(short a_tileIndex, short a_tileIndexInMap);
+	std::array<bool, 8> GetNeighbouringTiles(short a_tileIndex, short a_tileIndexInMap, short* a_layer);
+
+	void RenderLayersOnTile(short a_indexInMap);
 
 	CTileset* m_tileset;
 	ETextures m_texture;
 	unsigned int m_tileCount;
-	short* m_tiles;
+	
+	//Layers
+	short* m_groundTiles;
+	short* m_interactedTiles;
 
 	short m_tileHeight;
 	short m_tileWidth;

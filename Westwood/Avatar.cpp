@@ -1,6 +1,12 @@
 #include "Avatar.h"
 #include <utility>
 
+CAvatar::CAvatar()
+{
+	m_lastInteraction = ETileInteraction::Count;
+	m_currentZone = 0;
+}
+
 void CAvatar::SetDirection(const sf::Vector2f & a_direction)
 {
 	if (a_direction != m_currentDirection)
@@ -39,6 +45,27 @@ void CAvatar::AllowMoveTo(const sf::Vector2f& a_allowedNewPosition)
 const short CAvatar::GetCurrentZone() const
 {
 	return m_currentZone;
+}
+
+void CAvatar::PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f & a_atPosition)
+{
+	m_lastInteraction = a_interaction;
+	m_interactedPosition = a_atPosition;
+}
+
+bool CAvatar::HasPerformedWorldInteraction(ETileInteraction & a_outInteraction, sf::Vector2f & a_outAtPosition)
+{
+	if (m_lastInteraction != ETileInteraction::Count)
+	{
+		a_outInteraction = m_lastInteraction;
+		m_lastInteraction = ETileInteraction::Count;
+
+		a_outAtPosition = m_interactedPosition;
+
+		return true;
+	}
+
+	return false;
 }
 
 #include <SFML\Graphics\Sprite.hpp>

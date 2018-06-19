@@ -73,8 +73,7 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 		if (inputManager.IsKeyDown(EKeyCode::MouseLeft))
 		{
 			STileData tileData;
-			tileData.m_allowedInteraction = ETileInteraction::Count;
-			tileData.m_isPassable = true;
+			tileData.SetInteractionAllowance(ETileInteraction::Pass, true);
 			tileData.m_tileIndex = 0;
 
 			a_worldZone.m_tileMap.SetTile(tileIndex, tileData);
