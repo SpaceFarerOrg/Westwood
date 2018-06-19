@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "name": "Null item",
+      "description": "No item",
+      "buy": 0,
+      "sell": 0,
+      "indexInSheet": 0
+    },
+    {
+      "name": "Axe",
+      "description": "Used to cut woods",
+      "buy": 0,
+      "sell": 0,
+      "indexInSheet": 1
+    },
+    {
+      "name": "Pickaxe",
+      "description": "Used to break stone",
+      "buy": 0,
+      "sell": 0,
+      "indexInSheet": 2
+    },
+    {
+      "name": "Shovel",
+      "description": "Used to dig dirt",
+      "buy": 0,
+      "sell": 0,
+      "indexInSheet": 3
+    }
+  ]
+}

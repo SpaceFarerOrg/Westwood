@@ -13,6 +13,7 @@ void CTextureBank::LoadAllTextures()
 {
 	LoadTexture(ETextures::TestTileset, "debugSpriteSheet");
 	LoadTexture(ETextures::PlayerCharacter, "debugPlayerSprite");
+	LoadTexture(ETextures::Items, "items");
 }
 
 void CTextureBank::LoadAllFonts()

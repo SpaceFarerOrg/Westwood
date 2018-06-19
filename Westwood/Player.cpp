@@ -28,12 +28,26 @@ void CPlayer::Update()
 		direction.y += 1.f;
 	}
 
-	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::Space))
+	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::E))
 	{
-		m_avatar.PerformWorldInteraction(ETileInteraction::Dig, m_avatar.GetPosition());
+		m_inventory.ChangeActiveSlot(1);
 	}
+	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::Q))
+	{
+		m_inventory.ChangeActiveSlot(-1);
+	}
+
+
 
 	m_avatar.SetDirection(direction);
 
 	CRenderer::GetInstance().SetCameraTarget(m_avatar.GetPosition());
+
+	m_inventory.RenderInventory();
 }
+
+CInventory & CPlayer::GetInventory()
+{
+	return m_inventory;
+}
+
