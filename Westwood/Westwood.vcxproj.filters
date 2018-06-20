@@ -73,6 +73,7 @@
     <ClCompile Include="TextureBank.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GameEventMaster.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Renderer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="GameEventMaster.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
