@@ -7,6 +7,11 @@ CInventory::CInventory()
 	m_activeSlot = 0;
 }
 
+void CInventory::BindToolBank(CToolBank & a_toolBank)
+{
+	m_boundToolBank = &a_toolBank;
+}
+
 bool CInventory::IsFull()
 {
 	bool full = m_freeSlots == 0;
@@ -104,6 +109,8 @@ void CInventory::ChangeActiveSlot(short a_change)
 	{
 		m_activeSlot = 0;
 	}
+
+	m_boundToolBank->SetRelevantToolAsActive(m_slots[m_activeSlot].m_itemId);
 
 	m_isDirty = true;
 }

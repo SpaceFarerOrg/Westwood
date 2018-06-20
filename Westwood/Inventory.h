@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include "Item.h"
+#include "ToolBank.h"
 
 struct SInventoryItem
 {
@@ -28,6 +29,8 @@ class CInventory
 {
 public:
 	CInventory();
+	void BindToolBank(CToolBank& a_toolBank);
+
 	void RenderInventory() const;
 
 	bool IsFull();
@@ -41,8 +44,11 @@ public:
 	bool GetIsDirty();
 private:
 	std::array<SInventoryItem, 10> m_slots;
+	CToolBank* m_boundToolBank;
+
 	short GetSlotIndex(short a_itemId) const;
 	short m_activeSlot;
 	short m_freeSlots;
+
 	bool m_isDirty : 1;
 };

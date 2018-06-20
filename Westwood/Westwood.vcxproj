@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarCollection.cpp" />
+    <ClCompile Include="Axe.cpp" />
     <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCalendar.cpp" />
@@ -144,14 +145,17 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBank.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Pickaxe.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Serializable.cpp" />
+    <ClCompile Include="Shovel.cpp" />
     <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileSelector.cpp" />
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="TilesetBank.cpp" />
+    <ClCompile Include="ToolBank.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />
     <ClCompile Include="WorldEditor.cpp" />
@@ -161,11 +165,17 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
+    <ClInclude Include="Axe.h" />
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCalendar.h" />
     <ClInclude Include="GameClock.h" />
     <ClInclude Include="GameWorld.h" />
+    <ClInclude Include="Pickaxe.h" />
+    <ClInclude Include="Shovel.h" />
+    <ClInclude Include="Tool.h" />
+    <ClInclude Include="ToolBank.h" />
+    <ClInclude Include="Useable.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />

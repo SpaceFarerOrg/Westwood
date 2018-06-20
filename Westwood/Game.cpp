@@ -35,6 +35,8 @@ void CGame::Initialize()
 
 	m_gameWorld.ChangeZone(0);
 
+	m_player.Init();
+
 	/*Debug give player items*/
 	short axeIndex = CItemBank::GetInstance().GetItemID("Axe");
 	short pickaxeIndex = CItemBank::GetInstance().GetItemID("Pickaxe");

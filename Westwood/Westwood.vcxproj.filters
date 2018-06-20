@@ -57,6 +57,18 @@
     <ClCompile Include="ItemBank.cpp">
       <Filter>Items</Filter>
     </ClCompile>
+    <ClCompile Include="ToolBank.cpp">
+      <Filter>Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Shovel.cpp">
+      <Filter>Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Axe.cpp">
+      <Filter>Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Pickaxe.cpp">
+      <Filter>Items\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -126,6 +138,24 @@
     <ClInclude Include="ItemBank.h">
       <Filter>Items</Filter>
     </ClInclude>
+    <ClInclude Include="Useable.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Shovel.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBank.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Axe.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Pickaxe.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -151,6 +181,9 @@
     </Filter>
     <Filter Include="Items">
       <UniqueIdentifier>{15a28afc-c12c-4a7e-aac2-9978e56893a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items\Tools">
+      <UniqueIdentifier>{02c12c52-58bf-4877-99a8-f44ec782d136}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
