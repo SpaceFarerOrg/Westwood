@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="WorldZone.cpp">
       <Filter>Game World</Filter>
     </ClCompile>
@@ -13,7 +12,6 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>Game World</Filter>
     </ClCompile>
-    <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="Avatar.cpp">
       <Filter>Character</Filter>
     </ClCompile>
@@ -69,10 +67,15 @@
     <ClCompile Include="Pickaxe.cpp">
       <Filter>Items\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureBank.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="GameWorld.h">
       <Filter>Game World</Filter>
     </ClInclude>
@@ -82,7 +85,6 @@
     <ClInclude Include="WorldZone.h">
       <Filter>Game World</Filter>
     </ClInclude>
-    <ClInclude Include="TextureBank.h" />
     <ClInclude Include="TileInteraction.h">
       <Filter>Game World</Filter>
     </ClInclude>
@@ -155,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="Pickaxe.h">
       <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBank.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
