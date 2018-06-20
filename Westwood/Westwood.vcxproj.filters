@@ -166,6 +166,9 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="GameEventMaster.h" />
+    <ClInclude Include="Math.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">

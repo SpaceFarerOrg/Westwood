@@ -3,6 +3,8 @@
 *.user
 *.ilk
 *.pdb
+*.ipdb
+*.iobj
 *.exe
 *.db
 .vs/Westwood/v15/ipch/AutoPCH/dbb9348ced9f6246/MAIN.ipch

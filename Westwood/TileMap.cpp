@@ -44,15 +44,15 @@ void CTileMap::Render()
 
 sf::Vector2f CTileMap::CheckForAllowedMove(const sf::Vector2f & a_targetPosition, const sf::Vector2f& a_currentPosition) const
 {
-	sf::Vector2f allowedMove = a_currentPosition;
+	sf::Vector2f allowedMove;
 
 	if (IsTileWalkable({ a_targetPosition.x, a_currentPosition.y }))
 	{
-		allowedMove.x = a_targetPosition.x;
+		allowedMove.x = a_targetPosition.x - a_currentPosition.x;
 	}
 	if (IsTileWalkable({ a_currentPosition.x, a_targetPosition.y }))
 	{
-		allowedMove.y = a_targetPosition.y;
+		allowedMove.y = a_targetPosition.y - a_currentPosition.y;
 	}
 
 	return std::move(allowedMove);
@@ -67,7 +67,7 @@ void CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformIntera
 		//VERY UGLY QUICK FIX FOR TESTING
 		if (a_interaction == ETileInteraction::Dig)
 		{
-			m_interactedTiles[tileIndex] = 35;
+			m_interactedTiles[tileIndex] = 5;
 		}
 	}
 }

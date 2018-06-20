@@ -52,6 +52,11 @@ void CGame::Initialize()
 void CGame::Update()
 {
 	float deltaTime = m_deltaTimer.getElapsedTime().asSeconds();
+	sf::Text deltaTimeText;
+	deltaTimeText.setFont(CTextureBank::GetFont(EFonts::Debug));
+	deltaTimeText.setString(std::to_string(static_cast<short>(1.f / deltaTime)));
+	CRenderer::GetInstance().PushUIRenderCommand(deltaTimeText);
+
 	m_deltaTimer.restart();
 
 	m_windowEventHandler.RunEventHandling();

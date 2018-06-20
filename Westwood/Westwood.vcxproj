@@ -94,6 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)external\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)external\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -173,6 +174,7 @@
     <ClInclude Include="GameClock.h" />
     <ClInclude Include="GameEventMaster.h" />
     <ClInclude Include="GameWorld.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Pickaxe.h" />
     <ClInclude Include="Shovel.h" />
     <ClInclude Include="Tool.h" />
