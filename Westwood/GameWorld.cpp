@@ -2,6 +2,15 @@
 #include <json.hpp>
 #include <fstream>
 #include "Avatar.h"
+#include "GameEventMaster.h"
+
+CGameWorld::CGameWorld()
+{
+	m_timeFreezed = false;
+
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::PauseTime, [&timeFreezed = m_timeFreezed]() { timeFreezed = true; });
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::ContinueTime, [&timeFreezed = m_timeFreezed]() {timeFreezed = false; });
+}
 
 void CGameWorld::Load(const char * a_worldPath)
 {
@@ -54,8 +63,15 @@ void CGameWorld::Update(float a_deltaTime)
 		m_calendar.SetTimePassageMultiplier(1.f);
 	}
 
-	m_calendar.Update(a_deltaTime);
-	UpdateAllAvatars(a_deltaTime);
+	float deltaTime = a_deltaTime;
+
+	if (m_timeFreezed == true)
+	{
+		deltaTime = 0.f;
+	}
+
+	m_calendar.Update(deltaTime);
+	UpdateAllAvatars(deltaTime);
 }
 
 CWorldZone & CGameWorld::GetCurrentZone()
