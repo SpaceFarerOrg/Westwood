@@ -1,5 +1,6 @@
 #include "Avatar.h"
 #include <utility>
+#include "Math.h"
 
 CAvatar::CAvatar()
 {
@@ -11,7 +12,6 @@ CAvatar::CAvatar()
 	m_collisionPoints[1] = { 32.f, 64.f };
 	m_collisionPoints[2] = { 0.f, 32.f };
 	m_collisionPoints[3] = { 32.f, 32.f };
-	
 }
 
 void CAvatar::SetDirection(const sf::Vector2f & a_direction)
@@ -22,6 +22,15 @@ void CAvatar::SetDirection(const sf::Vector2f & a_direction)
 	}
 
 	m_currentDirection = a_direction;
+
+	if (fabs(m_currentDirection.x) > 0.f)
+	{
+		m_facingDirection = { m_currentDirection.x, 0 };
+	}
+	else if (fabs(m_currentDirection.y) > 0.f)
+	{
+		m_facingDirection = { 0, m_currentDirection.y };
+	}
 }
 
 void CAvatar::SetMovementSpeed(float a_movementSpeed)
@@ -83,6 +92,10 @@ bool CAvatar::HasPerformedWorldInteraction(ETileInteraction & a_outInteraction, 
 #include <SFML\Graphics\Sprite.hpp>
 #include "Renderer.h"
 #include "TextureBank.h"
+const sf::Vector2f & CAvatar::GetFacingDirection() const
+{
+	return m_facingDirection;
+}
 void CAvatar::Draw()
 {
 	sf::Sprite sprite;

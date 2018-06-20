@@ -14,23 +14,24 @@ public:
 	void SetDeltaTime(float a_deltaTime);
 
 	const sf::Vector2f& GetPosition() const;
-
 	sf::Vector2f GetPositionOfCollisionPoint(short a_collisionPoint) const;
-
 	sf::Vector2f GetFuturePositionOfCollisionPoint(short a_collisionPoint) const;
-	void AllowMove(const sf::Vector2f& a_allowedMove);
-
+	
 	const short GetCurrentZone() const;
+	
+	void AllowMove(const sf::Vector2f& a_allowedMove);
 
 	void PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f& a_atPosition);
 	bool HasPerformedWorldInteraction(ETileInteraction& a_outInteraction, sf::Vector2f& a_outAtPosition);
 
+	const sf::Vector2f& GetFacingDirection() const;
 	void Draw();
 private:
 	sf::Vector2f CalculateFuturePositionOfCollisionPoint(short a_collisionPoint) const;
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_currentDirection;
+	sf::Vector2f m_facingDirection;
 
 	ETileInteraction m_lastInteraction;
 	sf::Vector2f m_interactedPosition;
