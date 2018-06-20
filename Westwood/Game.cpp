@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "InputManager.h"
 #include "ItemBank.h"
+#include "GameEventMaster.h"
 
 CGame::CGame()
 	:m_windowEventHandler(CRenderer::GetInstance().GetWindow())
@@ -71,6 +72,8 @@ void CGame::Update()
 	{
 		m_shouldRun = false;
 	}
+
+	CGameEventMaster::GetInstance().HandleFrameEvents();
 }
 
 bool CGame::ShouldRun() const
