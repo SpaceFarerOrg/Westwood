@@ -31,7 +31,12 @@ public:
 	CInventory();
 	void BindToolBank(CToolBank& a_toolBank);
 
-	void RenderInventory() const;
+	void SetIsOwnedByPlayer();
+
+	void OpenInventory();
+	void CloseInventory();
+
+	void RenderInventory();
 
 	bool IsFull();
 	bool Contains(short a_itemId) const;
@@ -43,6 +48,10 @@ public:
 
 	bool GetIsDirty();
 private:
+	void RenderAsOpen();
+	void RenderAsClosed();
+	void RenderItemInformation(short a_itemID, const sf::Vector2f& a_atPosition);
+
 	std::array<SInventoryItem, 10> m_slots;
 	CToolBank* m_boundToolBank;
 
@@ -51,4 +60,6 @@ private:
 	short m_freeSlots;
 
 	bool m_isDirty : 1;
+	bool m_isOpen : 1;
+	bool m_isOwnedByPlayer : 1;
 };

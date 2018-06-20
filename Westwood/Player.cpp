@@ -12,6 +12,7 @@ void CPlayer::Init()
 {
 	m_toolBank.InitTools();
 	m_inventory.BindToolBank(m_toolBank);
+	m_inventory.SetIsOwnedByPlayer();
 }
 
 void CPlayer::Update()
@@ -47,7 +48,11 @@ void CPlayer::Update()
 	{
 		m_toolBank.UseActiveTool(m_avatar);
 	}
-
+	
+	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::I))
+	{
+		m_inventory.OpenInventory();
+	}
 
 
 	m_avatar.SetDirection(direction);
