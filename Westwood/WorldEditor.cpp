@@ -82,8 +82,8 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 		{
 			STileData tileData;
 
-			tileData.m_allowedInteraction = ETileInteraction::Count;
-			tileData.m_isPassable = true;
+			//tileData.m_allowedInteraction = ETileInteraction::Count;
+			//tileData.m_isPassable = true;
 			tileData.m_tileIndex = m_selectedTile;
 
 			tileData.SetInteractionAllowance(ETileInteraction::Pass, true);
@@ -266,8 +266,8 @@ void CWorldEditor::DrawRectangleOnZone(short a_startTile, short a_endTile, CTile
 	int tiledifferenceY = (a_endTile / a_tileMap.m_width) - (a_startTile / a_tileMap.m_width) + 1;
 
 	STileData tileData;
-	tileData.m_allowedInteraction = ETileInteraction::Count;
-	tileData.m_isPassable = true;
+	//tileData.m_allowedInteraction = ETileInteraction::Count;
+	//tileData.m_isPassable = true;
 	tileData.m_tileIndex = m_selectedTile;
 
 	short index = a_startTile;
