@@ -3,6 +3,7 @@
 #include <vector>
 #include "TileData.h"
 #include <SFML\System\Vector2.hpp>
+#include <array>
 
 class CTileset
 {
@@ -14,8 +15,12 @@ public:
 
 	const STileData& GetTileData(short a_tileIndex) const;
 
+	short CalculateAdaptiveTile(short a_tileIndex, const std::array<bool, 8>& a_neighbours);
+
 	void DrawTileAtPosition(short a_tileIndex, const sf::Vector2f& a_position);
 private:
+	void LoadAdaptiveTile(short a_tileIndex, const char* a_adaptiveJson);
+
 	STileData* m_tiles;
 	short m_columns;
 	short m_texture;

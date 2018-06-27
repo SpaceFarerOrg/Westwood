@@ -1,28 +1,43 @@
 #pragma once
 #include <SFML\System\Vector2.hpp>
+#include "TileInteraction.h"
+#include <array>
 
 class CAvatar
 {
 public:
+	CAvatar();
+
 	void SetDirection(const sf::Vector2f& a_direction);
 	void SetMovementSpeed(float a_movementSpeed);
 
 	void SetDeltaTime(float a_deltaTime);
 
 	const sf::Vector2f& GetPosition() const;
-
-	sf::Vector2f GetFuturePosition() const;
-	void AllowMoveTo(const sf::Vector2f& a_allowedNewPosition);
-
+	sf::Vector2f GetPositionOfCollisionPoint(short a_collisionPoint) const;
+	sf::Vector2f GetFuturePositionOfCollisionPoint(short a_collisionPoint) const;
+	
 	const short GetCurrentZone() const;
+	
+	void AllowMove(const sf::Vector2f& a_allowedMove);
 
+	void PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f& a_atPosition);
+	bool HasPerformedWorldInteraction(ETileInteraction& a_outInteraction, sf::Vector2f& a_outAtPosition);
+
+	const sf::Vector2f& GetFacingDirection() const;
 	void Draw();
 private:
-	sf::Vector2f CalculateFuturePosition() const;
+	sf::Vector2f CalculateFuturePositionOfCollisionPoint(short a_collisionPoint) const;
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_currentDirection;
-	
+	sf::Vector2f m_facingDirection;
+
+	ETileInteraction m_lastInteraction;
+	sf::Vector2f m_interactedPosition;
+
+	std::array<sf::Vector2f, 4> m_collisionPoints;
+
 	float m_currentDeltaTime;
 
 	float m_movementSpeed;

@@ -8,6 +8,8 @@ class CAvatar;
 class CGameWorld
 {
 public:
+	CGameWorld();
+
 	void Load(const char* a_worldPath);
 	void Render();
 
@@ -20,7 +22,7 @@ private:
 	CGameCalendar m_calendar;
 
 	void UpdateAllAvatars(float a_deltaTime);
-
+	
 	void RecalculateAvatarsInZone();
 
 	short m_currentZone;
@@ -28,4 +30,6 @@ private:
 	std::vector<CAvatar*> m_allAvatars;
 	std::vector<CAvatar*> m_avatarsInCurrentZone;
 	std::vector<CAvatar*> m_avatarsInOtherZones;
+
+	bool m_timeFreezed;
 };

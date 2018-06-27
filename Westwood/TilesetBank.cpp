@@ -13,8 +13,13 @@ void CTilesetBank::LoadAllTilesets()
 	for (auto& path : std::experimental::filesystem::directory_iterator("data/tilesets/"))
 	{
 		std::experimental::filesystem::path fileP = path;
-		std::wstring pathString = fileP.c_str();
 		
+		/*Avoid loading only*/
+		if (!fileP.has_extension())
+			continue;
+
+		std::wstring pathString = fileP.c_str();
+
 		nlohmann::json tilesetJson;
 
 		std::ifstream tilesetFile(pathString);

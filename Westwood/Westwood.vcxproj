@@ -94,6 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)external\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)external\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -134,35 +135,55 @@
   <ItemGroup>
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarCollection.cpp" />
+    <ClCompile Include="Axe.cpp" />
     <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCalendar.cpp" />
     <ClCompile Include="GameClock.cpp" />
+    <ClCompile Include="GameEventMaster.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemBank.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Pickaxe.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Serializable.cpp" />
+    <ClCompile Include="Shovel.cpp" />
     <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileSelector.cpp" />
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="TilesetBank.cpp" />
+    <ClCompile Include="ToolBank.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />
     <ClCompile Include="WorldEditor.cpp" />
     <ClCompile Include="WorldZone.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
+    <ClInclude Include="Axe.h" />
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCalendar.h" />
     <ClInclude Include="GameClock.h" />
+    <ClInclude Include="GameEventMaster.h" />
     <ClInclude Include="GameWorld.h" />
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="Pickaxe.h" />
+    <ClInclude Include="Shovel.h" />
+    <ClInclude Include="Tool.h" />
+    <ClInclude Include="ToolBank.h" />
+    <ClInclude Include="Useable.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemBank.h" />
     <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />

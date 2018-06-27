@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "InputManager.h"
+#include "ItemBank.h"
+#include "GameEventMaster.h"
 
 CGame::CGame()
 	:m_windowEventHandler(CRenderer::GetInstance().GetWindow())
@@ -18,6 +20,10 @@ void CGame::Initialize()
 	m_textureBank.LoadAllFonts();
 	/*End gfx load*/
 
+	/*Load data*/
+	CItemBank::GetInstance().LoadAllItems("data/items.json");
+	/*End load data*/
+
 	m_tilesetBank.LoadAllTilesets();
 
 	m_gameWorld.Load("data/gameWorld.json");
@@ -29,11 +35,28 @@ void CGame::Initialize()
 	m_avatarCollection.FinalizeAvatarCreation();
 
 	m_gameWorld.ChangeZone(0);
+
+	m_player.Init();
+
+	/*Debug give player items*/
+	short axeIndex = CItemBank::GetInstance().GetItemID("Axe");
+	short pickaxeIndex = CItemBank::GetInstance().GetItemID("Pickaxe");
+	short shovelIndex = CItemBank::GetInstance().GetItemID("Shovel");
+
+	m_player.GetInventory().AddItemToInventory(axeIndex);
+	m_player.GetInventory().AddItemToInventory(pickaxeIndex);
+	m_player.GetInventory().AddItemToInventory(shovelIndex);
+	/*End debug*/
 }
 
 void CGame::Update()
 {
 	float deltaTime = m_deltaTimer.getElapsedTime().asSeconds();
+	sf::Text deltaTimeText;
+	deltaTimeText.setFont(CTextureBank::GetFont(EFonts::Debug));
+	deltaTimeText.setString(std::to_string(static_cast<short>(1.f / deltaTime)));
+	CRenderer::GetInstance().PushUIRenderCommand(deltaTimeText);
+
 	m_deltaTimer.restart();
 
 	m_windowEventHandler.RunEventHandling();
@@ -54,6 +77,8 @@ void CGame::Update()
 	{
 		m_shouldRun = false;
 	}
+
+	CGameEventMaster::GetInstance().HandleFrameEvents();
 }
 
 bool CGame::ShouldRun() const

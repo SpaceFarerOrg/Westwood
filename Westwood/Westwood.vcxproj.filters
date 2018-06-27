@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="WorldZone.cpp">
       <Filter>Game World</Filter>
     </ClCompile>
@@ -13,7 +12,6 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>Game World</Filter>
     </ClCompile>
-    <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="Avatar.cpp">
       <Filter>Character</Filter>
     </ClCompile>
@@ -50,10 +48,38 @@
     <ClCompile Include="TileSelector.cpp">
       <Filter>Game World\Tileset &amp; Map</Filter>
     </ClCompile>
+    <ClCompile Include="TileSelector.cpp" />
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBank.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBank.cpp">
+      <Filter>Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Shovel.cpp">
+      <Filter>Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Axe.cpp">
+      <Filter>Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Pickaxe.cpp">
+      <Filter>Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureBank.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEventMaster.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="GameWorld.h">
       <Filter>Game World</Filter>
     </ClInclude>
@@ -63,7 +89,6 @@
     <ClInclude Include="WorldZone.h">
       <Filter>Game World</Filter>
     </ClInclude>
-    <ClInclude Include="TextureBank.h" />
     <ClInclude Include="TileInteraction.h">
       <Filter>Game World</Filter>
     </ClInclude>
@@ -108,6 +133,46 @@
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="TileSelector.h">
       <Filter>Game World\Tileset &amp; Map</Filter>
+    <ClInclude Include="Animation.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSelector.h" />
+    <ClInclude Include="Inventory.h">
+      <Filter>Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBank.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Useable.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Shovel.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBank.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Axe.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Pickaxe.h">
+      <Filter>Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBank.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEventMaster.h" />
+    <ClInclude Include="Math.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +193,15 @@
     </Filter>
     <Filter Include="Game World\Time">
       <UniqueIdentifier>{129ae4a3-cf08-4b8a-a690-95d49475bb71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{333a8296-7aed-45f2-a4f9-a30f7fe2d0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{15a28afc-c12c-4a7e-aac2-9978e56893a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items\Tools">
+      <UniqueIdentifier>{02c12c52-58bf-4877-99a8-f44ec782d136}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

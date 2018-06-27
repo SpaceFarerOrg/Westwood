@@ -2,6 +2,16 @@
 #include <json.hpp>
 #include <fstream>
 #include "Avatar.h"
+#include "GameEventMaster.h"
+#include "Math.h"
+
+CGameWorld::CGameWorld()
+{
+	m_timeFreezed = false;
+
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::PauseTime, [&timeFreezed = m_timeFreezed]() { timeFreezed = true; });
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::ContinueTime, [&timeFreezed = m_timeFreezed]() {timeFreezed = false; });
+}
 
 void CGameWorld::Load(const char * a_worldPath)
 {
@@ -54,8 +64,15 @@ void CGameWorld::Update(float a_deltaTime)
 		m_calendar.SetTimePassageMultiplier(1.f);
 	}
 
-	m_calendar.Update(a_deltaTime);
-	UpdateAllAvatars(a_deltaTime);
+	float deltaTime = a_deltaTime;
+
+	if (m_timeFreezed == true)
+	{
+		deltaTime = 0.f;
+	}
+
+	m_calendar.Update(deltaTime);
+	UpdateAllAvatars(deltaTime);
 }
 
 CWorldZone & CGameWorld::GetCurrentZone()
@@ -74,12 +91,34 @@ void CGameWorld::UpdateAllAvatars(float a_deltaTime)
 	{
 		m_avatarsInCurrentZone[i]->SetDeltaTime(a_deltaTime);
 
-		sf::Vector2f avatarsFuturePosition = m_avatarsInCurrentZone[i]->GetFuturePosition();
-		sf::Vector2f avatarsCurrentPosition = m_avatarsInCurrentZone[i]->GetPosition();
+		/*Move logic*/
+		sf::Vector2f finalAllowedMove;
+		
+		for (short cp = 0; cp < 4; ++cp)
+		{
+			sf::Vector2f collisionPointsFuturePosition = m_avatarsInCurrentZone[i]->GetFuturePositionOfCollisionPoint(cp);
+			sf::Vector2f collisionPointsCurrentPosition = m_avatarsInCurrentZone[i]->GetPositionOfCollisionPoint(cp);
 
-		sf::Vector2f allowedMove = m_worldZones[m_currentZone].CheckForAllowedMove(avatarsFuturePosition, avatarsCurrentPosition);
+			sf::Vector2f allowedMove = m_worldZones[m_currentZone].CheckForAllowedMove(collisionPointsFuturePosition, collisionPointsCurrentPosition);
 
-		m_avatarsInCurrentZone[i]->AllowMoveTo(allowedMove);
+			if (Math::GetLenght2(allowedMove) < Math::GetLenght2(finalAllowedMove) || cp == 0) //If its the first iteration do this to avoid never being allowed to move
+			{
+				finalAllowedMove = allowedMove;
+			}
+		}
+
+		m_avatarsInCurrentZone[i]->AllowMove(finalAllowedMove);
+		/*End Move*/
+
+		/*Interaction Logic*/
+		sf::Vector2f interactionPosition;
+		ETileInteraction interaction;
+
+		if (m_avatarsInCurrentZone[i]->HasPerformedWorldInteraction(interaction, interactionPosition))
+		{
+			m_worldZones[m_currentZone].PerformWorldInteraction(interaction, interactionPosition);
+		}
+		/*End interaction*/
 	}
 
 	//Todo: Update all Avatars in a different zone than the current one (will make NPCs seem more lively)

@@ -2,7 +2,7 @@
   "zones": [
     {
       "name": "startingArea",
-      "tileMap": "startingArea.json"
+      "tileMap": "testMap.json"
     }
   ]
 }
