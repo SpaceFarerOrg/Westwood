@@ -13,39 +13,18 @@ void CTileset::LoadFromJson(nlohmann::json & a_tilesetJson)
 
 	m_columns = a_tilesetJson["columns"].get<short>();
 
-	m_texture = CTextureBank::LoadUnorderedTexture(a_tilesetJson["name"].get<std::string>().c_str());
+	m_tilesetName = a_tilesetJson["name"].get<std::string>();
+
+	m_texture = CTextureBank::LoadUnorderedTexture(m_tilesetName.toAnsiString().c_str());
 
 	for (short tileIndex = 0; tileIndex < m_tileCount; ++tileIndex)
 	{
-		m_tiles[tileIndex].m_tileIndex = tileIndex;
-
-		m_tiles[tileIndex].m_textureRect.width = m_tileWidth;
-		m_tiles[tileIndex].m_textureRect.height = m_tileHeight;
-		m_tiles[tileIndex].m_textureRect.left = (tileIndex % m_columns) * m_tileWidth;
-		m_tiles[tileIndex].m_textureRect.top = (tileIndex / m_columns) * m_tileHeight;
-
 		nlohmann::json tileData = a_tilesetJson["tileproperties"][std::to_string(tileIndex)];
-		
-		m_tiles[tileIndex].SetInteractionAllowance(ETileInteraction::Pass,false);
-		m_tiles[tileIndex].SetInteractionAllowance(ETileInteraction::Dig, false);
-		m_tiles[tileIndex].m_isAdaptive = false;
 
-		if (tileData.find("passable") != tileData.end())
-		{
-			m_tiles[tileIndex].SetInteractionAllowance(ETileInteraction::Pass, true);
-		}
-		if (tileData.find("plowable") != tileData.end())
-		{
-			m_tiles[tileIndex].SetInteractionAllowance(ETileInteraction::Dig, true);
-		}
-		if (tileData.find("adaptive") != tileData.end())
-		{
-			m_tiles[tileIndex].m_isAdaptive = true;
-
-			LoadAdaptiveTile(tileIndex, tileData["adaptiveFile"].get<std::string>().c_str());
-		}
-
+		LoadTileData(tileIndex, tileData);
 	}
+
+	LoadTilesInteractionData();
 }
 
 void CTileset::Unload()
@@ -153,4 +132,52 @@ void CTileset::LoadAdaptiveTile(short a_tileIndex, const char* a_adaptiveJson)
 	{
 		m_tiles[a_tileIndex].m_adaptiveIndexLUT[i] = adaptiveJson["adaptiveIndexes"][i].get<short>();
 	}
+}
+
+void CTileset::LoadTileData(short a_tileIndex, nlohmann::json & a_tileInJson)
+{
+	m_tiles[a_tileIndex].m_tileIndex = a_tileIndex;
+
+	m_tiles[a_tileIndex].m_textureRect.width = m_tileWidth;
+	m_tiles[a_tileIndex].m_textureRect.height = m_tileHeight;
+	m_tiles[a_tileIndex].m_textureRect.left = (a_tileIndex % m_columns) * m_tileWidth;
+	m_tiles[a_tileIndex].m_textureRect.top = (a_tileIndex / m_columns) * m_tileHeight;
+
+	if (a_tileInJson.find("passable") != a_tileInJson.end())
+	{
+		m_tiles[a_tileIndex].SetInteractionAllowance(ETileInteraction::Pass, true);
+	}
+	if (a_tileInJson.find("plowable") != a_tileInJson.end())
+	{
+		m_tiles[a_tileIndex].SetInteractionAllowance(ETileInteraction::Dig, true);
+	}
+	if (a_tileInJson.find("adaptive") != a_tileInJson.end())
+	{
+		m_tiles[a_tileIndex].m_isAdaptive = true;
+
+		LoadAdaptiveTile(a_tileIndex, a_tileInJson["adaptiveFile"].get<std::string>().c_str());
+	}
+}
+
+void CTileset::LoadTilesInteractionData()
+{
+	std::string interactionsDataFilePath = "data/tilesets/" + m_tilesetName + "InteractionData.json";
+	nlohmann::json interactionDataJson;
+
+	std::ifstream interactionDataFile(interactionsDataFilePath);
+	interactionDataFile >> interactionDataJson;
+	interactionDataFile.close();
+
+	nlohmann::json interactedData = interactionDataJson["interactableTiles"];
+
+	for (size_t i = 0; i < interactedData.size(); ++i)
+	{
+		STileData& tile = m_tiles[interactedData[i]["tile"].get<short>()];
+
+		if (interactedData[i].find("dig") != interactedData[i].end()) //If dig exists
+		{
+			tile.SetTileToAddOnInteraction(ETileInteraction::Dig, interactedData[i]["dig"]["addInteractionLayerTile"].get<short>());
+		}
+	}
+
 }

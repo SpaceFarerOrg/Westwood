@@ -3,6 +3,7 @@
 #include <vector>
 #include "TileData.h"
 #include <SFML\System\Vector2.hpp>
+#include <SFML\System\String.hpp>
 #include <array>
 
 class CTileset
@@ -20,8 +21,12 @@ public:
 	void DrawTileAtPosition(short a_tileIndex, const sf::Vector2f& a_position);
 private:
 	void LoadAdaptiveTile(short a_tileIndex, const char* a_adaptiveJson);
+	void LoadTileData(short a_tileIndex, nlohmann::json& a_tileInJson);
+	void LoadTilesInteractionData();
+
 
 	STileData* m_tiles;
+	sf::String m_tilesetName;
 	short m_columns;
 	short m_texture;
 	short m_tileWidth;

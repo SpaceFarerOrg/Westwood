@@ -12,7 +12,7 @@ void CWorldZone::LoadZone(nlohmann::json & a_zoneJson)
 
 	tileMapFile.close();
 
-	m_tileMap.Load(tileMapJson);
+	m_tileMap.Load(tileMapJson, *this);
 }
 
 void CWorldZone::Render()

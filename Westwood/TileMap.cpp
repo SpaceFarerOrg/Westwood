@@ -2,10 +2,13 @@
 #include "Renderer.h"
 #include <SFML\Graphics\Sprite.hpp>
 #include "TilesetBank.h"
+#include "WorldZone.h"
 
-void CTileMap::Load(nlohmann::json & a_tileMapJson)
+void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 {
-	m_tileset = &CTilesetBank::GetTileset(0);
+	m_ownerZone = &a_zoneToBindTo;
+
+	m_tileset = &CTilesetBank::GetTileset(0); //Todo: Make this load relevant tileset instead
 
 	m_width = a_tileMapJson["width"].get<short>();
 	m_height = a_tileMapJson["height"].get<short>();
@@ -62,12 +65,18 @@ void CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformIntera
 {
 	short tileIndex = ConvertPositionToTileIndex(a_positionToPerformInteractionOn);
 
-	if (m_tileset->GetTileData(m_groundTiles[tileIndex]).IsInteractionAllowed(a_interaction))
+	const STileData& tileData = m_tileset->GetTileData(m_groundTiles[tileIndex]);
+
+	if (tileData.IsInteractionAllowed(a_interaction))
 	{
-		//VERY UGLY QUICK FIX FOR TESTING
 		if (a_interaction == ETileInteraction::Dig)
 		{
-			m_interactedTiles[tileIndex] = 5;
+			short onDigTileToAdd = tileData.GetTileToAddOnInteraction(a_interaction);
+
+			if (onDigTileToAdd != -1)
+			{
+				m_interactedTiles[tileIndex] = onDigTileToAdd;
+			}
 		}
 	}
 }

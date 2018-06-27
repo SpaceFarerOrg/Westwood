@@ -20,6 +20,12 @@ void CTilesetBank::LoadAllTilesets()
 
 		std::wstring pathString = fileP.c_str();
 
+		/*Avoid loading interaction data files*/
+		if (pathString.find(L"InteractionData") != pathString.npos)
+		{
+			continue;
+		}
+
 		nlohmann::json tilesetJson;
 
 		std::ifstream tilesetFile(pathString);

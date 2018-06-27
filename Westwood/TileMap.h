@@ -5,13 +5,15 @@
 #include "TileData.h"
 #include "Tileset.h"
 
+class CWorldZone;
+
 class CTileMap
 {
 
 	friend class CWorldEditor;
 
 public:
-	void Load(nlohmann::json& a_tileMapJson);
+	void Load(nlohmann::json& a_tileMapJson, CWorldZone& a_zoneToBindTo);
 	void Save();
 	void Render();
 
@@ -29,6 +31,8 @@ private:
 	std::array<bool, 8> GetNeighbouringTiles(short a_tileIndex, short a_tileIndexInMap, short* a_layer);
 
 	void RenderLayersOnTile(short a_indexInMap);
+
+	CWorldZone* m_ownerZone;
 
 	CTileset* m_tileset;
 	ETextures m_texture;

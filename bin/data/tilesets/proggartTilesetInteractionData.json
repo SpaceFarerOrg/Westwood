@@ -1,0 +1,14 @@
+{
+  "interactableTiles": [
+    {
+      "tile": 17,
+      "dig": {
+        "spawnItem": {
+          "itemName": "clay",
+          "chance": 10
+        },
+        "addInteractionLayerTile": 5
+      }
+    }
+  ]
+}
