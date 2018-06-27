@@ -15,7 +15,7 @@ void CItemBank::LoadAllItems(const char * a_itemsFilePath)
 	itemsFile >> itemsJson;
 	itemsFile.close();
 
-	short amountOfItems = itemsJson["items"].size();
+	short amountOfItems = static_cast<short>(itemsJson["items"].size());
 	m_items.reserve(amountOfItems);
 
 	for (short i = 0; i < amountOfItems; ++i)

@@ -45,7 +45,7 @@ void CUIButton::Render()
 	sf::Text subText;
 	subText.setFillColor(shape.getFillColor());
 	subText.setFont(CTextureBank::GetFont(EFonts::Debug));
-	subText.setCharacterSize(height * 0.25f);
+	subText.setCharacterSize(static_cast<size_t>(height * 0.25f));
 	subText.setString(m_subText);
 	subText.setOrigin(subText.getGlobalBounds().width / 2.f, subText.getGlobalBounds().height / 2.f);
 	subText.setPosition(left + width / 2.f, top + height * 1.25f);

@@ -141,13 +141,13 @@ bool CInputManager::IsKeyDown(EKeyCode aKey)
 
 int CInputManager::GetScrollWheelDelta()
 {
-	return myWheelDelta;
+	return static_cast<int>(myWheelDelta);
 }
 
 sf::Vector2f CInputManager::GetMousePosFloat()
 {
 	sf::Vector2i mPos = sf::Mouse::getPosition(*myHWND);
-	return sf::Vector2f(mPos.x, mPos.y);
+	return sf::Vector2f(static_cast<float>(mPos.x), static_cast<float>(mPos.y));
 }
 
 sf::Vector2i CInputManager::GetMousePosInt()

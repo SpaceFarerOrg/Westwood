@@ -103,8 +103,8 @@ sf::Vector2f CTileMap::GetTilePosition(short a_tileIndex) const
 {
 	sf::Vector2f rv;
 
-	rv.x = (a_tileIndex % m_width) * m_tileWidth;
-	rv.y = (a_tileIndex / m_width) * m_tileHeight;
+	rv.x = static_cast<float>((a_tileIndex % m_width) * m_tileWidth);
+	rv.y = static_cast<float>((a_tileIndex / m_width) * m_tileHeight);
 
 	return rv;
 }

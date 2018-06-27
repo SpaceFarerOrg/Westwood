@@ -116,7 +116,7 @@ void CInventory::ChangeActiveSlot(short a_change)
 
 	if (m_activeSlot < 0)
 	{
-		m_activeSlot = m_slots.max_size() - 1;
+		m_activeSlot = static_cast<short>(m_slots.max_size()) - 1;
 	}
 	else if(m_activeSlot >= m_slots.max_size())
 	{

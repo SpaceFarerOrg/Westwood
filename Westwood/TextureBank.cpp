@@ -29,7 +29,7 @@ short CTextureBank::LoadUnorderedTexture(const char * a_textureName)
 	m_unorderedBank.push_back(sf::Texture());
 	m_unorderedBank.back().loadFromFile(completePath);
 
-	return m_unorderedBank.size() - 1;
+	return static_cast<short>(m_unorderedBank.size() - 1);
 }
 
 const sf::Texture & CTextureBank::GetTexture(ETextures a_textureToGet)
