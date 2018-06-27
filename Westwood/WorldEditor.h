@@ -4,6 +4,7 @@
 #include "TileSelector.h"
 
 class CWorldZone;
+class CTileMap;
 namespace sf
 {
 	class RenderWindow;
@@ -30,9 +31,13 @@ public:
 	bool IsInEditMode();
 	
 	void SetDrawingMode(EDrawingMode a_drawingMode);
+	void SaveCurrentZone();
 
 private:
 	void AddButtons();
+
+	void DrawRectangleOnZone(short a_startTile, short a_endTile, CTileMap& a_tileMap);
+	void ShowPreviewRectangle(short a_startTile, short a_endTile);
 
 	sf::RenderWindow* m_renderWindow;
 	sf::Vector2f m_prevMPos;
@@ -41,6 +46,8 @@ private:
 	CButtonManager m_buttonManager;
 	EDrawingMode m_drawingMode;
 	CTileSelector m_tileSelector;
+	short m_selectedTile;
+	short m_startTile;
 
 	bool m_editMode : 1;
 };

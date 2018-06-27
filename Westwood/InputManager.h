@@ -19,6 +19,7 @@ public:
 
 	bool IsKeyPressed(EKeyCode aKey);
 	bool IsKeyDown(EKeyCode aKey);
+	bool IsKeyReleased(EKeyCode aKey);
 
 	int GetScrollWheelDelta();
 	sf::Vector2f GetMousePosFloat();

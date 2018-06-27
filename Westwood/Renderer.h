@@ -7,6 +7,11 @@
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML\System\Vector2.hpp>
 
+#define LAYER_GROUND 0
+#define LAYER_PATH	 1
+#define LAYER_OBJECT 2
+#define LAYER_UI	 3
+
 class CRenderer
 {
 public:
@@ -17,12 +22,12 @@ public:
 
 	sf::RenderWindow& GetWindow();
 
-	void PushRenderCommand(const sf::Sprite& a_renderCommand);
-	void PushRenderCommand(const sf::RectangleShape& a_renderCommand);
-	void PushRenderCommand(const sf::Text& a_renderCommand);
-	void PushUIRenderCommand(const sf::Sprite& a_renderCommand);
-	void PushUIRenderCommand(const sf::RectangleShape& a_renderCommand);
-	void PushUIRenderCommand(const sf::Text& a_renderCommand);
+	void PushRenderCommand(const sf::Sprite& a_renderCommand, int a_layer = 0);
+	void PushRenderCommand(const sf::RectangleShape& a_renderCommand, int a_layer = 0);
+	void PushRenderCommand(const sf::Text& a_renderCommand, int a_layer = 0);
+	void PushUIRenderCommand(const sf::Sprite& a_renderCommand, int a_layer = 0);
+	void PushUIRenderCommand(const sf::RectangleShape& a_renderCommand, int a_layer = 0);
+	void PushUIRenderCommand(const sf::Text& a_renderCommand, int a_layer = 0);
 	
 	const sf::Vector2f& GetWindowDimensions();
 
@@ -44,10 +49,16 @@ private:
 	struct SRenderCommand
 	{
 		ERenderCommandType m_type;
+		int m_layer;
 
 		sf::Sprite m_spriteData;
 		sf::RectangleShape m_rectShapeData;
 		sf::Text m_textData;
+
+		bool operator<(const SRenderCommand& a_other)
+		{
+			return m_layer < a_other.m_layer;
+		}
 	};
 
 	void RenderQueue(std::vector<SRenderCommand>& a_renderQueue);
