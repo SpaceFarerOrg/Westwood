@@ -139,6 +139,14 @@ bool CInputManager::IsKeyDown(EKeyCode aKey)
 		return myMouseButtonStates[aKey] == EKeyState::Down;
 }
 
+bool CInputManager::IsKeyReleased(EKeyCode aKey)
+{
+	if (static_cast<int>(aKey) - 200 <= 0)
+		return myKeyStates[aKey] == EKeyState::Up && myPreviousKeyStates[aKey] == EKeyState::Down;
+	else
+		return myMouseButtonStates[aKey] == EKeyState::Up && myPreviousMouseButtonStates[aKey] == EKeyState::Down;
+}
+
 int CInputManager::GetScrollWheelDelta()
 {
 	return static_cast<int>(myWheelDelta);

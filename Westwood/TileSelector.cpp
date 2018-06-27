@@ -2,6 +2,8 @@
 #include "Renderer.h"
 #include "Tileset.h"
 #include "TextureBank.h"
+#include "InputManager.h"
+#include <iostream>
 
 CTileSelector::CTileSelector()
 {
@@ -12,6 +14,32 @@ CTileSelector::~CTileSelector()
 {
 }
 
+short CTileSelector::Update()
+{
+	CInputManager& inputManager = CInputManager::GetInstance();
+
+	if (inputManager.IsKeyPressed(EKeyCode::MouseLeft))
+	{
+		sf::Vector2f mPos = inputManager.GetMousePosFloat();
+		if (contains(mPos))
+		{
+			sf::Vector2f offseted = mPos - sf::Vector2f(left, top);
+
+			offseted.x = static_cast<int>(offseted.x / m_tileSize) + 1;
+			offseted.y = static_cast<int>(offseted.y / m_tileSize) + 1;
+
+			short tileIndex = width * offseted.y;
+			tileIndex -= width - offseted.x;
+
+			std::cout << "Selected tile " << tileIndex << std::endl;
+
+			return tileIndex;
+		}
+	}
+
+	return -1;
+}
+
 void CTileSelector::Render()
 {
 	sf::RectangleShape background;
@@ -20,7 +48,7 @@ void CTileSelector::Render()
 	background.setPosition(left, top);
 	CRenderer::GetInstance().PushUIRenderCommand(background);
 
-	sf::Texture texture = CTextureBank::GetUnorderedTexture(m_tileset->m_texture);
+	const sf::Texture& texture = CTextureBank::GetUnorderedTexture(m_tileset->m_texture);
 
 	for (int i = 0; i < m_tileset->m_tileCount; ++i)
 	{
@@ -28,7 +56,9 @@ void CTileSelector::Render()
 
 		sf::Sprite tileRC;
 		tileRC.setTexture(texture);
-		tileRC.setPosition(left, top);
+		tileRC.setPosition(left + i * m_tileSize, top);
+		tileRC.setTextureRect(tile.m_textureRect);
+		tileRC.setScale((m_tileSize / m_tileset->m_tileWidth) * sf::Vector2f(1.f, 1.f));
 
 		CRenderer::GetInstance().PushUIRenderCommand(tileRC);
 	}
@@ -37,4 +67,6 @@ void CTileSelector::Render()
 void CTileSelector::SetTilesetPointer(CTileset * a_tilesetPtr)
 {
 	m_tileset = a_tilesetPtr;
+
+	m_tileSize = height / 2.f;
 }

@@ -6,11 +6,13 @@
 #include "Renderer.h"
 #include "TilesetBank.h"
 #include "Tileset.h"
+#include <iostream>
 
 CWorldEditor::CWorldEditor(sf::RenderWindow* a_renderWindow)
 {
 	m_editMode = false;
 	m_renderWindow = a_renderWindow;
+	m_startTile = -1;
 }
 
 
@@ -49,6 +51,12 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 
 	m_buttonManager.Update();
 
+	short selectedTile = m_tileSelector.Update();
+	if (selectedTile != -1)
+	{
+		m_selectedTile = selectedTile;
+	}
+
 	sf::Vector2f mPos = inputManager.GetMousePosFloat();
 
 	sf::Vector2f convertedPos = mPos;
@@ -66,17 +74,39 @@ void CWorldEditor::Update(CWorldZone& a_worldZone)
 	rect.setSize({(float)a_worldZone.m_tileMap.m_tileWidth, (float)a_worldZone.m_tileMap.m_tileHeight});
 	rect.setPosition(currentBox);
 	rect.setFillColor(sf::Color(100, 50, 50, 100));
-	CRenderer::GetInstance().PushRenderCommand(rect);
+	CRenderer::GetInstance().PushRenderCommand(rect, LAYER_UI);
 
 	if (m_drawingMode == EDrawingMode::Pencil)
 	{
 		if (inputManager.IsKeyDown(EKeyCode::MouseLeft))
 		{
 			STileData tileData;
+
+			tileData.m_allowedInteraction = ETileInteraction::Count;
+			tileData.m_isPassable = true;
+			tileData.m_tileIndex = m_selectedTile;
+
 			tileData.SetInteractionAllowance(ETileInteraction::Pass, true);
 			tileData.m_tileIndex = 0;
 
 			a_worldZone.m_tileMap.SetTile(tileIndex, tileData);
+		}
+	}
+	else if (m_drawingMode == EDrawingMode::Rectangle)
+	{
+		if (inputManager.IsKeyPressed(EKeyCode::MouseLeft))
+		{
+			m_startTile = tileIndex;
+		}
+		if (inputManager.IsKeyReleased(EKeyCode::MouseLeft))
+		{
+			DrawRectangleOnZone(m_startTile, tileIndex, a_worldZone.m_tileMap);
+			m_startTile = -1;
+		}
+
+		if (m_startTile != -1)
+		{
+			ShowPreviewRectangle(m_startTile, tileIndex);
 		}
 	}
 
@@ -145,6 +175,12 @@ bool CWorldEditor::IsInEditMode()
 void CWorldEditor::SetDrawingMode(EDrawingMode a_drawingMode)
 {
 	m_drawingMode = a_drawingMode;
+	m_startTile = -1;
+}
+
+void CWorldEditor::SaveCurrentZone()
+{
+	std::cout << "Saved current zone." << std::endl;
 }
 
 void CWorldEditor::AddButtons()
@@ -208,4 +244,47 @@ void CWorldEditor::AddButtons()
 		button.SetFunction([](void* a_object) { reinterpret_cast<CWorldEditor*>(a_object)->SetDrawingMode(EDrawingMode::Circle); });
 		button.AddSubText("Circle");
 	}
+
+	{
+		CUIButton& button = m_buttonManager.AddButton();
+
+		button.top = 0;
+		button.left = 0;
+		button.width = 64;
+		button.height = 64;
+
+		button.SetPosition(buttonIncrement * buttonNumber++, borderMiddle);
+		button.SetAssociatedObject(this);
+		button.SetFunction([](void* a_object) { reinterpret_cast<CWorldEditor*>(a_object)->SaveCurrentZone(); });
+		button.AddSubText("Save");
+	}
+}
+
+void CWorldEditor::DrawRectangleOnZone(short a_startTile, short a_endTile, CTileMap& a_tileMap)
+{
+	int tiledifferenceX = (a_endTile % a_tileMap.m_width) - (a_startTile % a_tileMap.m_width) + 1;
+	int tiledifferenceY = (a_endTile / a_tileMap.m_width) - (a_startTile / a_tileMap.m_width) + 1;
+
+	STileData tileData;
+	tileData.m_allowedInteraction = ETileInteraction::Count;
+	tileData.m_isPassable = true;
+	tileData.m_tileIndex = m_selectedTile;
+
+	short index = a_startTile;
+	for (int i = 0; i < tiledifferenceX * tiledifferenceY; ++i)
+	{
+		a_tileMap.SetTile(index, tileData);
+		index++;
+		if ((index - a_startTile) % (tiledifferenceX) == 0)
+		{
+			index += a_tileMap.m_width - tiledifferenceX;
+		}
+	}
+
+	std::cout << "Drew rectangle with dimensions: width:" << tiledifferenceX << " height:" << tiledifferenceY << std::endl;
+}
+
+void CWorldEditor::ShowPreviewRectangle(short a_startTile, short a_endTile)
+{
+
 }

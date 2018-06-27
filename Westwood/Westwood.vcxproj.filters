@@ -45,6 +45,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Character\Player</Filter>
     </ClCompile>
+    <ClCompile Include="TileSelector.cpp">
+      <Filter>Game World\Tileset &amp; Map</Filter>
+    </ClCompile>
     <ClCompile Include="TileSelector.cpp" />
     <ClCompile Include="Inventory.cpp">
       <Filter>Character\Player</Filter>
@@ -128,6 +131,8 @@
     </ClInclude>
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="ButtonManager.h" />
+    <ClInclude Include="TileSelector.h">
+      <Filter>Game World\Tileset &amp; Map</Filter>
     <ClInclude Include="Animation.h">
       <Filter>Graphics</Filter>
     </ClInclude>

@@ -65,26 +65,29 @@ sf::RenderWindow & CRenderer::GetWindow()
 	return m_renderWindow;
 }
 
-void CRenderer::PushRenderCommand(const sf::Sprite & a_renderCommand)
+void CRenderer::PushRenderCommand(const sf::Sprite & a_renderCommand, int a_layer)
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::Sprite;
+	rc.m_layer = a_layer;
 	rc.m_spriteData = a_renderCommand;
 	m_renderCommands.push_back(rc);
 }
 
-void CRenderer::PushRenderCommand(const sf::RectangleShape & a_renderCommand)
+void CRenderer::PushRenderCommand(const sf::RectangleShape & a_renderCommand, int a_layer)
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::RectangleShape;
+	rc.m_layer = a_layer;
 	rc.m_rectShapeData = a_renderCommand;
 	m_renderCommands.push_back(rc);
 }
 
-void CRenderer::PushRenderCommand(const sf::Text& a_renderCommand)
+void CRenderer::PushRenderCommand(const sf::Text& a_renderCommand, int a_layer)
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::Text;
+	rc.m_layer = a_layer;
 	rc.m_textData = a_renderCommand;
 	m_renderCommands.push_back(rc);
 }
@@ -112,32 +115,37 @@ sf::View CRenderer::GetCamera()
 	return m_camera;
 }
 
-void CRenderer::PushUIRenderCommand(const sf::Sprite & a_renderCommand)
+void CRenderer::PushUIRenderCommand(const sf::Sprite & a_renderCommand, int a_layer)
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::Sprite;
+	rc.m_layer = a_layer;
 	rc.m_spriteData = a_renderCommand;
 	m_UIRenderCommands.push_back(rc);
 }
 
-void CRenderer::PushUIRenderCommand(const sf::RectangleShape & a_renderCommand)
+void CRenderer::PushUIRenderCommand(const sf::RectangleShape & a_renderCommand, int a_layer)
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::RectangleShape;
+	rc.m_layer = a_layer;
 	rc.m_rectShapeData = a_renderCommand;
 	m_UIRenderCommands.push_back(rc);
 }
 
-void CRenderer::PushUIRenderCommand(const sf::Text & a_renderCommand)
+void CRenderer::PushUIRenderCommand(const sf::Text & a_renderCommand, int a_layer)
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::Text;
+	rc.m_layer = a_layer;
 	rc.m_textData = a_renderCommand;
 	m_UIRenderCommands.push_back(rc);
 }
 
 void CRenderer::RenderQueue(std::vector<SRenderCommand>& a_renderQueue)
 {
+	std::sort(a_renderQueue.begin(), a_renderQueue.end());
+
 	for (SRenderCommand& command : a_renderQueue)
 	{
 		switch (command.m_type)
