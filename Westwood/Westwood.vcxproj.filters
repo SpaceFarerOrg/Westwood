@@ -1,207 +1,231 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="WorldZone.cpp">
+    <ClCompile Include="GameWorld.cpp">
       <Filter>Game World</Filter>
     </ClCompile>
-    <ClCompile Include="GameWorld.cpp">
+    <ClCompile Include="WorldZone.cpp">
       <Filter>Game World</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>Game World</Filter>
     </ClCompile>
-    <ClCompile Include="Avatar.cpp">
-      <Filter>Character</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowEventHandler.cpp" />
-    <ClCompile Include="WorldEditor.cpp">
-      <Filter>Game World\Tileset &amp; Map</Filter>
-    </ClCompile>
-    <ClCompile Include="TilesetBank.cpp">
-      <Filter>Game World\Tileset &amp; Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Tileset.cpp">
-      <Filter>Game World\Tileset &amp; Map</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="AvatarCollection.cpp">
-      <Filter>Character</Filter>
-    </ClCompile>
-    <ClCompile Include="GameClock.cpp">
-      <Filter>Game World\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="GameCalendar.cpp">
-      <Filter>Game World\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="UIButton.cpp" />
-    <ClCompile Include="ButtonManager.cpp" />
-    <ClCompile Include="Player.cpp">
-      <Filter>Character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="TileSelector.cpp">
-      <Filter>Game World\Tileset &amp; Map</Filter>
-    </ClCompile>
-    <ClCompile Include="TileSelector.cpp" />
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemBank.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
-    <ClCompile Include="ToolBank.cpp">
-      <Filter>Items\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Shovel.cpp">
-      <Filter>Items\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Axe.cpp">
-      <Filter>Items\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Pickaxe.cpp">
-      <Filter>Items\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="TextureBank.cpp">
-      <Filter>Graphics</Filter>
+      <Filter>Engine\gfx</Filter>
     </ClCompile>
-    <ClCompile Include="GameEventMaster.cpp" />
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TilesetBank.cpp">
+      <Filter>Engine\gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEventMaster.cpp">
+      <Filter>Game Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCalendar.cpp">
+      <Filter>Game Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClock.cpp">
+      <Filter>Game Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Game Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBank.cpp">
+      <Filter>Game Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Axe.cpp">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Pickaxe.cpp">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Shovel.cpp">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBank.cpp">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tileset.cpp">
+      <Filter>Engine\gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Game Objects\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Avatar.cpp">
+      <Filter>Game Objects\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="AvatarCollection.cpp">
+      <Filter>Game Objects\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game Objects\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowEventHandler.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable.cpp">
+      <Filter>Engine\File Hanlding</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSelector.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldEditor.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="GameWorld.h">
-      <Filter>Game World</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMap.h">
       <Filter>Game World</Filter>
     </ClInclude>
     <ClInclude Include="WorldZone.h">
       <Filter>Game World</Filter>
     </ClInclude>
-    <ClInclude Include="TileInteraction.h">
+    <ClInclude Include="TileMap.h">
       <Filter>Game World</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Avatar.h">
-      <Filter>Character</Filter>
     </ClInclude>
     <ClInclude Include="TileData.h">
       <Filter>Game World</Filter>
     </ClInclude>
-    <ClInclude Include="AvatarCollection.h">
-      <Filter>Character</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowEventHandler.h" />
-    <ClInclude Include="WorldEditor.h">
-      <Filter>Game World\Tileset &amp; Map</Filter>
-    </ClInclude>
-    <ClInclude Include="TilesetBank.h">
-      <Filter>Game World\Tileset &amp; Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Tileset.h">
-      <Filter>Game World\Tileset &amp; Map</Filter>
+    <ClInclude Include="Game.h">
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="KeyCodes.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="GameCalendar.h">
-      <Filter>Game World\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="GameClock.h">
-      <Filter>Game World\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="UIButton.h" />
-    <ClInclude Include="ButtonManager.h" />
-    <ClInclude Include="TileSelector.h">
-      <Filter>Game World\Tileset &amp; Map</Filter>
-    <ClInclude Include="Animation.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="TileSelector.h" />
-    <ClInclude Include="Inventory.h">
-      <Filter>Character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Items</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemBank.h">
-      <Filter>Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Useable.h">
-      <Filter>Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Tool.h">
-      <Filter>Items\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Shovel.h">
-      <Filter>Items\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolBank.h">
-      <Filter>Items\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Axe.h">
-      <Filter>Items\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Pickaxe.h">
-      <Filter>Items\Tools</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="TextureBank.h">
-      <Filter>Graphics</Filter>
+      <Filter>Engine\gfx</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Graphics</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="GameEventMaster.h" />
+    <ClInclude Include="TilesetBank.h">
+      <Filter>Engine\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
     <ClInclude Include="Math.h">
-      <Filter>Utility</Filter>
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEventMaster.h">
+      <Filter>Game Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCalendar.h">
+      <Filter>Game Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClock.h">
+      <Filter>Game Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Game Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBank.h">
+      <Filter>Game Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Axe.h">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Pickaxe.h">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Shovel.h">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBank.h">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tileset.h">
+      <Filter>Engine\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Game Objects\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Avatar.h">
+      <Filter>Game Objects\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="AvatarCollection.h">
+      <Filter>Game Objects\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Useable.h">
+      <Filter>Game Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game Objects\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowEventHandler.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable.h">
+      <Filter>Engine\File Hanlding</Filter>
+    </ClInclude>
+    <ClInclude Include="TileInteraction.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSelector.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldEditor.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\gfx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
-      <UniqueIdentifier>{92bc2ea6-1379-4373-ac6c-88ee2477a736}</UniqueIdentifier>
+      <UniqueIdentifier>{b0256459-0430-4007-bd1e-5ba1e7dcf469}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Character">
-      <UniqueIdentifier>{61f33282-8b8a-4f13-845e-f711752f6982}</UniqueIdentifier>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{3667e11c-8ccd-4eb8-b30f-205dab0237a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Character\Player">
-      <UniqueIdentifier>{62137775-fb7c-4807-86d0-687ec6c14e74}</UniqueIdentifier>
+    <Filter Include="Engine\gfx">
+      <UniqueIdentifier>{c1bdf47e-588b-4ea3-b087-6292757d96cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game World\Tileset &amp; Map">
-      <UniqueIdentifier>{070aef58-b0b4-49d8-a7a2-314771e12413}</UniqueIdentifier>
+    <Filter Include="Engine\Utility">
+      <UniqueIdentifier>{8484d479-20cb-4b3f-9ed3-6dae6c8f1b3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utility">
-      <UniqueIdentifier>{db7d5ff2-6ae5-4b8c-992d-04572161e66f}</UniqueIdentifier>
+    <Filter Include="Game Systems">
+      <UniqueIdentifier>{9501a637-df99-4d3a-9763-a38c392e480e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game World\Time">
-      <UniqueIdentifier>{129ae4a3-cf08-4b8a-a690-95d49475bb71}</UniqueIdentifier>
+    <Filter Include="Game Objects">
+      <UniqueIdentifier>{63ac83ff-e1fa-44e3-afc8-7d3b614de552}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics">
-      <UniqueIdentifier>{333a8296-7aed-45f2-a4f9-a30f7fe2d0ae}</UniqueIdentifier>
+    <Filter Include="Game Objects\Character">
+      <UniqueIdentifier>{0058611d-c0db-43ba-9318-a55ce30272cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Items">
-      <UniqueIdentifier>{15a28afc-c12c-4a7e-aac2-9978e56893a9}</UniqueIdentifier>
+    <Filter Include="Game Objects\Character\Player">
+      <UniqueIdentifier>{11159eae-bb21-4085-bbd9-3cf9d731bdbc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Items\Tools">
-      <UniqueIdentifier>{02c12c52-58bf-4877-99a8-f44ec782d136}</UniqueIdentifier>
+    <Filter Include="Game Objects\Items">
+      <UniqueIdentifier>{55f5341d-2254-4513-bcc3-f4620ea05745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Objects\Items\Tools">
+      <UniqueIdentifier>{54c319f2-d3b2-4b79-8f1b-213ec430e36e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\File Hanlding">
+      <UniqueIdentifier>{323fb1dc-375a-4bad-bc5b-b5715d637e2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{88b84f3b-d3f3-44fe-94a8-4060f7f4260d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
