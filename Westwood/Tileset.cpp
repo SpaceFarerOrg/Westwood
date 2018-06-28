@@ -1,6 +1,7 @@
 #include "Tileset.h"
 #include "TextureBank.h"
 #include "Renderer.h"
+#include "ItemBank.h"
 
 
 void CTileset::LoadFromJson(nlohmann::json & a_tilesetJson)
@@ -172,12 +173,27 @@ void CTileset::LoadTilesInteractionData()
 
 	for (size_t i = 0; i < interactedData.size(); ++i)
 	{
-		STileData& tile = m_tiles[interactedData[i]["tile"].get<short>()];
+		short tileIndex = interactedData[i]["tile"].get<short>();
+		STileData& tile = m_tiles[tileIndex];
 
 		if (interactedData[i].find("dig") != interactedData[i].end()) //If dig exists
 		{
 			tile.SetTileToAddOnInteraction(ETileInteraction::Dig, interactedData[i]["dig"]["addInteractionLayerTile"].get<short>());
+
+			LoadItemSpawnOnInteraction(ETileInteraction::Dig, tileIndex,interactedData[i]["dig"]["spawnItems"]);
 		}
 	}
+}
 
+void CTileset::LoadItemSpawnOnInteraction(ETileInteraction a_interaction, short a_tileIndex, nlohmann::json & a_spawnItemsData)
+{
+	for (size_t i = 0; i < a_spawnItemsData.size(); ++i)
+	{
+		short itemID = CItemBank::GetInstance().GetItemID(a_spawnItemsData[i]["itemName"].get<std::string>().c_str());
+		short spawnChance = a_spawnItemsData[i]["chance"].get<short>();
+		short minSpawnAmount = a_spawnItemsData[i]["minAmount"].get<short>();
+		short maxSpawnAmount = a_spawnItemsData[i]["maxAmount"].get<short>();
+
+		m_tiles[a_tileIndex].AddInteractionItemSpawn(itemID, spawnChance, a_interaction, minSpawnAmount, maxSpawnAmount);
+	}
 }

@@ -25,7 +25,7 @@ namespace Math
 	{
 		short percentage = RandomInRange(0, 100);
 
-		if (a_percentageChance <= percentage)
+		if (a_percentageChance >= percentage)
 		{
 			return true;
 		}

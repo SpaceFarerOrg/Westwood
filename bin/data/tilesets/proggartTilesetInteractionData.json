@@ -3,10 +3,14 @@
     {
       "tile": 17,
       "dig": {
-        "spawnItem": {
-          "itemName": "clay",
-          "chance": 10
-        },
+        "spawnItems": [
+          {
+            "itemName": "Clay",
+            "chance": 10,
+            "minAmount": 1,
+            "maxAmount": 2
+          }
+        ],
         "addInteractionLayerTile": 5
       }
     }

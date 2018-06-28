@@ -24,6 +24,7 @@ public:
 	void PerformInteraction(const sf::Vector2f& a_positionToPerformInteractionOn, ETileInteraction a_interaction);
 private:
 	void SetTile(short a_tileIndex, STileData a_newTile);
+	void RunItemSpawnForTileInteraction(ETileInteraction a_interaction, short a_tileIndexInTileSet, short a_tileIndexInMap);
 	short ConvertPositionToTileIndex(const sf::Vector2f& a_position, const sf::Vector2f& a_zoomFactor = { 1,1 }) const;
 	sf::Vector2f GetTilePosition(short a_tileIndex) const;
 

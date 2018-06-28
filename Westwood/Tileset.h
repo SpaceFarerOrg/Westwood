@@ -23,7 +23,7 @@ private:
 	void LoadAdaptiveTile(short a_tileIndex, const char* a_adaptiveJson);
 	void LoadTileData(short a_tileIndex, nlohmann::json& a_tileInJson);
 	void LoadTilesInteractionData();
-
+	void LoadItemSpawnOnInteraction(ETileInteraction a_interaction, short a_tileIndex, nlohmann::json& a_spawnItemsData);
 
 	STileData* m_tiles;
 	sf::String m_tilesetName;

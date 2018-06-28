@@ -23,6 +23,30 @@ enum class EAdaptiveState
 	Count,
 };
 
+struct SItemSpawnData
+{
+	SItemSpawnData()
+	{
+		m_chance = 0;
+		m_itemId = -1;
+		m_minSpawnAmount = 0;
+		m_maxSpawnAmount = 0;
+	}
+
+	SItemSpawnData(short a_chance, short a_itemID, short a_minSpawnAmount, short a_maxSpawnAmount)
+	{
+		m_chance = a_chance;
+		m_itemId = a_itemID;
+		m_minSpawnAmount = a_minSpawnAmount;
+		m_maxSpawnAmount = a_maxSpawnAmount;
+	}
+
+	short m_chance;
+	short m_itemId;
+	short m_minSpawnAmount;
+	short m_maxSpawnAmount;
+};
+
 struct STileData
 {
 public:
@@ -45,6 +69,11 @@ public:
 	void SetInteractionAllowance(ETileInteraction a_interaction, bool a_shouldBeAllowed)
 	{
 		m_allowedInteractions[static_cast<size_t>(a_interaction)] = a_shouldBeAllowed;
+	}
+
+	void AddInteractionItemSpawn(short a_itemID, short a_chance, ETileInteraction a_onInteraction, short a_minSpawnAmount, short a_maxSpawnAmount)
+	{
+		m_onInteractionSpawnlist[static_cast<size_t>(a_onInteraction)].push_back({ a_chance, a_itemID, a_minSpawnAmount, a_maxSpawnAmount });
 	}
 
 	bool IsInteractionAllowed(ETileInteraction a_interaction) const
@@ -71,6 +100,7 @@ public:
 	std::array<short, static_cast<size_t>(EAdaptiveState::Count)> m_adaptiveIndexLUT;
 	std::array<bool, static_cast<size_t>(ETileInteraction::Count)> m_allowedInteractions;
 	std::array<short, static_cast<size_t>(ETileInteraction::Count)> m_onInteractionAddTile;
+	std::array<std::vector<SItemSpawnData>, static_cast<size_t>(ETileInteraction::Count)> m_onInteractionSpawnlist;
 
 
 	short m_tileIndex;

@@ -157,7 +157,9 @@ void CInventory::RenderAsOpen()
 
 	sf::Vector2f positionToRenderItem;
 
-	float totalWOfInventory = 32.f * static_cast<float>(m_slots.max_size());
+	float itemsSpriteSize = CItemBank::GetInstance().GetItemsSpriteSize(); 
+
+	float totalWOfInventory = itemsSpriteSize * static_cast<float>(m_slots.max_size());
 
 	positionToRenderItem.x = (CRenderer::GetInstance().GetWindowDimensions().x / 2.f) - (totalWOfInventory / 2.f);
 	positionToRenderItem.y = (CRenderer::GetInstance().GetWindowDimensions().y / 2.f) - 16.f;
@@ -171,15 +173,15 @@ void CInventory::RenderAsOpen()
 		sf::FloatRect mouseCollisionRect;
 		mouseCollisionRect.left = positionToRenderItem.x;
 		mouseCollisionRect.top = positionToRenderItem.y;
-		mouseCollisionRect.width = 32.f;
-		mouseCollisionRect.height = 32.f;
+		mouseCollisionRect.width = itemsSpriteSize;
+		mouseCollisionRect.height = itemsSpriteSize;
 
 		if (mouseCollisionRect.contains(CInputManager::GetInstance().GetMousePosFloat()))
 		{
 			hoveredItem = m_slots[i].m_itemId;
 		}
 
-		positionToRenderItem.x += 32;
+		positionToRenderItem.x += itemsSpriteSize;
 	}
 
 	if (hoveredItem != -1)
@@ -192,7 +194,9 @@ void CInventory::RenderAsClosed()
 {
 	sf::Vector2f positionToRenderItem;
 
-	float totalWOfInventory = 32.f * static_cast<float>(m_slots.max_size());
+	float itemsSpriteSize = CItemBank::GetInstance().GetItemsSpriteSize();
+
+	float totalWOfInventory = itemsSpriteSize * static_cast<float>(m_slots.max_size());
 
 	positionToRenderItem.x = (CRenderer::GetInstance().GetWindowDimensions().x / 2.f) - (totalWOfInventory / 2.f);
 	positionToRenderItem.y = CRenderer::GetInstance().GetWindowDimensions().y - 64.f;
@@ -203,7 +207,7 @@ void CInventory::RenderAsClosed()
 		{
 			sf::RectangleShape rect;
 			rect.setFillColor(sf::Color(255, 255, 255, 50));
-			rect.setSize({ 32.f, 32.f });
+			rect.setSize({ itemsSpriteSize, itemsSpriteSize });
 			rect.setPosition(positionToRenderItem);
 
 			CRenderer::GetInstance().PushUIRenderCommand(rect);
@@ -211,7 +215,7 @@ void CInventory::RenderAsClosed()
 
 		CItemBank::GetInstance().RenderItem(m_slots[i].m_itemId, positionToRenderItem, true);
 
-		positionToRenderItem.x += 32;
+		positionToRenderItem.x += itemsSpriteSize;
 	}
 }
 

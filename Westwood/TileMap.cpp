@@ -3,6 +3,7 @@
 #include <SFML\Graphics\Sprite.hpp>
 #include "TilesetBank.h"
 #include "WorldZone.h"
+#include "Math.h"
 
 void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 {
@@ -78,6 +79,8 @@ void CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformIntera
 				m_interactedTiles[tileIndex] = onDigTileToAdd;
 			}
 		}
+
+		RunItemSpawnForTileInteraction(a_interaction, m_groundTiles[tileIndex], tileIndex);
 	}
 }
 
@@ -93,6 +96,39 @@ bool CTileMap::IsTileWalkable(const sf::Vector2f & a_position) const
 void CTileMap::SetTile(short a_tileIndex, STileData a_newTile)
 {
 	m_groundTiles[a_tileIndex] = a_newTile;
+}
+
+void CTileMap::RunItemSpawnForTileInteraction(ETileInteraction a_interaction, short a_tileIndexInTileSet, short a_tileIndexInMap)
+{
+	const std::vector<SItemSpawnData>& itemSpawnList = m_tileset->GetTileData(a_tileIndexInTileSet).m_onInteractionSpawnlist[static_cast<size_t>(a_interaction)];
+
+	for (const SItemSpawnData& itemSpawnData : itemSpawnList)
+	{
+		if (itemSpawnData.m_itemId == -1)
+		{
+			continue;
+		}
+		
+		bool shouldSpawn = Math::Chance(itemSpawnData.m_chance);
+
+		if (shouldSpawn == false)
+		{
+			continue;
+		}
+
+		short amountToSpawn = 0;
+
+		if (itemSpawnData.m_minSpawnAmount == itemSpawnData.m_maxSpawnAmount)
+		{
+			amountToSpawn = itemSpawnData.m_minSpawnAmount;
+		}
+		else
+		{
+			amountToSpawn = Math::RandomInRange(itemSpawnData.m_minSpawnAmount, itemSpawnData.m_maxSpawnAmount);
+		}
+
+		m_ownerZone->SpawnItem(itemSpawnData.m_itemId, amountToSpawn, GetTilePosition(a_tileIndexInMap));
+	}
 }
 
 short CTileMap::ConvertPositionToTileIndex(const sf::Vector2f & a_position, const sf::Vector2f& a_zoomFactor) const

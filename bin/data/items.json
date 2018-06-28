@@ -7,14 +7,14 @@
       "sellable": false
     },
     {
-      "name": "Axe",
-      "description": "Used to cut woods",
+      "name": "Pickaxe",
+      "description": "Used to break stone",
       "indexInSheet": 1,
       "sellable": false
     },
     {
-      "name": "Pickaxe",
-      "description": "Used to break stone",
+      "name": "Axe",
+      "description": "Used to cut woods",
       "indexInSheet": 2,
       "sellable": false
     },
@@ -23,6 +23,15 @@
       "description": "Used to dig dirt",
       "indexInSheet": 3,
       "sellable": false
+    },
+    {
+      "name": "Clay",
+      "description": "Soil from digging dirt",
+      "indexInSheet": 4,
+      "sellable": true,
+      "sellData": {
+        "sell": 1
+      }
     }
   ]
 }

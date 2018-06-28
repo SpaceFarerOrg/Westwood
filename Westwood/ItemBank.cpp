@@ -46,6 +46,11 @@ const CItem & CItemBank::GetItem(short a_itemID) const
 	return item;
 }
 
+size_t CItemBank::GetItemCount() const
+{
+	return m_items.size();
+}
+
 #include "TextureBank.h"
 #include "Renderer.h"
 void CItemBank::RenderItem(short a_itemID, const sf::Vector2f & a_position, bool a_shouldRenderAsUI) const
@@ -65,7 +70,12 @@ void CItemBank::RenderItem(short a_itemID, const sf::Vector2f & a_position, bool
 	}
 }
 
+float CItemBank::GetItemsSpriteSize() const
+{
+	return m_itemSpriteSize;
+}
+
 CItemBank::CItemBank()
 {
-	m_itemSpriteSize = 32;
+	m_itemSpriteSize = 64.f;
 }
