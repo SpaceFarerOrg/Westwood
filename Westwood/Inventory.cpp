@@ -64,6 +64,12 @@ void CInventory::AddItemToInventory(short a_itemId, short a_amount)
 	}
 }
 
+void CInventory::AddItemToInventory(const sf::String & a_itemName, short a_amount)
+{
+	short itemID = CItemBank::GetInstance().GetItemID(a_itemName.toAnsiString().c_str());
+	AddItemToInventory(itemID, a_amount);
+}
+
 short CInventory::GetSlotIndex(short a_itemId) const
 {
 	for (short i = 0; i < m_slots.max_size(); ++i)

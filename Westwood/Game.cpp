@@ -39,13 +39,9 @@ void CGame::Initialize()
 	m_player.Init();
 
 	/*Debug give player items*/
-	short axeIndex = CItemBank::GetInstance().GetItemID("Axe");
-	short pickaxeIndex = CItemBank::GetInstance().GetItemID("Pickaxe");
-	short shovelIndex = CItemBank::GetInstance().GetItemID("Shovel");
-
-	m_player.GetInventory().AddItemToInventory(axeIndex);
-	m_player.GetInventory().AddItemToInventory(pickaxeIndex);
-	m_player.GetInventory().AddItemToInventory(shovelIndex);
+	m_player.GetInventory().AddItemToInventory("Axe");
+	m_player.GetInventory().AddItemToInventory("Pickaxe");
+	m_player.GetInventory().AddItemToInventory("Shovel");
 	/*End debug*/
 }
 

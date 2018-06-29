@@ -41,6 +41,7 @@ public:
 	bool IsFull();
 	bool Contains(short a_itemId) const;
 	void AddItemToInventory(short a_itemId, short a_amount = 1);
+	void AddItemToInventory(const sf::String& a_itemName, short a_amount = 1);
 	
 	void ChangeActiveSlot(short a_change);
 
