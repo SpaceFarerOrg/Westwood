@@ -49,9 +49,9 @@ void CGame::Update()
 
 	m_gameWorld.Update(deltaTime);
 
+	CRenderer::GetInstance().Clear();
 	m_gameWorld.Render();
 	m_worldEditor.Render();
-
 	CRenderer::GetInstance().RenderToWindow();
 
 	if (m_windowEventHandler.GetHasClosed())

@@ -32,6 +32,9 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 	m_texture = CTextureBank::GetTextureIndex(a_tileMapJson["tilesets"][0]["name"].get<std::string>().c_str()); //SCALE WITH LAYERS!!!
 
 	const sf::Texture& tilesheetTexture = CTextureBank::GetTexture(m_texture);
+
+	m_vertices.setPrimitiveType(sf::Quads);
+	m_vertices.resize(m_width * m_height * 4);
 }
 
 void CTileMap::Save()
@@ -44,6 +47,8 @@ void CTileMap::Render()
 	{
 		RenderLayersOnTile(indexInMap);
 	}
+
+	CRenderer::GetInstance().RenderTileMap(*this);
 }
 
 sf::Vector2f CTileMap::CheckForAllowedMove(const sf::Vector2f & a_targetPosition, const sf::Vector2f& a_currentPosition) const
@@ -91,6 +96,15 @@ bool CTileMap::IsTileWalkable(const sf::Vector2f & a_position) const
 	bool isWalkable = m_tileset->GetTileData(m_groundTiles[tileIndex]).IsInteractionAllowed(ETileInteraction::Pass);
 
 	return isWalkable;
+}
+
+void CTileMap::draw(sf::RenderTarget& a_target, sf::RenderStates a_states) const
+{
+	a_states.transform *= getTransform();
+
+	a_states.texture = &CTextureBank::GetUnorderedTexture(m_tileset->GetTexture());
+
+	a_target.draw(m_vertices, a_states);
 }
 
 void CTileMap::SetTile(short a_tileIndex, STileData a_newTile)
@@ -176,6 +190,20 @@ void CTileMap::RenderLayersOnTile(short a_indexInMap)
 	tilePosition.x = static_cast<float>((a_indexInMap % m_width) * m_tileWidth);
 	tilePosition.y = static_cast<float>((a_indexInMap / m_width) * m_tileHeight);
 
+	sf::View camera = CRenderer::GetInstance().GetCamera();
+	sf::FloatRect cameraRect;
+	sf::Vector2f cameraSize = camera.getSize() * 1.1f;
+
+	cameraRect.left = camera.getCenter().x - cameraSize.x / 2;
+	cameraRect.top = camera.getCenter().y - cameraSize.y / 2;
+	cameraRect.width = cameraSize.x;
+	cameraRect.height = cameraSize.y;
+
+	if (!cameraRect.contains(tilePosition))
+	{
+		return;
+	}
+
 	short groundTileIndex = m_groundTiles[a_indexInMap];
 
 	if (m_tileset->GetTileData(m_groundTiles[a_indexInMap]).m_isAdaptive)
@@ -183,7 +211,20 @@ void CTileMap::RenderLayersOnTile(short a_indexInMap)
 		groundTileIndex = m_tileset->CalculateAdaptiveTile(groundTileIndex, GetNeighbouringTiles(groundTileIndex, a_indexInMap, m_groundTiles));
 	}
 
-	m_tileset->DrawTileAtPosition(groundTileIndex, tilePosition);
+	sf::IntRect texRect = m_tileset->GetTileData(groundTileIndex).m_textureRect;
+
+	sf::Vertex* quad = &m_vertices[a_indexInMap * 4];
+	quad[0].position = sf::Vector2f(tilePosition.x, tilePosition.y);
+	quad[1].position = sf::Vector2f(tilePosition.x + m_tileWidth, tilePosition.y);
+	quad[2].position = sf::Vector2f(tilePosition.x + m_tileWidth, tilePosition.y + m_tileHeight);
+	quad[3].position = sf::Vector2f(tilePosition.x, tilePosition.y + m_tileHeight);
+
+	quad[0].texCoords =	sf::Vector2f(texRect.left, texRect.top);
+	quad[1].texCoords = sf::Vector2f(texRect.left + texRect.width, texRect.top);
+	quad[2].texCoords = sf::Vector2f(texRect.left + texRect.width, texRect.top + texRect.height);
+	quad[3].texCoords = sf::Vector2f(texRect.left, texRect.top + texRect.height);
+
+	//m_tileset->DrawTileAtPosition(groundTileIndex, tilePosition);
 
 	short interactedTileIndex = m_interactedTiles[a_indexInMap];
 	if (interactedTileIndex != -1) //Do not render anything if no interaction was made to the tile

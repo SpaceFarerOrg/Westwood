@@ -1,6 +1,6 @@
 #include "Renderer.h"
 #include "InputManager.h"
-
+#include "TileMap.h"
 
 CRenderer::CRenderer()
 	: m_currentRenderTarget(nullptr)
@@ -36,8 +36,6 @@ void CRenderer::RenderToWindow()
 {
 	m_currentRenderTarget = &m_renderWindow;
 
-	m_currentRenderTarget->clear(sf::Color(50,150,255,255));
-
 	/*Camera space rendering*/
 	m_renderWindow.setView(m_camera);
 
@@ -58,6 +56,11 @@ void CRenderer::RenderToWindow()
 	/*End Screen space rendering*/
 
 	m_renderWindow.display();
+}
+
+void CRenderer::Clear()
+{
+	m_renderWindow.clear(sf::Color(50, 150, 255, 255));
 }
 
 sf::RenderWindow & CRenderer::GetWindow()
@@ -140,6 +143,11 @@ void CRenderer::PushUIRenderCommand(const sf::Text & a_renderCommand, int a_laye
 	rc.m_layer = a_layer;
 	rc.m_textData = a_renderCommand;
 	m_UIRenderCommands.push_back(rc);
+}
+
+void CRenderer::RenderTileMap(const CTileMap & a_tileMap)
+{
+	m_renderWindow.draw(a_tileMap);
 }
 
 void CRenderer::RenderQueue(std::vector<SRenderCommand>& a_renderQueue)

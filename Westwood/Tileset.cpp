@@ -3,7 +3,6 @@
 #include "Renderer.h"
 #include "ItemBank.h"
 
-
 void CTileset::LoadFromJson(nlohmann::json & a_tilesetJson)
 {
 	m_tileWidth = a_tilesetJson["tilewidth"].get<short>();
@@ -115,6 +114,11 @@ void CTileset::DrawTileAtPosition(short a_tileIndex, const sf::Vector2f & a_posi
 	tileRenderCommand.setPosition(a_position);
 
 	CRenderer::GetInstance().PushRenderCommand(tileRenderCommand);
+}
+
+short CTileset::GetTexture()
+{
+	return m_texture;
 }
 
 #include <fstream>
