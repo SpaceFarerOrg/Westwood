@@ -10,7 +10,6 @@
 class CPlayer : public CAvatar
 {
 public:
-
 	CPlayer();
 	void Init();
 	void Update();
@@ -18,6 +17,9 @@ public:
 	CInventory& GetInventory();
 	bool GetShouldSleep();
 	void WakeUp();
+	void SetShouldSleep();
+
+	sf::Vector2f GetInteractPosition() const;
 
 	void DrainEnergy(float a_drainage);
 private:

@@ -88,6 +88,10 @@
       <Filter>Game Systems</Filter>
     </ClCompile>
     <ClCompile Include="Tool.cpp" />
+    <ClCompile Include="InteractableItem.cpp" />
+    <ClCompile Include="Bed.cpp">
+      <Filter>Game World\Interactable Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />
@@ -196,6 +200,12 @@
     <ClInclude Include="StatusBar.h">
       <Filter>Game Systems</Filter>
     </ClInclude>
+    <ClInclude Include="InteractableItem.h">
+      <Filter>Game World\Interactable Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Bed.h">
+      <Filter>Game World\Interactable Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -233,6 +243,9 @@
     </Filter>
     <Filter Include="Tools">
       <UniqueIdentifier>{88b84f3b-d3f3-44fe-94a8-4060f7f4260d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game World\Interactable Items">
+      <UniqueIdentifier>{1c1e5631-ba3f-4309-a524-b7a496bd208e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

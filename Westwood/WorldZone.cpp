@@ -3,6 +3,7 @@
 #include <fstream>
 #include "Math.h"
 
+#include "Bed.h"
 void CWorldZone::LoadZone(nlohmann::json & a_zoneJson)
 {
 	m_zoneName = a_zoneJson["name"].get<std::string>();
@@ -15,6 +16,12 @@ void CWorldZone::LoadZone(nlohmann::json & a_zoneJson)
 	tileMapFile.close();
 
 	m_tileMap.Load(tileMapJson, *this);
+
+	/*
+	DEBUG ADD BED
+	*/
+	m_objects.push_back(new CBed());
+	m_objects.back()->SetPosition({ 0.f,0.f });
 }
 
 void CWorldZone::Render()
@@ -25,6 +32,12 @@ void CWorldZone::Render()
 	{
 		CItemBank::GetInstance().RenderItem(itemInWorld.a_itemID, itemInWorld.m_position);
 	}
+
+	for (CInteractableItem*& object : m_objects)
+	{
+		object->Render();
+	}
+	
 }
 
 void CWorldZone::EnterZone(CPlayer & a_player)
@@ -75,6 +88,14 @@ sf::Vector2f CWorldZone::CheckForAllowedMove(const sf::Vector2f & a_targetPositi
 
 void CWorldZone::PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f & a_interactionPosition)
 {
+	for (CInteractableItem*& object : m_objects)
+	{
+		if (object->IsColliding(a_interactionPosition))
+		{
+			object->Interact(*m_player);
+		}
+	}
+
 	m_tileMap.PerformInteraction(a_interactionPosition, a_interaction);
 }
 

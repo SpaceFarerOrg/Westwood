@@ -11,5 +11,5 @@ void CShovel::Init()
 void CShovel::Use(CPlayer & a_user)
 {
 	ITool::Use(a_user);
-	a_user.PerformWorldInteraction(ETileInteraction::Dig, a_user.GetPosition() + (a_user.GetFacingDirection() * 64.f));
+	a_user.PerformWorldInteraction(ETileInteraction::Dig, a_user.GetInteractPosition());
 }

@@ -4,6 +4,8 @@ CGameCalendar::CGameCalendar()
 	: m_timePassageMultiplier(1.0f)
 	, m_lengthOfMinute(3.f)
 {
+	m_hasChangedDateWithoutSleep = false;
+
 	for (size_t i = 0; i < 28; ++i)
 	{
 		m_dateToDayLUT[i] = static_cast<EDay>(i % 7);
@@ -28,14 +30,25 @@ void CGameCalendar::EndDay()
 	m_currentDate++;
 	m_currentMinuteTime = 0.f;
 	m_clock = { 0,0 };
-	
-	if (m_currentDate / 29 == 1)
+
+	if (m_currentDate == 29)
 	{
 		EnterNewSeason();
 	}
 
 	m_currentDay = m_dateToDayLUT[m_currentDate - 1];
+}
 
+void CGameCalendar::Sleep()
+{
+	if (!m_hasChangedDateWithoutSleep)
+	{
+		EndDay();
+	}
+
+	m_clock = { 6,0 };
+
+	m_hasChangedDateWithoutSleep = false;
 }
 
 void CGameCalendar::Update(float a_dt)
@@ -50,6 +63,7 @@ void CGameCalendar::Update(float a_dt)
 
 		if (m_clock.GetCurrentTime() > CClock::STimePoint(24,0))
 		{
+			m_hasChangedDateWithoutSleep = true;
 			EndDay();
 		}
 	}

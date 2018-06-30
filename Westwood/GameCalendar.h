@@ -29,6 +29,7 @@ public:
 	CGameCalendar();
 
 	void EndDay();
+	void Sleep();
 	void Update(float a_dt);
 	void RenderCalendar();
 
@@ -59,4 +60,5 @@ private:
 	float m_currentMinuteTime;
 	float m_lengthOfMinute;
 
+	bool m_hasChangedDateWithoutSleep : 1;
 };

@@ -48,6 +48,11 @@ const sf::Vector2f & CAvatar::GetPosition() const
 	return m_position;
 }
 
+void CAvatar::SetPosition(const sf::Vector2f & a_position)
+{
+	m_position = a_position;
+}
+
 sf::Vector2f CAvatar::GetPositionOfCollisionPoint(short a_collisionPoint) const
 {
 	return std::move(m_position + m_collisionPoints[a_collisionPoint]);

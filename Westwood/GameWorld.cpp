@@ -98,7 +98,7 @@ void CGameWorld::Update(float a_deltaTime)
 
 	if (m_player.GetShouldSleep())
 	{
-		m_calendar.EndDay();
+		m_calendar.Sleep();
 		m_player.WakeUp();
 	}
 }
