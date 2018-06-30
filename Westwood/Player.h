@@ -7,11 +7,11 @@
 
 #include <array>
 
-class CPlayer
+class CPlayer : public CAvatar
 {
 public:
 
-	CPlayer(CAvatar& a_avatar);
+	CPlayer();
 	void Init();
 	void Update();
 
@@ -19,13 +19,12 @@ public:
 	bool GetShouldSleep();
 	void WakeUp();
 
-	const sf::Vector2f& GetPosition() const;
+	void DrainEnergy(float a_drainage);
 private:
 	void Faint();
+	void DoInteraction();
 private:
 	CStatusBar m_energyStatus;
-
-	CAvatar & m_avatar;
 
 	CInventory m_inventory;
 	CToolBank m_toolBank;

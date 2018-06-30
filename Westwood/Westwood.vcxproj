@@ -158,6 +158,7 @@
     <ClCompile Include="TileSelector.cpp" />
     <ClCompile Include="Tileset.cpp" />
     <ClCompile Include="TilesetBank.cpp" />
+    <ClCompile Include="Tool.cpp" />
     <ClCompile Include="ToolBank.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />

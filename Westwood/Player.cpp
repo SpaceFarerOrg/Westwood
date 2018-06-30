@@ -2,10 +2,9 @@
 #include "Renderer.h"
 #include "InputManager.h"
 
-CPlayer::CPlayer(CAvatar & a_avatar)
-	:m_avatar(a_avatar)
+CPlayer::CPlayer()
 {
-	m_avatar.SetMovementSpeed(100.f);
+	SetMovementSpeed(100.f);
 }
 
 void CPlayer::Init()
@@ -51,8 +50,7 @@ void CPlayer::Update()
 
 	if (input.IsKeyPressed(EKeyCode::Space))
 	{
-		m_toolBank.UseActiveTool(m_avatar);
-		m_energyStatus.AddToValue(-1.f); //TEMP FOR TESTING!!
+		DoInteraction();
 	}
 	
 	if (input.IsKeyPressed(EKeyCode::I))
@@ -67,9 +65,9 @@ void CPlayer::Update()
 	}
 #endif
 
-	m_avatar.SetDirection(direction);
+	SetDirection(direction);
 
-	CRenderer::GetInstance().SetCameraTarget(m_avatar.GetPosition());
+	CRenderer::GetInstance().SetCameraTarget(GetPosition());
 
 	m_inventory.RenderInventory();
 	
@@ -80,15 +78,16 @@ void CPlayer::Update()
 	m_energyStatus.Render(positionToRenderInventory);
 }
 
-const sf::Vector2f& CPlayer::GetPosition() const
-{
-	return m_avatar.GetPosition();
-}
-
 void CPlayer::Faint()
 {
 	//Todo: Add meaningful faint logic here
 	m_energyStatus.SetToMax();
+}
+
+void CPlayer::DoInteraction()
+{
+	m_toolBank.UseActiveTool(*this);
+	m_energyStatus.AddToValue(-1.f); //TEMP FOR TESTING!!
 }
 
 CInventory & CPlayer::GetInventory()
@@ -104,5 +103,10 @@ bool CPlayer::GetShouldSleep()
 void CPlayer::WakeUp()
 {
 	m_shouldSleep = false;
+}
+
+void CPlayer::DrainEnergy(float a_drainage)
+{
+	m_energyStatus.AddToValue(a_drainage * -1.f);
 }
 
