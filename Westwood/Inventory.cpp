@@ -205,7 +205,7 @@ void CInventory::RenderAsClosed()
 	float totalWOfInventory = itemsSpriteSize * static_cast<float>(m_slots.max_size());
 
 	positionToRenderItem.x = (CRenderer::GetInstance().GetWindowDimensions().x / 2.f) - (totalWOfInventory / 2.f);
-	positionToRenderItem.y = CRenderer::GetInstance().GetWindowDimensions().y - 64.f;
+	positionToRenderItem.y = CRenderer::GetInstance().GetWindowDimensions().y - (itemsSpriteSize * 1.5f);
 
 	for (short i = 0; i < m_slots.max_size(); ++i)
 	{
