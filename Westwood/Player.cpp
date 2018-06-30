@@ -86,8 +86,8 @@ void CPlayer::Faint()
 
 void CPlayer::DoInteraction()
 {
+	PerformWorldInteraction(ETileInteraction::Use, GetInteractPosition());
 	m_toolBank.UseActiveTool(*this);
-	m_energyStatus.AddToValue(-1.f); //TEMP FOR TESTING!!
 }
 
 CInventory & CPlayer::GetInventory()
@@ -103,6 +103,20 @@ bool CPlayer::GetShouldSleep()
 void CPlayer::WakeUp()
 {
 	m_shouldSleep = false;
+	m_energyStatus.SetToMax();
+}
+
+void CPlayer::SetShouldSleep()
+{
+	m_shouldSleep = true;
+}
+
+sf::Vector2f CPlayer::GetInteractPosition() const
+{
+	sf::Vector2f interactPosition;
+	interactPosition = GetPosition() + GetFacingDirection() * 64.f;
+
+	return std::move(interactPosition);
 }
 
 void CPlayer::DrainEnergy(float a_drainage)

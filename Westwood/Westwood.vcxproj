@@ -136,6 +136,7 @@
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarCollection.cpp" />
     <ClCompile Include="Axe.cpp" />
+    <ClCompile Include="Bed.cpp" />
     <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCalendar.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="GameEventMaster.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InteractableItem.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBank.cpp" />
@@ -170,12 +172,14 @@
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
     <ClInclude Include="Axe.h" />
+    <ClInclude Include="Bed.h" />
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCalendar.h" />
     <ClInclude Include="GameClock.h" />
     <ClInclude Include="GameEventMaster.h" />
     <ClInclude Include="GameWorld.h" />
+    <ClInclude Include="InteractableItem.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Pickaxe.h" />
     <ClInclude Include="Shovel.h" />

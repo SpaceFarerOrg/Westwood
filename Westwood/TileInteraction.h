@@ -4,5 +4,6 @@ enum class ETileInteraction
 {
 	Dig,
 	Pass,
+	Use,
 	Count,
 };

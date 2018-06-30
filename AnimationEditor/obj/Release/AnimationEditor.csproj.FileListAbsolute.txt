@@ -1,7 +1,6 @@
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\bin\Release\AnimationEditor.exe.config
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\bin\Release\AnimationEditor.exe
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\bin\Release\AnimationEditor.pdb
-C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\obj\Release\AnimationEditor.csprojResolveAssemblyReference.cache
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\obj\Release\MainWindow.g.cs
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\obj\Release\App.g.cs
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\obj\Release\AnimationEditor_MarkupCompile.cache
@@ -13,3 +12,4 @@ C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\Animation
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\obj\Release\AnimationEditor.csproj.CoreCompileInputs.cache
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\obj\Release\AnimationEditor.exe
 C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\obj\Release\AnimationEditor.pdb
+C:\Users\kaspe\Desktop\Game Ideas\Western Stardew Valley Code\Westwood\AnimationEditor\obj\Release\AnimationEditor.csprojAssemblyReference.cache

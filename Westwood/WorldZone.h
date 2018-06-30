@@ -4,6 +4,7 @@
 #include "TileMap.h"
 #include <json.hpp>
 #include "Player.h"
+#include "InteractableItem.h"
 
 class CWorldZone
 {
@@ -31,6 +32,7 @@ private:
 	};
 private:
 	std::vector<SItemInWorldData> m_items;
+	std::vector<CInteractableItem*> m_objects;
 
 	sf::String m_zoneName;
 	CTileMap m_tileMap;
