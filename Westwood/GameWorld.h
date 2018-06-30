@@ -2,6 +2,8 @@
 #include <vector>
 #include "WorldZone.h"
 #include "GameCalendar.h"
+#include "AvatarCollection.h"
+#include "Player.h"
 
 class CAvatar;
 
@@ -20,6 +22,8 @@ public:
 	void AddAvatarToWorld(CAvatar& a_avatar);
 private:
 	CGameCalendar m_calendar;
+	CAvatarCollection m_avatarCollection;
+	CPlayer m_player;
 
 	void UpdateAllAvatars(float a_deltaTime);
 	

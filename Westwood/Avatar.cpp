@@ -103,7 +103,7 @@ void CAvatar::Draw()
 
 	sprite.setPosition(m_position);
 
-	CRenderer::GetInstance().PushRenderCommand(sprite);
+	CRenderer::GetInstance().PushRenderCommand(sprite, LAYER_OBJECT);
 }
 
 

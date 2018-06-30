@@ -9,11 +9,14 @@
 class CPlayer
 {
 public:
+
 	CPlayer(CAvatar& a_avatar);
 	void Init();
 	void Update();
 
 	CInventory& GetInventory();
+	bool GetShouldSleep();
+	void WakeUp();
 
 private:
 	CAvatar & m_avatar;
@@ -22,4 +25,5 @@ private:
 	CToolBank m_toolBank;
 
 	short m_activeTool;
+	bool m_shouldSleep : 1;
 };

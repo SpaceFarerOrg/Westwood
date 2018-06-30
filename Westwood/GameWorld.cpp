@@ -6,6 +6,7 @@
 #include "Math.h"
 
 CGameWorld::CGameWorld()
+	:m_player(m_avatarCollection.CreateNewAvatar())
 {
 	m_timeFreezed = false;
 
@@ -29,6 +30,17 @@ void CGameWorld::Load(const char * a_worldPath)
 	}
 
 	m_calendar.SetTime({ 6,0 }, CGameCalendar::ESeason::Spring, 1);
+
+	m_player.Init();
+	/*Debug give player items*/
+	m_player.GetInventory().AddItemToInventory("Axe");
+	m_player.GetInventory().AddItemToInventory("Pickaxe");
+	m_player.GetInventory().AddItemToInventory("Shovel");
+	/*End debug*/
+
+
+	m_avatarCollection.BindGameWorld(*this);
+	m_avatarCollection.FinalizeAvatarCreation();
 }
 
 void CGameWorld::Render()
@@ -71,8 +83,16 @@ void CGameWorld::Update(float a_deltaTime)
 		deltaTime = 0.f;
 	}
 
+	m_player.Update();
 	m_calendar.Update(deltaTime);
 	UpdateAllAvatars(deltaTime);
+	m_avatarCollection.RenderAvatars();
+
+	if (m_player.GetShouldSleep())
+	{
+		m_calendar.EndDay();
+		m_player.WakeUp();
+	}
 }
 
 CWorldZone & CGameWorld::GetCurrentZone()

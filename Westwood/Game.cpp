@@ -5,7 +5,6 @@
 
 CGame::CGame()
 	:m_windowEventHandler(CRenderer::GetInstance().GetWindow())
-	, m_player(m_avatarCollection.CreateNewAvatar())
 	, m_worldEditor(&CRenderer::GetInstance().GetWindow())
 {
 	
@@ -31,18 +30,7 @@ void CGame::Initialize()
 
 	m_shouldRun = true;
 
-	m_avatarCollection.BindGameWorld(m_gameWorld);
-	m_avatarCollection.FinalizeAvatarCreation();
-
 	m_gameWorld.ChangeZone(0);
-
-	m_player.Init();
-
-	/*Debug give player items*/
-	m_player.GetInventory().AddItemToInventory("Axe");
-	m_player.GetInventory().AddItemToInventory("Pickaxe");
-	m_player.GetInventory().AddItemToInventory("Shovel");
-	/*End debug*/
 }
 
 void CGame::Update()
@@ -58,14 +46,11 @@ void CGame::Update()
 	m_windowEventHandler.RunEventHandling();
 
 	m_worldEditor.Update(m_gameWorld.GetCurrentZone());
-	m_player.Update();
 
 	m_gameWorld.Update(deltaTime);
 
 	m_gameWorld.Render();
 	m_worldEditor.Render();
-
-	m_avatarCollection.RenderAvatars();
 
 	CRenderer::GetInstance().RenderToWindow();
 

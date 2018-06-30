@@ -13,47 +13,55 @@ void CPlayer::Init()
 	m_toolBank.InitTools();
 	m_inventory.BindToolBank(m_toolBank);
 	m_inventory.SetIsOwnedByPlayer();
+	m_shouldSleep = false;
 }
 
 void CPlayer::Update()
 {
+	CInputManager& input = CInputManager::GetInstance();
 	sf::Vector2f direction;
-	if (CInputManager::GetInstance().IsKeyDown(EKeyCode::D))
+	if (input.IsKeyDown(EKeyCode::D))
 	{
 		direction.x += 1.f;
 	}
-	if (CInputManager::GetInstance().IsKeyDown(EKeyCode::A))
+	if (input.IsKeyDown(EKeyCode::A))
 	{
 		direction.x -= 1.f;
 	}
-	if (CInputManager::GetInstance().IsKeyDown(EKeyCode::W))
+	if (input.IsKeyDown(EKeyCode::W))
 	{
 		direction.y -= 1.f;
 	}
-	if (CInputManager::GetInstance().IsKeyDown(EKeyCode::S))
+	if (input.IsKeyDown(EKeyCode::S))
 	{
 		direction.y += 1.f;
 	}
 
-	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::E))
+	if (input.IsKeyPressed(EKeyCode::E))
 	{
 		m_inventory.ChangeActiveSlot(1);
 	}
-	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::Q))
+	if (input.IsKeyPressed(EKeyCode::Q))
 	{
 		m_inventory.ChangeActiveSlot(-1);
 	}
 
-	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::Space))
+	if (input.IsKeyPressed(EKeyCode::Space))
 	{
 		m_toolBank.UseActiveTool(m_avatar);
 	}
 	
-	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::I))
+	if (input.IsKeyPressed(EKeyCode::I))
 	{
 		m_inventory.OpenInventory();
 	}
 
+#ifdef _DEBUG
+	if (input.IsKeyPressed(EKeyCode::F8))
+	{
+		m_shouldSleep = true;
+	}
+#endif
 
 	m_avatar.SetDirection(direction);
 
@@ -65,5 +73,15 @@ void CPlayer::Update()
 CInventory & CPlayer::GetInventory()
 {
 	return m_inventory;
+}
+
+bool CPlayer::GetShouldSleep()
+{
+	return m_shouldSleep;
+}
+
+void CPlayer::WakeUp()
+{
+	m_shouldSleep = false;
 }
 
