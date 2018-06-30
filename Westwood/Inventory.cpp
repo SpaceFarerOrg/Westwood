@@ -156,6 +156,8 @@ bool CInventory::GetIsDirty()
 #include "TextureBank.h"
 void CInventory::RenderAsOpen()
 {
+	/*Do this in a different way that does not require copy paste code*/
+
 	if (CInputManager::GetInstance().IsKeyPressed(EKeyCode::Escape))
 	{
 		CloseInventory();
@@ -207,8 +209,13 @@ void CInventory::RenderAsClosed()
 	positionToRenderItem.x = (CRenderer::GetInstance().GetWindowDimensions().x / 2.f) - (totalWOfInventory / 2.f);
 	positionToRenderItem.y = CRenderer::GetInstance().GetWindowDimensions().y - (itemsSpriteSize * 1.5f);
 
+	sf::Text stackText;
+	stackText.setFont(CTextureBank::GetFont(EFonts::Debug));
+
 	for (short i = 0; i < m_slots.max_size(); ++i)
 	{
+		stackText.setString("");
+
 		if (i == m_activeSlot)
 		{
 			sf::RectangleShape rect;
@@ -220,6 +227,10 @@ void CInventory::RenderAsClosed()
 		}
 
 		CItemBank::GetInstance().RenderItem(m_slots[i].m_itemId, positionToRenderItem, true);
+
+		stackText.setString(std::to_string(m_slots[i].m_itemCount));
+		stackText.setPosition(positionToRenderItem.x, positionToRenderItem.y);
+		CRenderer::GetInstance().PushUIRenderCommand(stackText);
 
 		positionToRenderItem.x += itemsSpriteSize;
 	}
