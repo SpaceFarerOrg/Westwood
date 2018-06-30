@@ -7,7 +7,7 @@ CGame::CGame()
 	:m_windowEventHandler(CRenderer::GetInstance().GetWindow())
 	, m_worldEditor(&CRenderer::GetInstance().GetWindow())
 {
-	
+
 }
 
 void CGame::Initialize()
@@ -48,6 +48,7 @@ void CGame::Update()
 	m_worldEditor.Update(m_gameWorld.GetCurrentZone());
 
 	m_gameWorld.Update(deltaTime);
+	m_fader.Update(deltaTime);
 
 	m_gameWorld.Render();
 	m_worldEditor.Render();

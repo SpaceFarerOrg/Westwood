@@ -92,6 +92,7 @@
     <ClCompile Include="Bed.cpp">
       <Filter>Game World\Interactable Items</Filter>
     </ClCompile>
+    <ClCompile Include="FullscreenFader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />
@@ -205,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="Bed.h">
       <Filter>Game World\Interactable Items</Filter>
+    </ClInclude>
+    <ClInclude Include="FullscreenFader.h">
+      <Filter>Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

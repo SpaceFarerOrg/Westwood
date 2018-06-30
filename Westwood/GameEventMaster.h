@@ -7,6 +7,8 @@ enum class EGameEvent
 {
 	PauseTime,
 	ContinueTime,
+	PlayerSleep,
+	FadeReachBlack,
 	Count,
 };
 

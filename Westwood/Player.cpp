@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Renderer.h"
 #include "InputManager.h"
+#include "GameEventMaster.h"
 
 CPlayer::CPlayer()
 {
@@ -16,6 +17,8 @@ void CPlayer::Init()
 
 	m_energyStatus.Init(100.f, 32.f, 128.f, CStatusBar::EType::vertical);
 	m_energyStatus.BindCallbackToOnEmpty([this] { this->Faint(); });
+
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeReachBlack, [this] {this->SetPosition({ 0.f, 0.f }); });
 }
 
 void CPlayer::Update()
@@ -104,12 +107,13 @@ void CPlayer::WakeUp()
 {
 	m_shouldSleep = false;
 	m_energyStatus.SetToMax();
-	SetPosition({ 0.f, 0.f });
 }
 
+#include "GameEventMaster.h"
 void CPlayer::SetShouldSleep()
 {
 	m_shouldSleep = true;
+	CGameEventMaster::GetInstance().SendGameEvent(EGameEvent::PlayerSleep);
 }
 
 sf::Vector2f CPlayer::GetInteractPosition() const
