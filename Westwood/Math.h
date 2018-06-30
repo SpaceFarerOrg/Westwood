@@ -32,4 +32,21 @@ namespace Math
 
 		return false;
 	}
+
+	template <typename T>
+	T Clamp(const T& a_t, const T& a_min, const T& a_max)
+	{
+		T clampedVal = a_t;
+
+		if (clampedVal < a_min)
+		{
+			clampedVal = a_min;
+		}
+		else if (a_max < clampedVal)
+		{
+			clampedVal = a_max;
+		}
+
+		return clampedVal;
+	}
 }
