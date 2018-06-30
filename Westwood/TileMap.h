@@ -4,10 +4,13 @@
 #include <json.hpp>
 #include "TileData.h"
 #include "Tileset.h"
+#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Transformable.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
 
 class CWorldZone;
 
-class CTileMap
+class CTileMap : public sf::Drawable, public sf::Transformable
 {
 
 	friend class CWorldEditor;
@@ -23,6 +26,9 @@ public:
 
 	void PerformInteraction(const sf::Vector2f& a_positionToPerformInteractionOn, ETileInteraction a_interaction);
 private:
+
+	virtual void draw(sf::RenderTarget& a_target, sf::RenderStates a_states) const;
+
 	void SetTile(short a_tileIndex, STileData a_newTile);
 	void RunItemSpawnForTileInteraction(ETileInteraction a_interaction, short a_tileIndexInTileSet, short a_tileIndexInMap);
 	short ConvertPositionToTileIndex(const sf::Vector2f& a_position, const sf::Vector2f& a_zoomFactor = { 1,1 }) const;
@@ -32,6 +38,8 @@ private:
 	std::array<bool, 8> GetNeighbouringTiles(short a_tileIndex, short a_tileIndexInMap, short* a_layer);
 
 	void RenderLayersOnTile(short a_indexInMap);
+
+	sf::VertexArray m_vertices;
 
 	CWorldZone* m_ownerZone;
 

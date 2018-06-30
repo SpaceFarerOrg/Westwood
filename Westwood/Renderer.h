@@ -19,6 +19,7 @@ public:
 
 	void Initialize();
 	void RenderToWindow();
+	void Clear();
 
 	sf::RenderWindow& GetWindow();
 
@@ -28,7 +29,10 @@ public:
 	void PushUIRenderCommand(const sf::Sprite& a_renderCommand, int a_layer = 0);
 	void PushUIRenderCommand(const sf::RectangleShape& a_renderCommand, int a_layer = 0);
 	void PushUIRenderCommand(const sf::Text& a_renderCommand, int a_layer = 0);
-	
+
+
+	void RenderTileMap(const class CTileMap& a_tileMap);
+
 	const sf::Vector2f& GetWindowDimensions();
 
 	void SetCameraTarget(const sf::Vector2f& a_targetPosition);

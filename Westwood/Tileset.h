@@ -19,6 +19,9 @@ public:
 	short CalculateAdaptiveTile(short a_tileIndex, const std::array<bool, 8>& a_neighbours);
 
 	void DrawTileAtPosition(short a_tileIndex, const sf::Vector2f& a_position);
+
+	short GetTexture();
+
 private:
 	void LoadAdaptiveTile(short a_tileIndex, const char* a_adaptiveJson);
 	void LoadTileData(short a_tileIndex, nlohmann::json& a_tileInJson);
@@ -27,6 +30,7 @@ private:
 
 	STileData* m_tiles;
 	sf::String m_tilesetName;
+
 	short m_columns;
 	short m_texture;
 	short m_tileWidth;
