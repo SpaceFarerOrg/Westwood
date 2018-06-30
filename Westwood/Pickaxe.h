@@ -5,5 +5,5 @@ class CPickaxe : public ITool
 {
 public:
 	void Init() override;
-	void Use(CAvatar& a_user) override;
+	void Use(CPlayer& a_user) override;
 };

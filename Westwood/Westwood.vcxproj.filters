@@ -87,6 +87,7 @@
     <ClCompile Include="StatusBar.cpp">
       <Filter>Game Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Tool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />

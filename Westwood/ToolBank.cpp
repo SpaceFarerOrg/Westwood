@@ -25,7 +25,7 @@ void CToolBank::SetRelevantToolAsActive(short a_currentActiveItemID)
 	}
 }
 
-void CToolBank::UseActiveTool(CAvatar & a_user)
+void CToolBank::UseActiveTool(CPlayer & a_user)
 {
 	if (m_activeTool == -1)
 		return;

@@ -1,11 +1,12 @@
 #pragma once
-#include "Avatar.h"
+
+class CPlayer;
 
 class IUseable
 {
 public:
 	virtual void Init() = 0;
-	virtual void Use(CAvatar& a_user) = 0;
+	virtual void Use(CPlayer& a_user) = 0;
 
 	short GetItemID() const
 	{

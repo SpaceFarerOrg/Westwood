@@ -6,12 +6,15 @@
 #include "Math.h"
 
 CGameWorld::CGameWorld()
-	:m_player(m_avatarCollection.CreateNewAvatar())
 {
 	m_timeFreezed = false;
 
 	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::PauseTime, [&timeFreezed = m_timeFreezed]() { timeFreezed = true; });
 	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::ContinueTime, [&timeFreezed = m_timeFreezed]() {timeFreezed = false; });
+
+	m_allAvatars.push_back(&m_player);
+
+	m_avatarCollection.AddPlayer(m_player);
 }
 
 void CGameWorld::Load(const char * a_worldPath)
@@ -135,16 +138,20 @@ void CGameWorld::UpdateAllAvatars(float a_deltaTime)
 		m_avatarsInCurrentZone[i]->AllowMove(finalAllowedMove);
 		/*End Move*/
 
-		/*Interaction Logic*/
-		sf::Vector2f interactionPosition;
-		ETileInteraction interaction;
 
-		if (m_avatarsInCurrentZone[i]->HasPerformedWorldInteraction(interaction, interactionPosition))
-		{
-			m_worldZones[m_currentZone].PerformWorldInteraction(interaction, interactionPosition);
-		}
-		/*End interaction*/
 	}
+
+	/*Interaction Logic*/
+	sf::Vector2f interactionPosition;
+	ETileInteraction interaction;
+
+	if (m_player.HasPerformedWorldInteraction(interaction, interactionPosition))
+	{
+		m_worldZones[m_currentZone].PerformWorldInteraction(interaction, interactionPosition);
+	}
+	/*End interaction*/
+
+
 
 	//Todo: Update all Avatars in a different zone than the current one (will make NPCs seem more lively)
 
