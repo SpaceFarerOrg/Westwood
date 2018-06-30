@@ -14,6 +14,8 @@ void CPlayer::Init()
 	m_inventory.BindToolBank(m_toolBank);
 	m_inventory.SetIsOwnedByPlayer();
 	m_shouldSleep = false;
+
+	m_energyStatus.Init(100.f, 32.f, 128.f, CStatusBar::EType::vertical);
 }
 
 void CPlayer::Update()
@@ -49,6 +51,7 @@ void CPlayer::Update()
 	if (input.IsKeyPressed(EKeyCode::Space))
 	{
 		m_toolBank.UseActiveTool(m_avatar);
+		m_energyStatus.AddToValue(-1.f); //TEMP FOR TESTING!!
 	}
 	
 	if (input.IsKeyPressed(EKeyCode::I))
@@ -68,6 +71,12 @@ void CPlayer::Update()
 	CRenderer::GetInstance().SetCameraTarget(m_avatar.GetPosition());
 
 	m_inventory.RenderInventory();
+	
+	sf::Vector2f positionToRenderInventory;
+	positionToRenderInventory.x = CRenderer::GetInstance().GetWindowDimensions().x - m_energyStatus.GetSize().x * 1.5f;
+	positionToRenderInventory.y = CRenderer::GetInstance().GetWindowDimensions().y - m_energyStatus.GetSize().y * 1.5f;
+
+	m_energyStatus.Render(positionToRenderInventory);
 }
 
 const sf::Vector2f& CPlayer::GetPosition() const

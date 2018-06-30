@@ -152,6 +152,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Serializable.cpp" />
     <ClCompile Include="Shovel.cpp" />
+    <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileSelector.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="Pickaxe.h" />
     <ClInclude Include="Shovel.h" />
+    <ClInclude Include="StatusBar.h" />
     <ClInclude Include="Tool.h" />
     <ClInclude Include="ToolBank.h" />
     <ClInclude Include="Useable.h" />

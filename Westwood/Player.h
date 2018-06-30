@@ -3,6 +3,7 @@
 #include "ToolBank.h"
 #include "Avatar.h"
 #include "Inventory.h"
+#include "StatusBar.h"
 
 #include <array>
 
@@ -20,6 +21,8 @@ public:
 
 	const sf::Vector2f& GetPosition() const;
 private:
+	CStatusBar m_energyStatus;
+
 	CAvatar & m_avatar;
 
 	CInventory m_inventory;
