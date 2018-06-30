@@ -14,6 +14,7 @@ public:
 	void SetDeltaTime(float a_deltaTime);
 
 	const sf::Vector2f& GetPosition() const;
+	void SetPosition(const sf::Vector2f& a_position);
 	sf::Vector2f GetPositionOfCollisionPoint(short a_collisionPoint) const;
 	sf::Vector2f GetFuturePositionOfCollisionPoint(short a_collisionPoint) const;
 	

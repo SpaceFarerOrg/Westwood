@@ -81,7 +81,7 @@ void CPlayer::Update()
 void CPlayer::Faint()
 {
 	//Todo: Add meaningful faint logic here
-	m_energyStatus.SetToMax();
+	SetShouldSleep();
 }
 
 void CPlayer::DoInteraction()
@@ -104,6 +104,7 @@ void CPlayer::WakeUp()
 {
 	m_shouldSleep = false;
 	m_energyStatus.SetToMax();
+	SetPosition({ 0.f, 0.f });
 }
 
 void CPlayer::SetShouldSleep()
