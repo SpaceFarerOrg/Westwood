@@ -52,7 +52,11 @@ void CGameWorld::Render()
 
 void CGameWorld::ChangeZone(short a_newZone)
 {
+	m_worldZones[m_currentZone].LeaveZone();
+
 	m_currentZone = a_newZone;
+
+	m_worldZones[m_currentZone].EnterZone(m_player);
 
 	RecalculateAvatarsInZone();
 }
@@ -87,6 +91,7 @@ void CGameWorld::Update(float a_deltaTime)
 	m_calendar.Update(deltaTime);
 	UpdateAllAvatars(deltaTime);
 	m_avatarCollection.RenderAvatars();
+	m_worldZones[m_currentZone].CheckPlayerAgainstItems();
 
 	if (m_player.GetShouldSleep())
 	{

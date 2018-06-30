@@ -1,6 +1,7 @@
 #include "WorldZone.h"
 #include "ItemBank.h"
 #include <fstream>
+#include "Math.h"
 
 void CWorldZone::LoadZone(nlohmann::json & a_zoneJson)
 {
@@ -23,6 +24,45 @@ void CWorldZone::Render()
 	for (SItemInWorldData& itemInWorld : m_items)
 	{
 		CItemBank::GetInstance().RenderItem(itemInWorld.a_itemID, itemInWorld.m_position);
+	}
+}
+
+void CWorldZone::EnterZone(CPlayer & a_player)
+{
+	m_player = &a_player;
+}
+
+void CWorldZone::LeaveZone()
+{
+
+}
+
+void CWorldZone::CheckPlayerAgainstItems()
+{
+	std::vector<size_t> removedItems;
+
+	for (size_t i = 0; i < m_items.size(); ++i)
+	{
+		SItemInWorldData& item = m_items[i];
+		
+		if (Math::GetLenght2(item.m_position - m_player->GetPosition()) < 10.f * 10.f)
+		{
+			CInventory& playerInventory = m_player->GetInventory();
+
+			if (playerInventory.IsFull())
+			{
+				continue;
+			}
+
+			removedItems.push_back(i);
+
+			playerInventory.AddItemToInventory(m_items[i].a_itemID);
+		}
+	}
+
+	for (int i = static_cast<int>(removedItems.size()) - 1; i > -1; --i)
+	{
+		m_items.erase(m_items.begin() + removedItems[i]);
 	}
 }
 

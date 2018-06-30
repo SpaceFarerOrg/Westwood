@@ -70,6 +70,11 @@ void CPlayer::Update()
 	m_inventory.RenderInventory();
 }
 
+const sf::Vector2f& CPlayer::GetPosition() const
+{
+	return m_avatar.GetPosition();
+}
+
 CInventory & CPlayer::GetInventory()
 {
 	return m_inventory;

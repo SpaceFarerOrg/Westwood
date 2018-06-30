@@ -3,6 +3,7 @@
 #include <vector>
 #include "TileMap.h"
 #include <json.hpp>
+#include "Player.h"
 
 class CWorldZone
 {
@@ -11,6 +12,11 @@ class CWorldZone
 public:
 	void LoadZone(nlohmann::json& a_zoneJson);
 	void Render();
+
+	void EnterZone(CPlayer& a_player);
+	void LeaveZone();
+
+	void CheckPlayerAgainstItems();
 
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 
@@ -25,7 +31,9 @@ private:
 	};
 private:
 	std::vector<SItemInWorldData> m_items;
+
 	sf::String m_zoneName;
 	CTileMap m_tileMap;
 
+	CPlayer* m_player;
 };

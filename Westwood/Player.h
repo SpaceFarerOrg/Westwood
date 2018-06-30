@@ -18,6 +18,7 @@ public:
 	bool GetShouldSleep();
 	void WakeUp();
 
+	const sf::Vector2f& GetPosition() const;
 private:
 	CAvatar & m_avatar;
 
