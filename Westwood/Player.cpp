@@ -16,6 +16,7 @@ void CPlayer::Init()
 	m_shouldSleep = false;
 
 	m_energyStatus.Init(100.f, 32.f, 128.f, CStatusBar::EType::vertical);
+	m_energyStatus.BindCallbackToOnEmpty([this] { this->Faint(); });
 }
 
 void CPlayer::Update()
@@ -82,6 +83,12 @@ void CPlayer::Update()
 const sf::Vector2f& CPlayer::GetPosition() const
 {
 	return m_avatar.GetPosition();
+}
+
+void CPlayer::Faint()
+{
+	//Todo: Add meaningful faint logic here
+	m_energyStatus.SetToMax();
 }
 
 CInventory & CPlayer::GetInventory()

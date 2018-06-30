@@ -21,6 +21,8 @@ public:
 
 	const sf::Vector2f& GetPosition() const;
 private:
+	void Faint();
+private:
 	CStatusBar m_energyStatus;
 
 	CAvatar & m_avatar;
