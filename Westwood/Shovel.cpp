@@ -10,6 +10,6 @@ void CShovel::Init()
 
 void CShovel::Use(CPlayer & a_user)
 {
-	a_user.DrainEnergy(m_energyDrainage);
+	ITool::Use(a_user);
 	a_user.PerformWorldInteraction(ETileInteraction::Dig, a_user.GetPosition() + (a_user.GetFacingDirection() * 64.f));
 }

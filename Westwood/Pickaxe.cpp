@@ -9,5 +9,5 @@ void CPickaxe::Init()
 
 void CPickaxe::Use(CPlayer& a_user)
 {
-
+	ITool::Use(a_user);
 }

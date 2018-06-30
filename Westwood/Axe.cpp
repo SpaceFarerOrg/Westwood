@@ -9,5 +9,5 @@ void CAxe::Init()
 
 void CAxe::Use(CPlayer& a_user)
 {
-
+	ITool::Use(a_user);
 }
