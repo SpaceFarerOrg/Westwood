@@ -31,7 +31,7 @@ void CGameCalendar::EndDay()
 	m_currentMinuteTime = 0.f;
 	m_clock = { 0,0 };
 
-	if (m_currentDate / 29 == 1)
+	if (m_currentDate == 29)
 	{
 		EnterNewSeason();
 	}

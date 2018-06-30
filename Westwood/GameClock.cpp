@@ -27,9 +27,9 @@ void CClock::SetTime(const STimePoint& a_timePoint)
 
 void CClock::TickMinute()
 {
-	++m_currentTimePoint.m_minute;
+	m_currentTimePoint.m_minute += 10;
 	
-	if (m_currentTimePoint.m_minute / 60 == 1)
+	if (m_currentTimePoint.m_minute == 60)
 	{
 		m_currentTimePoint.m_minute = 0;
 		m_currentTimePoint.m_hour++;
