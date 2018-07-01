@@ -42,14 +42,7 @@ void CPlayer::Update()
 		direction.y += 1.f;
 	}
 
-	if (input.IsKeyPressed(EKeyCode::E))
-	{
-		m_inventory.ChangeActiveSlot(1);
-	}
-	if (input.IsKeyPressed(EKeyCode::Q))
-	{
-		m_inventory.ChangeActiveSlot(-1);
-	}
+	SelectInventorySlot();
 
 	if (input.IsKeyPressed(EKeyCode::Space))
 	{
@@ -91,6 +84,31 @@ void CPlayer::DoInteraction()
 {
 	PerformWorldInteraction(ETileInteraction::Use, GetInteractPosition());
 	m_toolBank.UseActiveTool(*this);
+}
+
+void CPlayer::SelectInventorySlot()
+{
+	CInputManager& input = CInputManager::GetInstance();
+
+	if (input.IsKeyPressed(EKeyCode::E))
+	{
+		m_inventory.ChangeActiveSlot(1);
+	}
+	if (input.IsKeyPressed(EKeyCode::Q))
+	{
+		m_inventory.ChangeActiveSlot(-1);
+	}
+
+	if (input.IsKeyPressed(EKeyCode::One)) { m_inventory.TrySetActiveSlot(0); }
+	if (input.IsKeyPressed(EKeyCode::Two)) { m_inventory.TrySetActiveSlot(1); }
+	if (input.IsKeyPressed(EKeyCode::Three)) { m_inventory.TrySetActiveSlot(2); }
+	if (input.IsKeyPressed(EKeyCode::Four)) { m_inventory.TrySetActiveSlot(3); }
+	if (input.IsKeyPressed(EKeyCode::Five)) { m_inventory.TrySetActiveSlot(4); }
+	if (input.IsKeyPressed(EKeyCode::Six)) { m_inventory.TrySetActiveSlot(5); }
+	if (input.IsKeyPressed(EKeyCode::Seven)) { m_inventory.TrySetActiveSlot(6); }
+	if (input.IsKeyPressed(EKeyCode::Eight)) { m_inventory.TrySetActiveSlot(7); }
+	if (input.IsKeyPressed(EKeyCode::Nine)) { m_inventory.TrySetActiveSlot(8); }
+	if (input.IsKeyPressed(EKeyCode::Zero)) { m_inventory.TrySetActiveSlot(9); }
 }
 
 CInventory & CPlayer::GetInventory()

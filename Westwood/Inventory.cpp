@@ -146,6 +146,24 @@ void CInventory::ChangeActiveSlot(short a_change)
 	m_isDirty = true;
 }
 
+void CInventory::TrySetActiveSlot(short a_slot)
+{
+	if (m_isOpen == true)
+	{
+		return;
+	}
+
+	if (a_slot < 0 || a_slot > m_slots.max_size() - 1)
+	{
+		return;
+	}
+
+	m_activeSlot = a_slot;
+
+	m_boundToolBank->SetRelevantToolAsActive(m_slots[m_activeSlot].m_itemId);
+	m_isDirty = true;
+}
+
 short CInventory::GetActiveSlotItemID() const
 {
 	short itemID = m_slots[m_activeSlot].m_itemId;

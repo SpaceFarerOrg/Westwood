@@ -45,6 +45,7 @@ public:
 	void AddItemToInventory(const sf::String& a_itemName, short a_amount = 1);
 	
 	void ChangeActiveSlot(short a_change);
+	void TrySetActiveSlot(short a_slot);
 
 	short GetActiveSlotItemID() const;
 

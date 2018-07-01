@@ -25,6 +25,8 @@ public:
 private:
 	void Faint();
 	void DoInteraction();
+
+	void SelectInventorySlot();
 private:
 	CStatusBar m_energyStatus;
 
