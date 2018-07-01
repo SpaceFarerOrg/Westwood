@@ -32,6 +32,18 @@ void CInventory::CloseInventory()
 	m_isOpen = false;
 }
 
+void CInventory::ToggleInventory()
+{
+	if (m_isOpen)
+	{
+		CloseInventory();
+	}
+	else
+	{
+		OpenInventory();
+	}
+}
+
 bool CInventory::IsFull()
 {
 	bool full = m_freeSlots == 0;

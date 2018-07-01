@@ -58,7 +58,7 @@ void CPlayer::Update()
 	
 	if (input.IsKeyPressed(EKeyCode::I))
 	{
-		m_inventory.OpenInventory();
+		m_inventory.ToggleInventory();
 	}
 
 #ifdef _DEBUG

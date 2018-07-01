@@ -35,6 +35,7 @@ public:
 
 	void OpenInventory();
 	void CloseInventory();
+	void ToggleInventory();
 
 	void RenderInventory();
 
