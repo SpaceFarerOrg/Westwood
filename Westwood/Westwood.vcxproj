@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarCollection.cpp" />
     <ClCompile Include="Axe.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Serializable.cpp" />
     <ClCompile Include="Shovel.cpp" />
+    <ClCompile Include="SoundBank.cpp" />
     <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="TextureBank.cpp" />
     <ClCompile Include="TileMap.cpp" />
@@ -171,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
     <ClInclude Include="Axe.h" />
@@ -186,6 +189,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="Pickaxe.h" />
     <ClInclude Include="Shovel.h" />
+    <ClInclude Include="SoundBank.h" />
     <ClInclude Include="StatusBar.h" />
     <ClInclude Include="Tool.h" />
     <ClInclude Include="ToolBank.h" />

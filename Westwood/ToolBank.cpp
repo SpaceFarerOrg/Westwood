@@ -27,6 +27,11 @@ void CToolBank::SetRelevantToolAsActive(short a_currentActiveItemID)
 	}
 }
 
+const std::string & CToolBank::GetActiveToolName()
+{
+	return m_rawTools[m_activeTool]->GetItemName();
+}
+
 void CToolBank::UseActiveTool(CPlayer & a_user)
 {
 	if (m_activeTool == -1)

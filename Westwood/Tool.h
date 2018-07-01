@@ -1,5 +1,6 @@
 #pragma once
 #include "Useable.h"
+#include <string>
 
 enum class EToolType
 {
@@ -15,6 +16,8 @@ class ITool : public IUseable
 {
 public:
 	virtual void Use(CPlayer& a_user) override;
+	const std::string& GetItemName();
 protected:
 	float m_energyDrainage;
+	std::string m_name;
 };

@@ -16,6 +16,7 @@ public:
 	void InitTools();
 
 	void SetRelevantToolAsActive(short a_currentActiveItemID);
+	const std::string& GetActiveToolName();
 
 	void UseActiveTool(CPlayer& a_user);
 private:

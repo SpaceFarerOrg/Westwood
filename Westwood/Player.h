@@ -4,6 +4,7 @@
 #include "Avatar.h"
 #include "Inventory.h"
 #include "StatusBar.h"
+#include <SFML/Audio/Sound.hpp>
 
 #include <array>
 

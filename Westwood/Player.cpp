@@ -2,6 +2,8 @@
 #include "Renderer.h"
 #include "InputManager.h"
 #include "GameEventMaster.h"
+#include "SoundBank.h"
+#include "AudioManager.h"
 
 CPlayer::CPlayer()
 {
@@ -84,6 +86,8 @@ void CPlayer::DoInteraction()
 {
 	PerformWorldInteraction(ETileInteraction::Use, GetInteractPosition());
 	m_toolBank.UseActiveTool(*this);
+	
+	CAudioManager::GetInstance().PlaySound(m_toolBank.GetActiveToolName().c_str());
 }
 
 void CPlayer::SelectInventorySlot()

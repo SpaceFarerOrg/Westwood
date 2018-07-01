@@ -2,6 +2,8 @@
 #include "InputManager.h"
 #include "ItemBank.h"
 #include "GameEventMaster.h"
+#include "SoundBank.h"
+#include "AudioManager.h"
 
 CGame::CGame()
 	:m_windowEventHandler(CRenderer::GetInstance().GetWindow())
@@ -22,6 +24,10 @@ void CGame::Initialize()
 	/*Load data*/
 	CItemBank::GetInstance().LoadAllItems("data/items.json");
 	/*End load data*/
+
+	/*Load sounds*/
+	CAudioManager::GetInstance().Load();
+	/*End load sounds*/
 
 	m_tilesetBank.LoadAllTilesets();
 

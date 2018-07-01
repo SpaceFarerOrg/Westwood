@@ -96,6 +96,12 @@
     <ClCompile Include="WaterCan.cpp">
       <Filter>Game Objects\Items\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="SoundBank.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />
@@ -216,6 +222,12 @@
     <ClInclude Include="WaterCan.h">
       <Filter>Game Objects\Items\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="SoundBank.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -256,6 +268,9 @@
     </Filter>
     <Filter Include="Game World\Interactable Items">
       <UniqueIdentifier>{1c1e5631-ba3f-4309-a524-b7a496bd208e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{a1894359-52d9-4a6f-af34-f71f22e5f879}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
