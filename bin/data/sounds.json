@@ -3,6 +3,18 @@
     {
       "name": "WaterCan",
       "path": "sounds/waterCan.wav"
+    },
+    {
+      "name": "Axe",
+      "path": "sounds/waterCan.wav"
+    },
+    {
+      "name": "Pickaxe",
+      "path": "sounds/waterCan.wav"
+    },
+    {
+      "name": "Shovel",
+      "path": "sounds/shovel.wav"
     }
   ]
 }
