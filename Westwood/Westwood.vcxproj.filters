@@ -93,6 +93,9 @@
       <Filter>Game World\Interactable Items</Filter>
     </ClCompile>
     <ClCompile Include="FullscreenFader.cpp" />
+    <ClCompile Include="WaterCan.cpp">
+      <Filter>Game Objects\Items\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />
@@ -209,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="FullscreenFader.h">
       <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterCan.h">
+      <Filter>Game Objects\Items\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

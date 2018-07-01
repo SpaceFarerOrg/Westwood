@@ -164,6 +164,7 @@
     <ClCompile Include="Tool.cpp" />
     <ClCompile Include="ToolBank.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="WaterCan.cpp" />
     <ClCompile Include="WindowEventHandler.cpp" />
     <ClCompile Include="WorldEditor.cpp" />
     <ClCompile Include="WorldZone.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Tileset.h" />
     <ClInclude Include="TilesetBank.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="WaterCan.h" />
     <ClInclude Include="WindowEventHandler.h" />
     <ClInclude Include="WorldEditor.h" />
     <ClInclude Include="WorldZone.h" />

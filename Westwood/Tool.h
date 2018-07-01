@@ -6,6 +6,7 @@ enum class EToolType
 	Axe,
 	Pickaxe,
 	Shovel,
+	WaterCan,
 	Count
 };
 

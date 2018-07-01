@@ -25,9 +25,15 @@
       "sellable": false
     },
     {
+      "name": "WaterCan",
+      "description": "Used to water soil",
+      "indexInSheet": 4,
+      "sellable": false
+    },
+    {
       "name": "Clay",
       "description": "Soil from digging dirt",
-      "indexInSheet": 4,
+      "indexInSheet": 5,
       "sellable": true,
       "sellData": {
         "sell": 1

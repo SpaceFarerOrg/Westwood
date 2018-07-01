@@ -6,6 +6,7 @@
 #include "Shovel.h"
 #include "Axe.h"
 #include "Pickaxe.h"
+#include "WaterCan.h"
 
 class CPlayer;
 
@@ -25,4 +26,5 @@ private:
 	CShovel m_shovel;
 	CAxe m_axe;
 	CPickaxe m_pickaxe;
+	CWaterCan m_waterCan;
 };

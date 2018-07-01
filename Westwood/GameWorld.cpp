@@ -39,6 +39,7 @@ void CGameWorld::Load(const char * a_worldPath)
 	m_player.GetInventory().AddItemToInventory("Axe");
 	m_player.GetInventory().AddItemToInventory("Pickaxe");
 	m_player.GetInventory().AddItemToInventory("Shovel");
+	m_player.GetInventory().AddItemToInventory("WaterCan");
 	/*End debug*/
 
 

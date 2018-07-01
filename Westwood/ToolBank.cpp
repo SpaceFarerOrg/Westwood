@@ -5,10 +5,12 @@ void CToolBank::InitTools()
 	m_shovel.Init();
 	m_axe.Init();
 	m_pickaxe.Init();
+	m_waterCan.Init();
 	
 	AddToolAsRawTool(m_shovel, EToolType::Shovel);
 	AddToolAsRawTool(m_axe, EToolType::Axe);
 	AddToolAsRawTool(m_pickaxe, EToolType::Pickaxe);
+	AddToolAsRawTool(m_waterCan, EToolType::WaterCan);
 }
 
 void CToolBank::SetRelevantToolAsActive(short a_currentActiveItemID)
