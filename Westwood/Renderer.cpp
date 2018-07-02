@@ -41,7 +41,10 @@ void CRenderer::RenderToWindow()
 
 	m_camera.setCenter(m_cameraTarget);
 
-	RenderQueue(m_renderCommands);
+	for (int i = 0; i < m_renderCommands.size(); ++i)
+	{
+		RenderQueue(m_renderCommands[i]);
+	}
 
 	/*End camera space rendering*/
 
@@ -72,27 +75,27 @@ void CRenderer::PushRenderCommand(const sf::Sprite & a_renderCommand, int a_laye
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::Sprite;
-	rc.m_layer = a_layer;
+	rc.m_layer = a_renderCommand.getPosition().y;
 	rc.m_spriteData = a_renderCommand;
-	m_renderCommands.push_back(rc);
+	m_renderCommands[a_layer].push_back(rc);
 }
 
 void CRenderer::PushRenderCommand(const sf::RectangleShape & a_renderCommand, int a_layer)
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::RectangleShape;
-	rc.m_layer = a_layer;
+	rc.m_layer = a_renderCommand.getPosition().y;
 	rc.m_rectShapeData = a_renderCommand;
-	m_renderCommands.push_back(rc);
+	m_renderCommands[a_layer].push_back(rc);
 }
 
 void CRenderer::PushRenderCommand(const sf::Text& a_renderCommand, int a_layer)
 {
 	SRenderCommand rc;
 	rc.m_type = ERenderCommandType::Text;
-	rc.m_layer = a_layer;
+	rc.m_layer = a_renderCommand.getPosition().y;
 	rc.m_textData = a_renderCommand;
-	m_renderCommands.push_back(rc);
+	m_renderCommands[a_layer].push_back(rc);
 }
 
 const sf::Vector2f & CRenderer::GetWindowDimensions()

@@ -7,6 +7,8 @@
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML\System\Vector2.hpp>
 
+#include <array>
+
 #define LAYER_GROUND 0
 #define LAYER_PATH	 1
 #define LAYER_OBJECT 2
@@ -67,7 +69,8 @@ private:
 
 	void RenderQueue(std::vector<SRenderCommand>& a_renderQueue);
 	
-	std::vector<SRenderCommand> m_renderCommands;
+	std::array<std::vector<SRenderCommand>, 4> m_renderCommands;
+
 	std::vector<SRenderCommand> m_UIRenderCommands;
 	
 	sf::Vector2f m_currentWindowDimensions;
