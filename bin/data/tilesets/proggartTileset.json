@@ -4,6 +4,18 @@
  "imagewidth":1028,
  "margin":0,
  "name":"proggartTileset",
+ "properties":
+    {
+     "adaptive":false,
+     "passable":false,
+     "plowable":false
+    },
+ "propertytypes":
+    {
+     "adaptive":"bool",
+     "passable":"bool",
+     "plowable":"bool"
+    },
  "spacing":0,
  "tilecount":256,
  "tileheight":64,
@@ -11,15 +23,18 @@
     {
      "0":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "1":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "16":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "17":
         {
@@ -28,31 +43,38 @@
         },
      "18":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "2":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "3":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "32":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "33":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "34":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "4":
         {
-         "passable":false
+         "passable":false,
+         "plowable":false
         },
      "5":
         {
@@ -64,15 +86,18 @@
     {
      "0":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "1":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "16":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "17":
         {
@@ -81,31 +106,38 @@
         },
      "18":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "2":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "3":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "32":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "33":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "34":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "4":
         {
-         "passable":"bool"
+         "passable":"bool",
+         "plowable":"bool"
         },
      "5":
         {

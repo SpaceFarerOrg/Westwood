@@ -16,12 +16,7 @@ void CWorldZone::LoadZone(nlohmann::json & a_zoneJson)
 	tileMapFile.close();
 
 	m_tileMap.Load(tileMapJson, *this);
-
-	/*
-	DEBUG ADD BED
-	*/
-	m_objects.push_back(new CBed());
-	m_objects.back()->SetPosition({ 0.f,0.f });
+	LoadObjects(tileMapJson);
 }
 
 void CWorldZone::Render()
@@ -104,5 +99,30 @@ void CWorldZone::SpawnItem(short a_itemID, short a_amount, const sf::Vector2f& a
 	for (short i = 0; i < a_amount; ++i)
 	{
 		m_items.push_back({ a_itemID, a_position });
+	}
+}
+
+void CWorldZone::LoadObjects(nlohmann::json & a_tileMapJson)
+{
+	int amountOfObjects = a_tileMapJson["layers"][1]["objects"].size();
+
+	for (int i = 0; i < amountOfObjects; ++i)
+	{
+		nlohmann::json objectData = a_tileMapJson["layers"][1]["objects"][i];
+
+		std::string objectType = objectData["type"];
+
+		if (objectType == "bed")
+		{
+			m_objects.push_back(new CBed());
+			sf::Vector2f position;
+			position.x = objectData["x"];
+			position.y = objectData["y"];
+			// Tiled saves positon with origin at bottom left, this corrects that
+			int offset = objectData["height"];
+			position.y -= offset;
+
+			m_objects.back()->SetPosition(position);
+		}
 	}
 }

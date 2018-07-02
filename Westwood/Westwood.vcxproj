@@ -179,6 +179,7 @@
     <ClInclude Include="Axe.h" />
     <ClInclude Include="Bed.h" />
     <ClInclude Include="ButtonManager.h" />
+    <ClInclude Include="CommonUtilities.h" />
     <ClInclude Include="FullscreenFader.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCalendar.h" />

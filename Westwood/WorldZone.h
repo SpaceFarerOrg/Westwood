@@ -31,6 +31,9 @@ private:
 		sf::Vector2f m_position;
 	};
 private:
+
+	void LoadObjects(nlohmann::json& a_tileMapJson);
+
 	std::vector<SItemInWorldData> m_items;
 	std::vector<CInteractableItem*> m_objects;
 

@@ -4,6 +4,7 @@
 #include "TilesetBank.h"
 #include "WorldZone.h"
 #include "Math.h"
+#include "CommonUtilities.h"
 
 void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 {
@@ -31,7 +32,10 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 		m_wateredTiles[i] = -1;
 	}
 
-	m_texture = CTextureBank::GetTextureIndex(a_tileMapJson["tilesets"][0]["name"].get<std::string>().c_str()); //SCALE WITH LAYERS!!!
+	std::string tilesetSource = a_tileMapJson["tilesets"][0]["source"].get<std::string>();
+	tilesetSource = SplitString(SplitString(tilesetSource, '/').back(), '.')[0];
+
+	m_texture = CTextureBank::GetTextureIndex(tilesetSource.c_str()); //SCALE WITH LAYERS!!!
 
 	const sf::Texture& tilesheetTexture = CTextureBank::GetTexture(m_texture);
 
