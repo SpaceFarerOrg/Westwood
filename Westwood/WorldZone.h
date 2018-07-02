@@ -24,6 +24,8 @@ public:
 
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 
+	CInteractableItem* GetTargetedObject(const sf::Vector2f& a_targetPosition);
+
 	void SpawnItem(short a_itemID, short a_amount, const sf::Vector2f& a_position);
 private:
 	struct SItemInWorldData

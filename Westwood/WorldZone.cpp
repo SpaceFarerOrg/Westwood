@@ -92,6 +92,21 @@ sf::Vector2f CWorldZone::CheckForAllowedMove(const sf::Vector2f & a_targetPositi
 	return std::move(allowedPosition);
 }
 
+CInteractableItem * CWorldZone::GetTargetedObject(const sf::Vector2f & a_targetPosition)
+{
+	CInteractableItem* item = nullptr;
+
+	for (CInteractableItem*& object : m_objects)
+	{
+		if (object->IsColliding(a_targetPosition))
+		{
+			item = object;
+		}
+	}
+
+	return item;
+}
+
 void CWorldZone::SpawnItem(short a_itemID, short a_amount, const sf::Vector2f& a_position)
 {
 	for (short i = 0; i < a_amount; ++i)

@@ -105,7 +105,13 @@ void CPlayer::DoInteraction()
 {
 	short heldItem = m_inventory.GetActiveSlotItemID();
 
-	if (m_toolBank.UseActiveTool(*this, *m_currentZone))
+	CInteractableItem* interactableObject = m_currentZone->GetTargetedObject(GetInteractPosition());
+	
+	if (interactableObject != nullptr)
+	{
+		interactableObject->Interact(*this);
+	}
+	else if (m_toolBank.UseActiveTool(*this, *m_currentZone))
 	{
 		CAudioManager::GetInstance().PlaySound(m_toolBank.GetActiveToolName());
 	}
