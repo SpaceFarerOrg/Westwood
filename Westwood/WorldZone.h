@@ -21,7 +21,7 @@ public:
 
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 
-	void PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f& a_interactionPosition);
+	bool PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f& a_interactionPosition);
 
 	void SpawnItem(short a_itemID, short a_amount, const sf::Vector2f& a_position);
 private:

@@ -24,7 +24,7 @@ public:
 
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 
-	void PerformInteraction(const sf::Vector2f& a_positionToPerformInteractionOn, ETileInteraction a_interaction);
+	bool PerformInteraction(const sf::Vector2f& a_positionToPerformInteractionOn, ETileInteraction a_interaction);
 private:
 
 	virtual void draw(sf::RenderTarget& a_target, sf::RenderStates a_states) const;

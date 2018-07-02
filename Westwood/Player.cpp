@@ -4,6 +4,7 @@
 #include "GameEventMaster.h"
 #include "SoundBank.h"
 #include "AudioManager.h"
+#include "ItemBank.h"
 
 CPlayer::CPlayer()
 {
@@ -52,7 +53,7 @@ void CPlayer::Update()
 	{
 		DoInteraction();
 	}
-	
+
 	if (input.IsKeyPressed(EKeyCode::I))
 	{
 		m_inventory.ToggleInventory();
@@ -70,7 +71,7 @@ void CPlayer::Update()
 	CRenderer::GetInstance().SetCameraTarget(GetPosition());
 
 	m_inventory.RenderInventory();
-	
+
 	sf::Vector2f positionToRenderInventory;
 	positionToRenderInventory.x = CRenderer::GetInstance().GetWindowDimensions().x - m_energyStatus.GetSize().x * 1.5f;
 	positionToRenderInventory.y = CRenderer::GetInstance().GetWindowDimensions().y - m_energyStatus.GetSize().y * 1.5f;
@@ -84,6 +85,11 @@ void CPlayer::Update()
 	}
 }
 
+void CPlayer::BindFarm(CFarm & a_farm)
+{
+	m_farm = &a_farm;
+}
+
 void CPlayer::Faint()
 {
 	//Todo: Add meaningful faint logic here
@@ -92,10 +98,22 @@ void CPlayer::Faint()
 
 void CPlayer::DoInteraction()
 {
+	short heldItem = m_inventory.GetActiveSlotItemID();
+
+	m_onInteractAllowedCallback = [] {};
+
 	PerformWorldInteraction(ETileInteraction::Use, GetInteractPosition());
 	if (m_toolBank.UseActiveTool(*this))
 	{
 		CAudioManager::GetInstance().PlaySound(m_toolBank.GetActiveToolName());
+	}
+	else if (CItemBank::GetInstance().GetItem(heldItem).IsSeed())
+	{
+		short seedID = CItemBank::GetInstance().GetItem(heldItem).GetSeedID();
+
+		m_onInteractAllowedCallback = [this, seedID] { this->m_farm->PlantSeed(seedID, this->GetInteractPosition()); };
+
+		PerformWorldInteraction(ETileInteraction::Plant, GetInteractPosition());
 	}
 }
 
@@ -153,6 +171,11 @@ sf::Vector2f CPlayer::GetInteractPosition() const
 	interactPosition = GetPosition() + GetFacingDirection() * 64.f;
 
 	return std::move(interactPosition);
+}
+
+std::function<void()> CPlayer::GetOnInteractAllowedCallback() const
+{
+	return m_onInteractAllowedCallback;
 }
 
 void CPlayer::DrainEnergy(float a_drainage)

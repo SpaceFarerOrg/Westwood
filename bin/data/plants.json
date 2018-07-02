@@ -2,10 +2,8 @@
   "plants": [
     {
       "name": "Potato",
-      "tilesheet": [ "graphics/plants/potato.png" ],
-      "days": 6,
-      "cost": 20,
-      "value": 70 
+      "row": 0,
+      "days": 6
     }
   ]
 }

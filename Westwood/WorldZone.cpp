@@ -86,17 +86,18 @@ sf::Vector2f CWorldZone::CheckForAllowedMove(const sf::Vector2f & a_targetPositi
 	return std::move(allowedPosition);
 }
 
-void CWorldZone::PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f & a_interactionPosition)
+bool CWorldZone::PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f & a_interactionPosition)
 {
 	for (CInteractableItem*& object : m_objects)
 	{
 		if (object->IsColliding(a_interactionPosition))
 		{
 			object->Interact(*m_player);
+			return false;
 		}
 	}
 
-	m_tileMap.PerformInteraction(a_interactionPosition, a_interaction);
+	return m_tileMap.PerformInteraction(a_interactionPosition, a_interaction);
 }
 
 void CWorldZone::SpawnItem(short a_itemID, short a_amount, const sf::Vector2f& a_position)

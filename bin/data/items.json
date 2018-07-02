@@ -43,7 +43,8 @@
       "name": "PotatoSeeds",
       "description": "Plant to grow potatoes",
       "indexInSheet": 6,
-      "sellable": false
+      "sellable": false,
+      "seedData": 0
     }
   ]
 }

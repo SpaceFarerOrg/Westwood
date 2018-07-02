@@ -69,7 +69,7 @@ sf::Vector2f CTileMap::CheckForAllowedMove(const sf::Vector2f & a_targetPosition
 	return std::move(allowedMove);
 }
 
-void CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformInteractionOn, ETileInteraction a_interaction)
+bool CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformInteractionOn, ETileInteraction a_interaction)
 {
 	short tileIndex = ConvertPositionToTileIndex(a_positionToPerformInteractionOn);
 
@@ -84,15 +84,27 @@ void CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformIntera
 			if (onDigTileToAdd != -1)
 			{
 				m_interactedTiles[tileIndex] = onDigTileToAdd;
+				return true;
 			}
 		}
 		else if (a_interaction == ETileInteraction::Water)
 		{
 			m_wateredTiles[tileIndex] = true;
+			return true;
+
 		}
 
 		RunItemSpawnForTileInteraction(a_interaction, m_groundTiles[tileIndex], tileIndex);
 	}
+	else if (a_interaction == ETileInteraction::Plant)
+	{
+		if (m_interactedTiles[tileIndex] == tileData.GetTileToAddOnInteraction(ETileInteraction::Dig))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool CTileMap::IsTileWalkable(const sf::Vector2f & a_position) const

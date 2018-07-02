@@ -15,6 +15,8 @@ CGameWorld::CGameWorld()
 	m_allAvatars.push_back(&m_player);
 
 	m_avatarCollection.AddPlayer(m_player);
+
+	m_player.BindFarm(m_farm);
 }
 
 void CGameWorld::Load(const char * a_worldPath)
@@ -52,6 +54,7 @@ void CGameWorld::Render()
 	m_worldZones[m_currentZone].Render();
 
 	m_calendar.RenderCalendar();
+	m_farm.Render();
 }
 
 void CGameWorld::ChangeZone(short a_newZone)
@@ -148,7 +151,10 @@ void CGameWorld::UpdateAllAvatars(float a_deltaTime)
 
 	if (m_player.HasPerformedWorldInteraction(interaction, interactionPosition))
 	{
-		m_worldZones[m_currentZone].PerformWorldInteraction(interaction, interactionPosition);
+		if (m_worldZones[m_currentZone].PerformWorldInteraction(interaction, interactionPosition))
+		{
+			m_player.GetOnInteractAllowedCallback()();
+		}
 	}
 	/*End interaction*/
 

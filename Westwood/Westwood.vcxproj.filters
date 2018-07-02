@@ -102,6 +102,13 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Plant.cpp">
+      <Filter>Game Systems\Farm</Filter>
+    </ClCompile>
+    <ClCompile Include="PlantBank.cpp" />
+    <ClCompile Include="Farm.cpp">
+      <Filter>Game Systems\Farm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />
@@ -228,6 +235,15 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Plant.h">
+      <Filter>Game Systems\Farm</Filter>
+    </ClInclude>
+    <ClInclude Include="Farm.h">
+      <Filter>Game Systems\Farm</Filter>
+    </ClInclude>
+    <ClInclude Include="PlantBank.h">
+      <Filter>Game Systems\Farm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
@@ -271,6 +287,9 @@
     </Filter>
     <Filter Include="Engine\Audio">
       <UniqueIdentifier>{a1894359-52d9-4a6f-af34-f71f22e5f879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Systems\Farm">
+      <UniqueIdentifier>{755a702a-0970-4389-8ff7-7577fbfcfac4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
