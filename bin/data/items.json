@@ -45,6 +45,13 @@
       "indexInSheet": 6,
       "sellable": false,
       "seedData": 0
+    },
+    {
+      "name": "FlowerSeeds",
+      "description": "Plant to grow Flowers",
+      "indexInSheet": 7,
+      "sellable": false,
+      "seedData": 1
     }
   ]
 }

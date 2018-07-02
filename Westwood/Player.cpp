@@ -82,6 +82,7 @@ void CPlayer::Update()
 	{
 		CAudioManager::GetInstance().PlaySoundAtPosition("Shovel", -CRenderer::GetInstance().GetCamera().getSize() / 2.f + input.GetMousePosFloat() + CRenderer::GetInstance().GetCamera().getCenter());
 		GetInventory().AddItemToInventory("PotatoSeeds", 5);
+		GetInventory().AddItemToInventory("FlowerSeeds", 5);
 	}
 }
 

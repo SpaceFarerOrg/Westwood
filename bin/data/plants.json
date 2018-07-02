@@ -4,6 +4,11 @@
       "name": "Potato",
       "row": 0,
       "days": 6
+    },
+    {
+      "name": "Flower",
+      "row": 1,
+      "days": 6
     }
   ]
 }
