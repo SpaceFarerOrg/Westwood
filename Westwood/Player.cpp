@@ -121,7 +121,7 @@ void CPlayer::DoInteraction()
 
 		if (m_currentZone->GetTileMap().PositionIsPlowed(GetInteractPosition()))
 		{
-			m_farm->PlantSeed(seedID, m_currentZone->GetTileMap().GetClosestTilePosition(GetInteractPosition()));
+			m_farm->PlantSeed(seedID, m_currentZone->GetTileMap().ConvertPositionToTileIndex(GetInteractPosition()));
 		}
 	}
 }

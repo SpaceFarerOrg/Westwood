@@ -20,7 +20,7 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 
 	m_groundTiles = new short[m_tileCount];
 	m_interactedTiles = new short[m_tileCount];
-	m_wateredTiles = new short[m_tileCount];
+	m_wateredTiles = new bool[m_tileCount];
 
 	//Todo: Make this scaleable with layers
 	for (unsigned int i = 0; i < m_tileCount; ++i)
@@ -28,7 +28,7 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 		m_groundTiles[i] = a_tileMapJson["layers"][0]["data"][i].get<short>() - 1; //-1 here is compensating for the fact that 0 in a tiled file is null object 
 
 		m_interactedTiles[i] = -1; //This must be loaded when loading a saved game but setting -1 for now
-		m_wateredTiles[i] = -1;
+		m_wateredTiles[i] = false;
 	}
 
 	m_texture = CTextureBank::GetTextureIndex(a_tileMapJson["tilesets"][0]["name"].get<std::string>().c_str()); //SCALE WITH LAYERS!!!
@@ -87,6 +87,11 @@ bool CTileMap::PositionIsPlowed(const sf::Vector2f & a_position)
 	}
 
 	return false;
+}
+
+bool CTileMap::IsTileWatered(short a_tileIndex)
+{
+	return m_wateredTiles[a_tileIndex];
 }
 
 void CTileMap::Dig(const sf::Vector2f & a_onPosition)
@@ -250,8 +255,8 @@ void CTileMap::RenderLayersOnTile(short a_indexInMap)
 	//m_tileset->DrawTileAtPosition(groundTileIndex, tilePosition);
 
 	sf::Color wetnessTint = sf::Color::White;
-	short wateredTileIndex = m_wateredTiles[a_indexInMap];
-	if (wateredTileIndex != -1)
+	bool wateredTileIndex = m_wateredTiles[a_indexInMap];
+	if (wateredTileIndex)
 	{
 		wetnessTint = sf::Color(150, 150, 150, 255);
 	}

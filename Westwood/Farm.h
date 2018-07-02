@@ -3,12 +3,16 @@
 #include "PlantBank.h"
 #include <SFML\System\Vector2.hpp>
 
+class CTileMap;
+
 class CFarm
 {
 public:
 	CFarm();
-	void PlantSeed(const char* a_plantName, const sf::Vector2f& a_onPosition);
-	void PlantSeed(short a_plantID, const sf::Vector2f& a_onPosition);
+	void PlantSeed(const char* a_plantName, short a_onTileIndex);
+	void PlantSeed(short a_plantID, short a_onTileIndex);
+
+	void BindFarmTileMap(CTileMap& a_tileMap);
 
 	void Render();
 private:
@@ -22,11 +26,13 @@ private:
 
 		short m_days;
 		short m_plantID;
-		sf::Vector2f m_position;
+		short m_tileIndex;
 	};
 
 	void TickDay();
 private:
 	std::vector<SPlantedPlant> m_plants;
 	CPlantBank m_plantBank;
+
+	CTileMap* m_tileMap;
 };

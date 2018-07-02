@@ -1,5 +1,6 @@
 #include "Farm.h"
 #include "GameEventMaster.h"
+#include "TileMap.h"
 
 CFarm::CFarm()
 {
@@ -7,19 +8,24 @@ CFarm::CFarm()
 	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeReachBlack, [this] {this->TickDay(); });
 }
 
-void CFarm::PlantSeed(const char * a_plantName, const sf::Vector2f& a_onPosition)
+void CFarm::PlantSeed(const char * a_plantName, short a_tileIndex)
 {
 	short plantID = m_plantBank.GetPlantID(a_plantName);
 
-	PlantSeed(plantID, a_onPosition);
+	PlantSeed(plantID, a_tileIndex);
 }
 
-void CFarm::PlantSeed(short a_plantID, const sf::Vector2f& a_onPosition)
+void CFarm::PlantSeed(short a_plantID, short a_tileIndex)
 {
 	m_plants.push_back(SPlantedPlant());
 
 	m_plants.back().m_plantID = a_plantID;
-	m_plants.back().m_position = a_onPosition;
+	m_plants.back().m_tileIndex = a_tileIndex;
+}
+
+void CFarm::BindFarmTileMap(CTileMap & a_tileMap)
+{
+	m_tileMap = &a_tileMap;
 }
 
 void CFarm::Render()
@@ -28,7 +34,7 @@ void CFarm::Render()
 	{
 		const CPlant& plant = m_plantBank.GetPlant(plantData.m_plantID);
 
-		plant.Render(plantData.m_position, plantData.m_days);
+		plant.Render(m_tileMap->GetTilePosition(plantData.m_tileIndex), plantData.m_days);
 	}
 }
 
@@ -36,6 +42,9 @@ void CFarm::TickDay()
 {
 	for (SPlantedPlant& plant : m_plants)
 	{
-		plant.m_days++;
+		if (m_tileMap->IsTileWatered(plant.m_tileIndex))
+		{
+			plant.m_days++;
+		}
 	}
 }

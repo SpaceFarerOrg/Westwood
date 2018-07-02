@@ -23,10 +23,12 @@ public:
 	bool IsTileWalkable(const sf::Vector2f& a_position) const;
 
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
-
+	sf::Vector2f GetTilePosition(short a_tileIndex) const;
 	sf::Vector2f GetClosestTilePosition(const sf::Vector2f& a_position);
+	short ConvertPositionToTileIndex(const sf::Vector2f& a_position, const sf::Vector2f& a_zoomFactor = { 1,1 }) const;
 
 	bool PositionIsPlowed(const sf::Vector2f& a_position);
+	bool IsTileWatered(short a_tileIndex);
 
 	void Dig(const sf::Vector2f& a_onPosition);
 	void Water(const sf::Vector2f& a_onPosition);
@@ -36,8 +38,6 @@ private:
 
 	void SetTile(short a_tileIndex, STileData a_newTile);
 	void RunItemSpawnForTileInteraction(ETileInteraction a_interaction, short a_tileIndexInTileSet, short a_tileIndexInMap);
-	short ConvertPositionToTileIndex(const sf::Vector2f& a_position, const sf::Vector2f& a_zoomFactor = { 1,1 }) const;
-	sf::Vector2f GetTilePosition(short a_tileIndex) const;
 
 private:
 	std::array<bool, 8> GetNeighbouringTiles(short a_tileIndex, short a_tileIndexInMap, short* a_layer);
@@ -55,7 +55,7 @@ private:
 	//Layers
 	short* m_groundTiles;
 	short* m_interactedTiles;
-	short* m_wateredTiles;
+	bool* m_wateredTiles;
 
 	short m_tileHeight;
 	short m_tileWidth;

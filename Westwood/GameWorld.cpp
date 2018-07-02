@@ -68,6 +68,7 @@ void CGameWorld::ChangeZone(short a_newZone)
 	RecalculateAvatarsInZone();
 
 	m_player.SetCurrentZone(m_worldZones[m_currentZone]);
+	m_farm.BindFarmTileMap(m_worldZones[m_currentZone].GetTileMap());
 }
 
 #include "InputManager.h"
