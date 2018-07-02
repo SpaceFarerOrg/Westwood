@@ -69,42 +69,47 @@ sf::Vector2f CTileMap::CheckForAllowedMove(const sf::Vector2f & a_targetPosition
 	return std::move(allowedMove);
 }
 
-bool CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformInteractionOn, ETileInteraction a_interaction)
+sf::Vector2f CTileMap::GetClosestTilePosition(const sf::Vector2f & a_position)
 {
-	short tileIndex = ConvertPositionToTileIndex(a_positionToPerformInteractionOn);
+	short tileIndex = ConvertPositionToTileIndex(a_position);
+	sf::Vector2f tilePos = GetTilePosition(tileIndex);
 
-	const STileData& tileData = m_tileset->GetTileData(m_groundTiles[tileIndex]);
+	return std::move(tilePos);
+}
 
-	if (tileData.IsInteractionAllowed(a_interaction))
+bool CTileMap::PositionIsPlowed(const sf::Vector2f & a_position)
+{
+	short tileIndex = ConvertPositionToTileIndex(a_position);
+
+	if (m_interactedTiles[tileIndex] != -1)
 	{
-		if (a_interaction == ETileInteraction::Dig)
-		{
-			short onDigTileToAdd = tileData.GetTileToAddOnInteraction(a_interaction);
-
-			if (onDigTileToAdd != -1)
-			{
-				m_interactedTiles[tileIndex] = onDigTileToAdd;
-				return true;
-			}
-		}
-		else if (a_interaction == ETileInteraction::Water)
-		{
-			m_wateredTiles[tileIndex] = true;
-			return true;
-
-		}
-
-		RunItemSpawnForTileInteraction(a_interaction, m_groundTiles[tileIndex], tileIndex);
-	}
-	else if (a_interaction == ETileInteraction::Plant)
-	{
-		if (m_interactedTiles[tileIndex] == tileData.GetTileToAddOnInteraction(ETileInteraction::Dig))
-		{
-			return true;
-		}
+		return true;
 	}
 
 	return false;
+}
+
+void CTileMap::Dig(const sf::Vector2f & a_onPosition)
+{
+	short tileIndex = ConvertPositionToTileIndex(a_onPosition);
+	const STileData& tileData = m_tileset->GetTileData(m_groundTiles[tileIndex]);
+
+	if (tileData.IsInteractionAllowed(ETileInteraction::Dig))
+	{
+		short onDigTileToAdd = tileData.GetTileToAddOnInteraction(ETileInteraction::Dig);
+
+		if (onDigTileToAdd != -1)
+		{
+			m_interactedTiles[tileIndex] = onDigTileToAdd;
+		}
+	}
+}
+
+void CTileMap::Water(const sf::Vector2f & a_onPosition)
+{
+	short tileIndex = ConvertPositionToTileIndex(a_onPosition);
+
+	m_wateredTiles[tileIndex] = true;
 }
 
 bool CTileMap::IsTileWalkable(const sf::Vector2f & a_position) const

@@ -3,8 +3,9 @@
 #include <vector>
 #include "TileMap.h"
 #include <json.hpp>
-#include "Player.h"
 #include "InteractableItem.h"
+
+class CPlayer;
 
 class CWorldZone
 {
@@ -14,14 +15,14 @@ public:
 	void LoadZone(nlohmann::json& a_zoneJson);
 	void Render();
 
-	void EnterZone(CPlayer& a_player);
+	void EnterZone();
 	void LeaveZone();
 
-	void CheckPlayerAgainstItems();
+	CTileMap& GetTileMap();
+
+	void CheckPlayerAgainstItems(CPlayer& a_player);
 
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
-
-	bool PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f& a_interactionPosition);
 
 	void SpawnItem(short a_itemID, short a_amount, const sf::Vector2f& a_position);
 private:
@@ -36,6 +37,4 @@ private:
 
 	sf::String m_zoneName;
 	CTileMap m_tileMap;
-
-	CPlayer* m_player;
 };

@@ -2,8 +2,9 @@
 #include "ItemBank.h"
 #include <fstream>
 #include "Math.h"
-
+#include "Player.h"
 #include "Bed.h"
+
 void CWorldZone::LoadZone(nlohmann::json & a_zoneJson)
 {
 	m_zoneName = a_zoneJson["name"].get<std::string>();
@@ -40,9 +41,9 @@ void CWorldZone::Render()
 	
 }
 
-void CWorldZone::EnterZone(CPlayer & a_player)
+void CWorldZone::EnterZone()
 {
-	m_player = &a_player;
+
 }
 
 void CWorldZone::LeaveZone()
@@ -50,7 +51,12 @@ void CWorldZone::LeaveZone()
 
 }
 
-void CWorldZone::CheckPlayerAgainstItems()
+CTileMap & CWorldZone::GetTileMap()
+{
+	return m_tileMap;
+}
+
+void CWorldZone::CheckPlayerAgainstItems(CPlayer& a_player)
 {
 	std::vector<size_t> removedItems;
 
@@ -58,9 +64,9 @@ void CWorldZone::CheckPlayerAgainstItems()
 	{
 		SItemInWorldData& item = m_items[i];
 		
-		if (Math::GetLenght2(item.m_position - m_player->GetPosition()) < 10.f * 10.f)
+		if (Math::GetLenght2(item.m_position - a_player.GetPosition()) < 10.f * 10.f)
 		{
-			CInventory& playerInventory = m_player->GetInventory();
+			CInventory& playerInventory = a_player.GetInventory();
 
 			if (playerInventory.IsFull())
 			{
@@ -84,20 +90,6 @@ sf::Vector2f CWorldZone::CheckForAllowedMove(const sf::Vector2f & a_targetPositi
 	sf::Vector2f allowedPosition = m_tileMap.CheckForAllowedMove(a_targetPosition, a_currentPosition);
 
 	return std::move(allowedPosition);
-}
-
-bool CWorldZone::PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f & a_interactionPosition)
-{
-	for (CInteractableItem*& object : m_objects)
-	{
-		if (object->IsColliding(a_interactionPosition))
-		{
-			object->Interact(*m_player);
-			return false;
-		}
-	}
-
-	return m_tileMap.PerformInteraction(a_interactionPosition, a_interaction);
 }
 
 void CWorldZone::SpawnItem(short a_itemID, short a_amount, const sf::Vector2f& a_position)

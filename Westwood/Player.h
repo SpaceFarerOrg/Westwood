@@ -8,6 +8,7 @@
 #include <functional>
 #include <array>
 #include "Farm.h"
+#include "WorldZone.h"
 
 class CPlayer : public CAvatar
 {
@@ -16,6 +17,7 @@ public:
 	void Init();
 	void Update();
 	void BindFarm(CFarm& a_farm);
+	void SetCurrentZone(CWorldZone& a_zone);
 
 	CInventory& GetInventory();
 	bool GetShouldSleep();
@@ -23,7 +25,6 @@ public:
 	void SetShouldSleep();
 
 	sf::Vector2f GetInteractPosition() const;
-	std::function<void()> GetOnInteractAllowedCallback() const;
 
 	void DrainEnergy(float a_drainage);
 
@@ -33,10 +34,10 @@ private:
 
 	void SelectInventorySlot();
 private:
-	std::function<void()> m_onInteractAllowedCallback;
-
 	CFarm* m_farm;
 
+	CWorldZone* m_currentZone;
+	
 	CStatusBar m_energyStatus;
 
 	CInventory m_inventory;

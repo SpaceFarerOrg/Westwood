@@ -39,12 +39,12 @@ const std::string & CToolBank::GetActiveToolName()
 	}
 }
 
-bool CToolBank::UseActiveTool(CPlayer & a_user)
+bool CToolBank::UseActiveTool(CPlayer & a_user, CWorldZone& a_zone)
 {
 	if (m_activeTool == -1)
 		return false;
 
-	m_rawTools[m_activeTool]->Use(a_user);
+	m_rawTools[m_activeTool]->Use(a_user, a_zone);
 	return true;
 }
 

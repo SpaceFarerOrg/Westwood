@@ -9,8 +9,8 @@ void CWaterCan::Init()
 	m_energyDrainage = 5.f;
 }
 
-void CWaterCan::Use(CPlayer& a_user)
+void CWaterCan::Use(CPlayer& a_user, CWorldZone& a_zone)
 {
-	ITool::Use(a_user);
-	a_user.PerformWorldInteraction(ETileInteraction::Water, a_user.GetInteractPosition());
+	ITool::Use(a_user, a_zone);
+	a_zone.GetTileMap().Water(a_user.GetInteractPosition());
 }

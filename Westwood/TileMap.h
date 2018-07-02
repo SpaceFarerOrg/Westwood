@@ -24,7 +24,12 @@ public:
 
 	sf::Vector2f CheckForAllowedMove(const sf::Vector2f& a_targetPosition, const sf::Vector2f& a_currentPosition) const;
 
-	bool PerformInteraction(const sf::Vector2f& a_positionToPerformInteractionOn, ETileInteraction a_interaction);
+	sf::Vector2f GetClosestTilePosition(const sf::Vector2f& a_position);
+
+	bool PositionIsPlowed(const sf::Vector2f& a_position);
+
+	void Dig(const sf::Vector2f& a_onPosition);
+	void Water(const sf::Vector2f& a_onPosition);
 private:
 
 	virtual void draw(sf::RenderTarget& a_target, sf::RenderStates a_states) const;

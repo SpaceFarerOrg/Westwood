@@ -90,6 +90,11 @@ void CPlayer::BindFarm(CFarm & a_farm)
 	m_farm = &a_farm;
 }
 
+void CPlayer::SetCurrentZone(CWorldZone & a_zone)
+{
+	m_currentZone = &a_zone;
+}
+
 void CPlayer::Faint()
 {
 	//Todo: Add meaningful faint logic here
@@ -100,10 +105,7 @@ void CPlayer::DoInteraction()
 {
 	short heldItem = m_inventory.GetActiveSlotItemID();
 
-	m_onInteractAllowedCallback = [] {};
-
-	PerformWorldInteraction(ETileInteraction::Use, GetInteractPosition());
-	if (m_toolBank.UseActiveTool(*this))
+	if (m_toolBank.UseActiveTool(*this, *m_currentZone))
 	{
 		CAudioManager::GetInstance().PlaySound(m_toolBank.GetActiveToolName());
 	}
@@ -111,9 +113,10 @@ void CPlayer::DoInteraction()
 	{
 		short seedID = CItemBank::GetInstance().GetItem(heldItem).GetSeedID();
 
-		m_onInteractAllowedCallback = [this, seedID] { this->m_farm->PlantSeed(seedID, this->GetInteractPosition()); };
-
-		PerformWorldInteraction(ETileInteraction::Plant, GetInteractPosition());
+		if (m_currentZone->GetTileMap().PositionIsPlowed(GetInteractPosition()))
+		{
+			m_farm->PlantSeed(seedID, m_currentZone->GetTileMap().GetClosestTilePosition(GetInteractPosition()));
+		}
 	}
 }
 
@@ -171,11 +174,6 @@ sf::Vector2f CPlayer::GetInteractPosition() const
 	interactPosition = GetPosition() + GetFacingDirection() * 64.f;
 
 	return std::move(interactPosition);
-}
-
-std::function<void()> CPlayer::GetOnInteractAllowedCallback() const
-{
-	return m_onInteractAllowedCallback;
 }
 
 void CPlayer::DrainEnergy(float a_drainage)

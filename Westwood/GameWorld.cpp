@@ -63,9 +63,11 @@ void CGameWorld::ChangeZone(short a_newZone)
 
 	m_currentZone = a_newZone;
 
-	m_worldZones[m_currentZone].EnterZone(m_player);
+	m_worldZones[m_currentZone].EnterZone();
 
 	RecalculateAvatarsInZone();
+
+	m_player.SetCurrentZone(m_worldZones[m_currentZone]);
 }
 
 #include "InputManager.h"
@@ -98,7 +100,7 @@ void CGameWorld::Update(float a_deltaTime)
 	m_calendar.Update(deltaTime);
 	UpdateAllAvatars(deltaTime);
 	m_avatarCollection.RenderAvatars();
-	m_worldZones[m_currentZone].CheckPlayerAgainstItems();
+	m_worldZones[m_currentZone].CheckPlayerAgainstItems(m_player);
 
 	if (m_player.GetShouldSleep())
 	{
@@ -144,21 +146,6 @@ void CGameWorld::UpdateAllAvatars(float a_deltaTime)
 
 
 	}
-
-	/*Interaction Logic*/
-	sf::Vector2f interactionPosition;
-	ETileInteraction interaction;
-
-	if (m_player.HasPerformedWorldInteraction(interaction, interactionPosition))
-	{
-		if (m_worldZones[m_currentZone].PerformWorldInteraction(interaction, interactionPosition))
-		{
-			m_player.GetOnInteractAllowedCallback()();
-		}
-	}
-	/*End interaction*/
-
-
 
 	//Todo: Update all Avatars in a different zone than the current one (will make NPCs seem more lively)
 

@@ -4,7 +4,6 @@
 
 CAvatar::CAvatar()
 {
-	m_lastInteraction = ETileInteraction::Count;
 	m_currentZone = 0;
 
 	//These are offsets from the sprite position
@@ -71,27 +70,6 @@ void CAvatar::AllowMove(const sf::Vector2f& a_allowedMove)
 const short CAvatar::GetCurrentZone() const
 {
 	return m_currentZone;
-}
-
-void CAvatar::PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f & a_atPosition)
-{
-	m_lastInteraction = a_interaction;
-	m_interactedPosition = a_atPosition;
-}
-
-bool CAvatar::HasPerformedWorldInteraction(ETileInteraction & a_outInteraction, sf::Vector2f & a_outAtPosition)
-{
-	if (m_lastInteraction != ETileInteraction::Count)
-	{
-		a_outInteraction = m_lastInteraction;
-		m_lastInteraction = ETileInteraction::Count;
-
-		a_outAtPosition = m_interactedPosition;
-
-		return true;
-	}
-
-	return false;
 }
 
 #include <SFML\Graphics\Sprite.hpp>
