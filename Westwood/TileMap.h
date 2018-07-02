@@ -33,11 +33,12 @@ public:
 	void Dig(const sf::Vector2f& a_onPosition);
 	void Water(const sf::Vector2f& a_onPosition);
 private:
-
 	virtual void draw(sf::RenderTarget& a_target, sf::RenderStates a_states) const;
 
 	void SetTile(short a_tileIndex, STileData a_newTile);
 	void RunItemSpawnForTileInteraction(ETileInteraction a_interaction, short a_tileIndexInTileSet, short a_tileIndexInMap);
+
+	void ResetWateredTiles();
 
 private:
 	std::array<bool, 8> GetNeighbouringTiles(short a_tileIndex, short a_tileIndexInMap, short* a_layer);

@@ -4,6 +4,7 @@
 #include "TilesetBank.h"
 #include "WorldZone.h"
 #include "Math.h"
+#include "GameEventMaster.h"
 
 void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 {
@@ -37,6 +38,8 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 
 	m_vertices.setPrimitiveType(sf::Quads);
 	m_vertices.resize(m_width * m_height * 4);
+
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeReachBlack, [this] { this->ResetWateredTiles(); });
 }
 
 void CTileMap::Save()
@@ -170,6 +173,14 @@ void CTileMap::RunItemSpawnForTileInteraction(ETileInteraction a_interaction, sh
 		}
 
 		m_ownerZone->SpawnItem(itemSpawnData.m_itemId, amountToSpawn, GetTilePosition(a_tileIndexInMap));
+	}
+}
+
+void CTileMap::ResetWateredTiles()
+{
+	for (size_t i = 0; i < m_tileCount; ++i)
+	{
+		m_wateredTiles[i] = false;
 	}
 }
 
