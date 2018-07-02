@@ -50,6 +50,7 @@ private:
 	//Layers
 	short* m_groundTiles;
 	short* m_interactedTiles;
+	short* m_wateredTiles;
 
 	short m_tileHeight;
 	short m_tileWidth;

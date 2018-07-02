@@ -29,8 +29,13 @@ void CSoundBank::LoadAllSounds(const char * a_soundDataPath)
 	}
 }
 
-const sf::SoundBuffer & CSoundBank::GetSoundBuffer(const std::string & aSoundName)
+const sf::SoundBuffer & CSoundBank::GetSoundBuffer(const std::string & a_SoundName)
 {
-	const std::vector<sf::SoundBuffer>& group = m_soundGroups[aSoundName].m_soundBuffers;
+	const std::vector<sf::SoundBuffer>& group = m_soundGroups[a_SoundName].m_soundBuffers;
 	return group[rand() % group.size()];
+}
+
+bool CSoundBank::SoundExists(const std::string& a_soundName)
+{
+	return m_soundGroups.find(a_soundName) != m_soundGroups.end();
 }

@@ -20,6 +20,7 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 
 	m_groundTiles = new short[m_tileCount];
 	m_interactedTiles = new short[m_tileCount];
+	m_wateredTiles = new short[m_tileCount];
 
 	//Todo: Make this scaleable with layers
 	for (unsigned int i = 0; i < m_tileCount; ++i)
@@ -27,6 +28,7 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 		m_groundTiles[i] = a_tileMapJson["layers"][0]["data"][i].get<short>() - 1; //-1 here is compensating for the fact that 0 in a tiled file is null object 
 
 		m_interactedTiles[i] = -1; //This must be loaded when loading a saved game but setting -1 for now
+		m_wateredTiles[i] = -1;
 	}
 
 	m_texture = CTextureBank::GetTextureIndex(a_tileMapJson["tilesets"][0]["name"].get<std::string>().c_str()); //SCALE WITH LAYERS!!!
@@ -83,6 +85,10 @@ void CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformIntera
 			{
 				m_interactedTiles[tileIndex] = onDigTileToAdd;
 			}
+		}
+		else if (a_interaction == ETileInteraction::Water)
+		{
+			m_wateredTiles[tileIndex] = true;
 		}
 
 		RunItemSpawnForTileInteraction(a_interaction, m_groundTiles[tileIndex], tileIndex);
@@ -226,6 +232,13 @@ void CTileMap::RenderLayersOnTile(short a_indexInMap)
 
 	//m_tileset->DrawTileAtPosition(groundTileIndex, tilePosition);
 
+	sf::Color wetnessTint = sf::Color::White;
+	short wateredTileIndex = m_wateredTiles[a_indexInMap];
+	if (wateredTileIndex != -1)
+	{
+		wetnessTint = sf::Color::Blue;
+	}
+
 	short interactedTileIndex = m_interactedTiles[a_indexInMap];
 	if (interactedTileIndex != -1) //Do not render anything if no interaction was made to the tile
 	{
@@ -234,7 +247,8 @@ void CTileMap::RenderLayersOnTile(short a_indexInMap)
 			interactedTileIndex = m_tileset->CalculateAdaptiveTile(interactedTileIndex, GetNeighbouringTiles(interactedTileIndex, a_indexInMap, m_interactedTiles));
 		}
 		
-		m_tileset->DrawTileAtPosition(interactedTileIndex, tilePosition);
+		m_tileset->DrawTileAtPosition(interactedTileIndex, tilePosition, wetnessTint);
 	}
+
 }
 

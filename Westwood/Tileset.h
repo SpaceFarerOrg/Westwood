@@ -5,6 +5,7 @@
 #include <SFML\System\Vector2.hpp>
 #include <SFML\System\String.hpp>
 #include <array>
+#include <SFML/Graphics/Color.hpp>
 
 class CTileset
 {
@@ -18,7 +19,7 @@ public:
 
 	short CalculateAdaptiveTile(short a_tileIndex, const std::array<bool, 8>& a_neighbours);
 
-	void DrawTileAtPosition(short a_tileIndex, const sf::Vector2f& a_position);
+	void DrawTileAtPosition(short a_tileIndex, const sf::Vector2f& a_position, const sf::Color& a_colorTint = sf::Color::White);
 
 	short GetTexture();
 

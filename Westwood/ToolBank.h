@@ -18,7 +18,7 @@ public:
 	void SetRelevantToolAsActive(short a_currentActiveItemID);
 	const std::string& GetActiveToolName();
 
-	void UseActiveTool(CPlayer& a_user);
+	bool UseActiveTool(CPlayer& a_user);
 private:
 	void AddToolAsRawTool(ITool& a_tool, EToolType a_toolType);
 	std::array<ITool*, static_cast<size_t>(EToolType::Count)> m_rawTools;

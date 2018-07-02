@@ -9,7 +9,8 @@ public:
 	CSoundBank();
 
 	void LoadAllSounds(const char*  a_soundDataPath);
-	const sf::SoundBuffer& GetSoundBuffer(const std::string& aSoundName);
+	const sf::SoundBuffer& GetSoundBuffer(const std::string& a_SoundName);
+	bool SoundExists(const std::string& a_soundName);
 
 private:
 

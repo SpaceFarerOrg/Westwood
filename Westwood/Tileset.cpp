@@ -105,13 +105,14 @@ short CTileset::CalculateAdaptiveTile(short a_tileIndex, const std::array<bool, 
 	return tileIndex;
 }
 
-void CTileset::DrawTileAtPosition(short a_tileIndex, const sf::Vector2f & a_position)
+void CTileset::DrawTileAtPosition(short a_tileIndex, const sf::Vector2f & a_position, const sf::Color& a_colorTint)
 {
 	sf::Sprite tileRenderCommand;
 	tileRenderCommand.setTexture(CTextureBank::GetUnorderedTexture(m_texture));
 
 	tileRenderCommand.setTextureRect(m_tiles[a_tileIndex].m_textureRect);
 	tileRenderCommand.setPosition(a_position);
+	tileRenderCommand.setColor(a_colorTint);
 
 	CRenderer::GetInstance().PushRenderCommand(tileRenderCommand);
 }
@@ -155,6 +156,7 @@ void CTileset::LoadTileData(short a_tileIndex, nlohmann::json & a_tileInJson)
 	if (a_tileInJson.find("plowable") != a_tileInJson.end())
 	{
 		m_tiles[a_tileIndex].SetInteractionAllowance(ETileInteraction::Dig, true);
+		m_tiles[a_tileIndex].SetInteractionAllowance(ETileInteraction::Water, true);
 	}
 	if (a_tileInJson.find("adaptive") != a_tileInJson.end())
 	{

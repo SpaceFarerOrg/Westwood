@@ -13,8 +13,8 @@ public:
 	void Load();
 	void SetListenerPosition(const sf::Vector2f& a_position);
 
-	void PlaySound(const char* a_soundName);
-	void PlaySoundAtPosition(const char* a_soundName, const sf::Vector2f& a_position);
+	void PlaySound(const std::string& a_soundName);
+	void PlaySoundAtPosition(const std::string& a_soundName, const sf::Vector2f& a_position);
 
 private:
 	~CAudioManager();

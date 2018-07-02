@@ -17,6 +17,8 @@ void CPlayer::Init()
 	m_inventory.SetIsOwnedByPlayer();
 	m_shouldSleep = false;
 
+	m_inventory.TrySetActiveSlot(0);
+
 	m_energyStatus.Init(100.f, 32.f, 128.f, CStatusBar::EType::vertical);
 	m_energyStatus.BindCallbackToOnEmpty([this] { this->Faint(); });
 
@@ -90,9 +92,10 @@ void CPlayer::Faint()
 void CPlayer::DoInteraction()
 {
 	PerformWorldInteraction(ETileInteraction::Use, GetInteractPosition());
-	m_toolBank.UseActiveTool(*this);
-	
-	CAudioManager::GetInstance().PlaySound(m_toolBank.GetActiveToolName().c_str());
+	if (m_toolBank.UseActiveTool(*this))
+	{
+		CAudioManager::GetInstance().PlaySound(m_toolBank.GetActiveToolName());
+	}
 }
 
 void CPlayer::SelectInventorySlot()

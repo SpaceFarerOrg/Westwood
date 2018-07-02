@@ -29,15 +29,23 @@ void CToolBank::SetRelevantToolAsActive(short a_currentActiveItemID)
 
 const std::string & CToolBank::GetActiveToolName()
 {
-	return m_rawTools[m_activeTool]->GetItemName();
+	if (m_activeTool > 0 && m_activeTool < m_rawTools.size())
+	{
+		return m_rawTools[m_activeTool]->GetItemName();
+	}
+	else
+	{
+		return "";
+	}
 }
 
-void CToolBank::UseActiveTool(CPlayer & a_user)
+bool CToolBank::UseActiveTool(CPlayer & a_user)
 {
 	if (m_activeTool == -1)
-		return;
+		return false;
 
 	m_rawTools[m_activeTool]->Use(a_user);
+	return true;
 }
 
 void CToolBank::AddToolAsRawTool(ITool & a_tool, EToolType a_toolType)

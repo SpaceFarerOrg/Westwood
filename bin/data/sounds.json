@@ -2,9 +2,7 @@
   "sounds": [
     {
       "name": "WaterCan",
-      "paths": [
-        "sounds/waterCan.wav" 
-      ]
+      "paths": [ "sounds/waterCan.wav" ]
     },
     {
       "name": "Axe",
