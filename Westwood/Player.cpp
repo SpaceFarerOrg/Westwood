@@ -122,6 +122,7 @@ void CPlayer::DoInteraction()
 		if (m_currentZone->GetTileMap().PositionIsPlowed(GetInteractPosition()))
 		{
 			m_farm->PlantSeed(seedID, m_currentZone->GetTileMap().ConvertPositionToTileIndex(GetInteractPosition()));
+			m_inventory.AddItemToInventory(heldItem, -1);
 		}
 	}
 }
