@@ -45,12 +45,12 @@ void CTileMap::Save()
 
 void CTileMap::Render()
 {
+	CRenderer::GetInstance().RenderTileMap(*this);
+
 	for (unsigned int indexInMap = 0; indexInMap < m_tileCount; ++indexInMap)
 	{
 		RenderLayersOnTile(indexInMap);
 	}
-
-	CRenderer::GetInstance().RenderTileMap(*this);
 }
 
 sf::Vector2f CTileMap::CheckForAllowedMove(const sf::Vector2f & a_targetPosition, const sf::Vector2f& a_currentPosition) const
@@ -236,7 +236,7 @@ void CTileMap::RenderLayersOnTile(short a_indexInMap)
 	short wateredTileIndex = m_wateredTiles[a_indexInMap];
 	if (wateredTileIndex != -1)
 	{
-		wetnessTint = sf::Color::Blue;
+		wetnessTint = sf::Color(150, 150, 150, 255);
 	}
 
 	short interactedTileIndex = m_interactedTiles[a_indexInMap];

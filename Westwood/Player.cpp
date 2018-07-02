@@ -61,7 +61,7 @@ void CPlayer::Update()
 #ifdef _DEBUG
 	if (input.IsKeyPressed(EKeyCode::F8))
 	{
-		m_shouldSleep = true;
+		SetShouldSleep();
 	}
 #endif
 
@@ -80,6 +80,7 @@ void CPlayer::Update()
 	if (input.IsKeyPressed(EKeyCode::MouseLeft))
 	{
 		CAudioManager::GetInstance().PlaySoundAtPosition("Shovel", -CRenderer::GetInstance().GetCamera().getSize() / 2.f + input.GetMousePosFloat() + CRenderer::GetInstance().GetCamera().getCenter());
+		GetInventory().AddItemToInventory("PotatoSeeds", 5);
 	}
 }
 
