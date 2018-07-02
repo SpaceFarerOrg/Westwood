@@ -1,12 +1,13 @@
 #pragma once
 
 class CPlayer;
+class CWorldZone;
 
 class IUseable
 {
 public:
 	virtual void Init() = 0;
-	virtual void Use(CPlayer& a_user) = 0;
+	virtual void Use(CPlayer& a_user, CWorldZone& a_zone) = 0;
 
 	short GetItemID() const
 	{

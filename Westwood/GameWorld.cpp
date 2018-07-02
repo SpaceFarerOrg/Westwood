@@ -15,6 +15,8 @@ CGameWorld::CGameWorld()
 	m_allAvatars.push_back(&m_player);
 
 	m_avatarCollection.AddPlayer(m_player);
+
+	m_player.BindFarm(m_farm);
 }
 
 void CGameWorld::Load(const char * a_worldPath)
@@ -52,6 +54,7 @@ void CGameWorld::Render()
 	m_worldZones[m_currentZone].Render();
 
 	m_calendar.RenderCalendar();
+	m_farm.Render();
 }
 
 void CGameWorld::ChangeZone(short a_newZone)
@@ -60,9 +63,12 @@ void CGameWorld::ChangeZone(short a_newZone)
 
 	m_currentZone = a_newZone;
 
-	m_worldZones[m_currentZone].EnterZone(m_player);
+	m_worldZones[m_currentZone].EnterZone();
 
 	RecalculateAvatarsInZone();
+
+	m_player.SetCurrentZone(m_worldZones[m_currentZone]);
+	m_farm.BindFarmTileMap(m_worldZones[m_currentZone].GetTileMap());
 }
 
 #include "InputManager.h"
@@ -95,7 +101,7 @@ void CGameWorld::Update(float a_deltaTime)
 	m_calendar.Update(deltaTime);
 	UpdateAllAvatars(deltaTime);
 	m_avatarCollection.RenderAvatars();
-	m_worldZones[m_currentZone].CheckPlayerAgainstItems();
+	m_worldZones[m_currentZone].CheckPlayerAgainstItems(m_player);
 
 	if (m_player.GetShouldSleep())
 	{
@@ -141,18 +147,6 @@ void CGameWorld::UpdateAllAvatars(float a_deltaTime)
 
 
 	}
-
-	/*Interaction Logic*/
-	sf::Vector2f interactionPosition;
-	ETileInteraction interaction;
-
-	if (m_player.HasPerformedWorldInteraction(interaction, interactionPosition))
-	{
-		m_worldZones[m_currentZone].PerformWorldInteraction(interaction, interactionPosition);
-	}
-	/*End interaction*/
-
-
 
 	//Todo: Update all Avatars in a different zone than the current one (will make NPCs seem more lively)
 

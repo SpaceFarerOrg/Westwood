@@ -22,9 +22,6 @@ public:
 	
 	void AllowMove(const sf::Vector2f& a_allowedMove);
 
-	void PerformWorldInteraction(ETileInteraction a_interaction, const sf::Vector2f& a_atPosition);
-	bool HasPerformedWorldInteraction(ETileInteraction& a_outInteraction, sf::Vector2f& a_outAtPosition);
-
 	const sf::Vector2f& GetFacingDirection() const;
 	void Draw();
 private:
@@ -34,7 +31,6 @@ private:
 	sf::Vector2f m_currentDirection;
 	sf::Vector2f m_facingDirection;
 
-	ETileInteraction m_lastInteraction;
 	sf::Vector2f m_interactedPosition;
 
 	std::array<sf::Vector2f, 4> m_collisionPoints;

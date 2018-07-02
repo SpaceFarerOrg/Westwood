@@ -4,6 +4,7 @@
 #include "GameCalendar.h"
 #include "AvatarCollection.h"
 #include "Player.h"
+#include "Farm.h"
 
 class CAvatar;
 
@@ -24,6 +25,7 @@ private:
 	CGameCalendar m_calendar;
 	CAvatarCollection m_avatarCollection;
 	CPlayer m_player;
+	CFarm m_farm;
 
 	void UpdateAllAvatars(float a_deltaTime);
 	

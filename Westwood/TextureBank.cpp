@@ -15,6 +15,7 @@ void CTextureBank::LoadAllTextures()
 	LoadTexture(ETextures::PlayerCharacter, "debugPlayerSprite");
 	LoadTexture(ETextures::Items, "items");
 	LoadTexture(ETextures::Objects, "objects");
+	LoadTexture(ETextures::Plants, "plants");
 }
 
 void CTextureBank::LoadAllFonts()

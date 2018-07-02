@@ -4,6 +4,7 @@
 #include "GameEventMaster.h"
 #include "SoundBank.h"
 #include "AudioManager.h"
+#include "ItemBank.h"
 
 CPlayer::CPlayer()
 {
@@ -52,7 +53,7 @@ void CPlayer::Update()
 	{
 		DoInteraction();
 	}
-	
+
 	if (input.IsKeyPressed(EKeyCode::I))
 	{
 		m_inventory.ToggleInventory();
@@ -70,7 +71,7 @@ void CPlayer::Update()
 	CRenderer::GetInstance().SetCameraTarget(GetPosition());
 
 	m_inventory.RenderInventory();
-	
+
 	sf::Vector2f positionToRenderInventory;
 	positionToRenderInventory.x = CRenderer::GetInstance().GetWindowDimensions().x - m_energyStatus.GetSize().x * 1.5f;
 	positionToRenderInventory.y = CRenderer::GetInstance().GetWindowDimensions().y - m_energyStatus.GetSize().y * 1.5f;
@@ -81,7 +82,18 @@ void CPlayer::Update()
 	{
 		CAudioManager::GetInstance().PlaySoundAtPosition("Shovel", -CRenderer::GetInstance().GetCamera().getSize() / 2.f + input.GetMousePosFloat() + CRenderer::GetInstance().GetCamera().getCenter());
 		GetInventory().AddItemToInventory("PotatoSeeds", 5);
+		GetInventory().AddItemToInventory("FlowerSeeds", 5);
 	}
+}
+
+void CPlayer::BindFarm(CFarm & a_farm)
+{
+	m_farm = &a_farm;
+}
+
+void CPlayer::SetCurrentZone(CWorldZone & a_zone)
+{
+	m_currentZone = &a_zone;
 }
 
 void CPlayer::Faint()
@@ -92,10 +104,27 @@ void CPlayer::Faint()
 
 void CPlayer::DoInteraction()
 {
-	PerformWorldInteraction(ETileInteraction::Use, GetInteractPosition());
-	if (m_toolBank.UseActiveTool(*this))
+	short heldItem = m_inventory.GetActiveSlotItemID();
+
+	CInteractableItem* interactableObject = m_currentZone->GetTargetedObject(GetInteractPosition());
+	
+	if (interactableObject != nullptr)
+	{
+		interactableObject->Interact(*this);
+	}
+	else if (m_toolBank.UseActiveTool(*this, *m_currentZone))
 	{
 		CAudioManager::GetInstance().PlaySound(m_toolBank.GetActiveToolName());
+	}
+	else if (CItemBank::GetInstance().GetItem(heldItem).IsSeed())
+	{
+		short seedID = CItemBank::GetInstance().GetItem(heldItem).GetSeedID();
+
+		if (m_currentZone->GetTileMap().PositionIsPlowed(GetInteractPosition()))
+		{
+			m_farm->PlantSeed(seedID, m_currentZone->GetTileMap().ConvertPositionToTileIndex(GetInteractPosition()));
+			m_inventory.AddItemToInventory(heldItem, -1);
+		}
 	}
 }
 

@@ -8,7 +8,7 @@ void CAxe::Init()
 	m_name = "Axe";
 }
 
-void CAxe::Use(CPlayer& a_user)
+void CAxe::Use(CPlayer& a_user, CWorldZone& a_zone)
 {
-	ITool::Use(a_user);
+	ITool::Use(a_user, a_zone);
 }

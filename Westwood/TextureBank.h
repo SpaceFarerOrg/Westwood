@@ -14,6 +14,7 @@ enum class ETextures
 	PlayerCharacter,
 	Items,
 	Objects,
+	Plants,
 	Count,
 };
 

@@ -9,9 +9,9 @@ void CShovel::Init()
 	m_name = "Shovel";
 }
 
-void CShovel::Use(CPlayer & a_user)
+void CShovel::Use(CPlayer & a_user, CWorldZone& a_zone)
 {
-	ITool::Use(a_user);
-	a_user.PerformWorldInteraction(ETileInteraction::Dig, a_user.GetInteractPosition());
+	ITool::Use(a_user, a_zone);
+	a_zone.GetTileMap().Dig(a_user.GetInteractPosition());
 }
 

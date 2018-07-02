@@ -2,6 +2,8 @@
 #include "Useable.h"
 #include <string>
 
+class CWorldZone;
+
 enum class EToolType
 {
 	Axe,
@@ -15,7 +17,7 @@ enum class EToolType
 class ITool : public IUseable
 {
 public:
-	virtual void Use(CPlayer& a_user) override;
+	virtual void Use(CPlayer& a_user, CWorldZone& a_zone) override;
 	const std::string& GetItemName();
 protected:
 	float m_energyDrainage;

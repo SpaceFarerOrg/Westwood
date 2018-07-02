@@ -4,6 +4,7 @@
 #include "TilesetBank.h"
 #include "WorldZone.h"
 #include "Math.h"
+#include "GameEventMaster.h"
 #include "CommonUtilities.h"
 
 void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
@@ -21,7 +22,7 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 
 	m_groundTiles = new short[m_tileCount];
 	m_interactedTiles = new short[m_tileCount];
-	m_wateredTiles = new short[m_tileCount];
+	m_wateredTiles = new bool[m_tileCount];
 
 	//Todo: Make this scaleable with layers
 	for (unsigned int i = 0; i < m_tileCount; ++i)
@@ -29,7 +30,7 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 		m_groundTiles[i] = a_tileMapJson["layers"][0]["data"][i].get<short>() - 1; //-1 here is compensating for the fact that 0 in a tiled file is null object 
 
 		m_interactedTiles[i] = -1; //This must be loaded when loading a saved game but setting -1 for now
-		m_wateredTiles[i] = -1;
+		m_wateredTiles[i] = false;
 	}
 
 	std::string tilesetSource = a_tileMapJson["tilesets"][0]["source"].get<std::string>();
@@ -41,6 +42,8 @@ void CTileMap::Load(nlohmann::json & a_tileMapJson, CWorldZone& a_zoneToBindTo)
 
 	m_vertices.setPrimitiveType(sf::Quads);
 	m_vertices.resize(m_width * m_height * 4);
+
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeReachBlack, [this] { this->ResetWateredTiles(); });
 }
 
 void CTileMap::Save()
@@ -73,30 +76,52 @@ sf::Vector2f CTileMap::CheckForAllowedMove(const sf::Vector2f & a_targetPosition
 	return std::move(allowedMove);
 }
 
-void CTileMap::PerformInteraction(const sf::Vector2f & a_positionToPerformInteractionOn, ETileInteraction a_interaction)
+sf::Vector2f CTileMap::GetClosestTilePosition(const sf::Vector2f & a_position)
 {
-	short tileIndex = ConvertPositionToTileIndex(a_positionToPerformInteractionOn);
+	short tileIndex = ConvertPositionToTileIndex(a_position);
+	sf::Vector2f tilePos = GetTilePosition(tileIndex);
 
+	return std::move(tilePos);
+}
+
+bool CTileMap::PositionIsPlowed(const sf::Vector2f & a_position)
+{
+	short tileIndex = ConvertPositionToTileIndex(a_position);
+
+	if (m_interactedTiles[tileIndex] != -1)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool CTileMap::IsTileWatered(short a_tileIndex)
+{
+	return m_wateredTiles[a_tileIndex];
+}
+
+void CTileMap::Dig(const sf::Vector2f & a_onPosition)
+{
+	short tileIndex = ConvertPositionToTileIndex(a_onPosition);
 	const STileData& tileData = m_tileset->GetTileData(m_groundTiles[tileIndex]);
 
-	if (tileData.IsInteractionAllowed(a_interaction))
+	if (tileData.IsInteractionAllowed(ETileInteraction::Dig))
 	{
-		if (a_interaction == ETileInteraction::Dig)
-		{
-			short onDigTileToAdd = tileData.GetTileToAddOnInteraction(a_interaction);
+		short onDigTileToAdd = tileData.GetTileToAddOnInteraction(ETileInteraction::Dig);
 
-			if (onDigTileToAdd != -1)
-			{
-				m_interactedTiles[tileIndex] = onDigTileToAdd;
-			}
-		}
-		else if (a_interaction == ETileInteraction::Water)
+		if (onDigTileToAdd != -1)
 		{
-			m_wateredTiles[tileIndex] = true;
+			m_interactedTiles[tileIndex] = onDigTileToAdd;
 		}
-
-		RunItemSpawnForTileInteraction(a_interaction, m_groundTiles[tileIndex], tileIndex);
 	}
+}
+
+void CTileMap::Water(const sf::Vector2f & a_onPosition)
+{
+	short tileIndex = ConvertPositionToTileIndex(a_onPosition);
+
+	m_wateredTiles[tileIndex] = true;
 }
 
 bool CTileMap::IsTileWalkable(const sf::Vector2f & a_position) const
@@ -152,6 +177,14 @@ void CTileMap::RunItemSpawnForTileInteraction(ETileInteraction a_interaction, sh
 		}
 
 		m_ownerZone->SpawnItem(itemSpawnData.m_itemId, amountToSpawn, GetTilePosition(a_tileIndexInMap));
+	}
+}
+
+void CTileMap::ResetWateredTiles()
+{
+	for (size_t i = 0; i < m_tileCount; ++i)
+	{
+		m_wateredTiles[i] = false;
 	}
 }
 
@@ -237,8 +270,8 @@ void CTileMap::RenderLayersOnTile(short a_indexInMap)
 	//m_tileset->DrawTileAtPosition(groundTileIndex, tilePosition);
 
 	sf::Color wetnessTint = sf::Color::White;
-	short wateredTileIndex = m_wateredTiles[a_indexInMap];
-	if (wateredTileIndex != -1)
+	bool wateredTileIndex = m_wateredTiles[a_indexInMap];
+	if (wateredTileIndex)
 	{
 		wetnessTint = sf::Color(150, 150, 150, 255);
 	}

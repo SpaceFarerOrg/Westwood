@@ -8,7 +8,7 @@ void CPickaxe::Init()
 	m_name = "Pickaxe";
 }
 
-void CPickaxe::Use(CPlayer& a_user)
+void CPickaxe::Use(CPlayer& a_user, CWorldZone& a_zone)
 {
-	ITool::Use(a_user);
+	ITool::Use(a_user, a_zone);
 }

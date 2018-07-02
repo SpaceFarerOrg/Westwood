@@ -59,6 +59,11 @@ void CInventory::AddItemToInventory(short a_itemId, short a_amount)
 	{
 		//Adds to current stack
 		m_slots[slotIndexIfExisting].m_itemCount += a_amount;
+
+		if (m_slots[slotIndexIfExisting].m_itemCount == 0)
+		{
+			m_slots[slotIndexIfExisting].m_itemId = 0;
+		}
 	}
 	else if(!IsFull()) //Does not assume I will remember to do full checks each time
 	{

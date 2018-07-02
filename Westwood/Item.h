@@ -13,6 +13,8 @@ public:
 	const sf::String& GetName() const { return m_name; };
 	const sf::String& GetDescription() const { return m_description; };
 	const sf::IntRect& GetRenderRect() const;
+	const bool IsSeed() const;
+	const short GetSeedID() const;
 
 	virtual void Use(CAvatar& a_user) {};
 private:
@@ -20,4 +22,7 @@ private:
 	sf::IntRect m_renderRect;
 	sf::String m_name;
 	sf::String m_description;
+
+	bool m_isSeed;
+	short m_seedIndex;
 };

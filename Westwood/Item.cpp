@@ -8,6 +8,8 @@ CItem::CItem()
 {
 	m_name = "";
 	m_description = "";
+	m_isSeed = false;
+	m_seedIndex = -1;
 }
 
 void CItem::LoadItem(nlohmann::json& a_itemJson)
@@ -25,10 +27,26 @@ void CItem::LoadItem(nlohmann::json& a_itemJson)
 	m_renderRect.width = itemsSpriteSize;
 	m_renderRect.height = itemsSpriteSize;
 
+	if (a_itemJson.find("seedData") != a_itemJson.end())
+	{
+		m_isSeed = true;
+		m_seedIndex = a_itemJson["seedData"].get<short>();
+	}
+
 	//Todo: Load all item parameters here
 }
 
 const sf::IntRect & CItem::GetRenderRect() const
 {
 	return m_renderRect;
+}
+
+const bool CItem::IsSeed() const
+{
+	return m_isSeed;
+}
+
+const short CItem::GetSeedID() const
+{
+	return m_seedIndex;
 }
