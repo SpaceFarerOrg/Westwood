@@ -56,6 +56,8 @@ void CGame::Update()
 	m_gameWorld.Update(deltaTime);
 	m_fader.Update(deltaTime);
 
+	CAudioManager::GetInstance().SetListenerPosition(CRenderer::GetInstance().GetCamera().getCenter());
+
 	CRenderer::GetInstance().Clear();
 	m_gameWorld.Render();
 	m_worldEditor.Render();

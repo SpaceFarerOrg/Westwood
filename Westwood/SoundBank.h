@@ -13,6 +13,11 @@ public:
 
 private:
 
-	std::unordered_map<std::string, sf::SoundBuffer> m_soundBuffers;
+	struct SSoundBufferGroup
+	{
+		std::vector<sf::SoundBuffer> m_soundBuffers;
+	};
+
+	std::unordered_map<std::string, SSoundBufferGroup> m_soundGroups;
 };
 

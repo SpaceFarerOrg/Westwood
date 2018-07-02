@@ -74,6 +74,11 @@ void CPlayer::Update()
 	positionToRenderInventory.y = CRenderer::GetInstance().GetWindowDimensions().y - m_energyStatus.GetSize().y * 1.5f;
 
 	m_energyStatus.Render(positionToRenderInventory);
+
+	if (input.IsKeyPressed(EKeyCode::MouseLeft))
+	{
+		CAudioManager::GetInstance().PlaySoundAtPosition("Shovel", -CRenderer::GetInstance().GetCamera().getSize() / 2.f + input.GetMousePosFloat() + CRenderer::GetInstance().GetCamera().getCenter());
+	}
 }
 
 void CPlayer::Faint()

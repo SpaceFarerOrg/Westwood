@@ -2,19 +2,24 @@
   "sounds": [
     {
       "name": "WaterCan",
-      "path": "sounds/waterCan.wav"
+      "paths": [
+        "sounds/waterCan.wav" 
+      ]
     },
     {
       "name": "Axe",
-      "path": "sounds/waterCan.wav"
+      "paths": [ "sounds/waterCan.wav" ]
     },
     {
       "name": "Pickaxe",
-      "path": "sounds/waterCan.wav"
+      "paths": [ "sounds/waterCan.wav" ]
     },
     {
       "name": "Shovel",
-      "path": "sounds/shovel.wav"
+      "paths": [
+        "sounds/shovel1.wav",
+        "sounds/shovel2.wav"
+      ]
     }
   ]
 }
