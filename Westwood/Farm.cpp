@@ -28,6 +28,21 @@ void CFarm::BindFarmTileMap(CTileMap & a_tileMap)
 	m_tileMap = &a_tileMap;
 }
 
+bool CFarm::TileContainsSeed(short a_tileIndex)
+{
+	bool foundSeed = false;
+
+	for (SPlantedPlant& plant : m_plants)
+	{
+		if (plant.m_tileIndex == a_tileIndex)
+		{
+			foundSeed = true;
+		}
+	}
+
+	return foundSeed;
+}
+
 void CFarm::Render()
 {
 	for (SPlantedPlant& plantData : m_plants)

@@ -120,9 +120,11 @@ void CPlayer::DoInteraction()
 	{
 		short seedID = CItemBank::GetInstance().GetItem(heldItem).GetSeedID();
 
-		if (m_currentZone->GetTileMap().PositionIsPlowed(GetInteractPosition()))
+		short tileIndex = m_currentZone->GetTileMap().ConvertPositionToTileIndex(GetInteractPosition());
+
+		if (m_currentZone->GetTileMap().TileIsPlowed(tileIndex) && m_farm->TileContainsSeed(tileIndex) == false)
 		{
-			m_farm->PlantSeed(seedID, m_currentZone->GetTileMap().ConvertPositionToTileIndex(GetInteractPosition()));
+			m_farm->PlantSeed(seedID, tileIndex);
 			m_inventory.AddItemToInventory(heldItem, -1);
 		}
 	}
@@ -188,4 +190,5 @@ void CPlayer::DrainEnergy(float a_drainage)
 {
 	m_energyStatus.AddToValue(a_drainage * -1.f);
 }
+
 

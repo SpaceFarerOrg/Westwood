@@ -28,6 +28,7 @@ public:
 	short ConvertPositionToTileIndex(const sf::Vector2f& a_position, const sf::Vector2f& a_zoomFactor = { 1,1 }) const;
 
 	bool PositionIsPlowed(const sf::Vector2f& a_position);
+	bool TileIsPlowed(short a_tileIndex);
 	bool IsTileWatered(short a_tileIndex);
 
 	void Dig(const sf::Vector2f& a_onPosition);

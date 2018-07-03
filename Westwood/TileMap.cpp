@@ -88,7 +88,12 @@ bool CTileMap::PositionIsPlowed(const sf::Vector2f & a_position)
 {
 	short tileIndex = ConvertPositionToTileIndex(a_position);
 
-	if (m_interactedTiles[tileIndex] != -1)
+	return TileIsPlowed(tileIndex);
+}
+
+bool CTileMap::TileIsPlowed(short a_tileIndex)
+{
+	if (m_interactedTiles[a_tileIndex] != -1)
 	{
 		return true;
 	}

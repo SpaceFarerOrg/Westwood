@@ -14,6 +14,8 @@ public:
 
 	void BindFarmTileMap(CTileMap& a_tileMap);
 
+	bool TileContainsSeed(short a_tileIndex);
+
 	void Render();
 private:
 	struct SPlantedPlant
