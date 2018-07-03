@@ -73,6 +73,19 @@ void CPlayer::Update()
 
 	SetDirection(direction);
 
+	sf::RectangleShape interactTile;
+	interactTile.setFillColor(sf::Color(255,0,0,50));
+	interactTile.setOutlineColor(sf::Color(150, 0, 0, 255));
+	interactTile.setOutlineThickness(2);
+	sf::Vector2f where = GetInteractPosition();
+	where /= 64.f;
+	where.x = (int)where.x;
+	where.y = (int)where.y;
+	where *= 64.f;
+	interactTile.setPosition(where.x , where.y);
+	interactTile.setSize({ 64, 64 });
+	CRenderer::GetInstance().PushRenderCommand(interactTile, LAYER_UI);
+
 	CRenderer::GetInstance().SetCameraTarget(GetPosition());
 
 	m_inventory.RenderInventory();
