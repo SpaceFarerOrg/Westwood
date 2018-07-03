@@ -8,7 +8,9 @@ enum class EGameEvent
 	PauseTime,
 	ContinueTime,
 	PlayerSleep,
+	PlayerWakeup,
 	FadeReachBlack,
+	FadeFinished,
 	Count,
 };
 

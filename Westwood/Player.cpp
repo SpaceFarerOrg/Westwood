@@ -23,41 +23,46 @@ void CPlayer::Init()
 	m_energyStatus.Init(100.f, 32.f, 128.f, CStatusBar::EType::vertical);
 	m_energyStatus.BindCallbackToOnEmpty([this] { this->Faint(); });
 
-	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeReachBlack, [this] {this->SetPosition({ 0.f, 0.f }); });
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeFinished, [this] {this->WakeUp(); });
 }
 
 void CPlayer::Update()
 {
 	CInputManager& input = CInputManager::GetInstance();
 	sf::Vector2f direction;
-	if (input.IsKeyDown(EKeyCode::D))
+
+	if (m_isInputLocked == false)
 	{
-		direction.x += 1.f;
-	}
-	if (input.IsKeyDown(EKeyCode::A))
-	{
-		direction.x -= 1.f;
-	}
-	if (input.IsKeyDown(EKeyCode::W))
-	{
-		direction.y -= 1.f;
-	}
-	if (input.IsKeyDown(EKeyCode::S))
-	{
-		direction.y += 1.f;
+		if (input.IsKeyDown(EKeyCode::D))
+		{
+			direction.x += 1.f;
+		}
+		if (input.IsKeyDown(EKeyCode::A))
+		{
+			direction.x -= 1.f;
+		}
+		if (input.IsKeyDown(EKeyCode::W))
+		{
+			direction.y -= 1.f;
+		}
+		if (input.IsKeyDown(EKeyCode::S))
+		{
+			direction.y += 1.f;
+		}
+		
+		if (input.IsKeyPressed(EKeyCode::Space))
+		{
+			DoInteraction();
+		}
+
+		if (input.IsKeyPressed(EKeyCode::I))
+		{
+			m_inventory.ToggleInventory();
+		}
 	}
 
 	SelectInventorySlot();
 
-	if (input.IsKeyPressed(EKeyCode::Space))
-	{
-		DoInteraction();
-	}
-
-	if (input.IsKeyPressed(EKeyCode::I))
-	{
-		m_inventory.ToggleInventory();
-	}
 
 #ifdef _DEBUG
 	if (input.IsKeyPressed(EKeyCode::F8))
@@ -107,7 +112,7 @@ void CPlayer::DoInteraction()
 	short heldItem = m_inventory.GetActiveSlotItemID();
 
 	CInteractableItem* interactableObject = m_currentZone->GetTargetedObject(GetInteractPosition());
-	
+
 	if (interactableObject != nullptr)
 	{
 		interactableObject->Interact(*this);
@@ -169,6 +174,8 @@ void CPlayer::WakeUp()
 {
 	m_shouldSleep = false;
 	m_energyStatus.SetToMax();
+	m_isInputLocked = false;
+	CGameEventMaster::GetInstance().SendGameEvent(EGameEvent::PlayerWakeup);
 }
 
 #include "GameEventMaster.h"
@@ -176,6 +183,7 @@ void CPlayer::SetShouldSleep()
 {
 	m_shouldSleep = true;
 	CGameEventMaster::GetInstance().SendGameEvent(EGameEvent::PlayerSleep);
+	m_isInputLocked = true;
 }
 
 sf::Vector2f CPlayer::GetInteractPosition() const

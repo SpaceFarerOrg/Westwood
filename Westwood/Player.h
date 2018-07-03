@@ -33,6 +33,7 @@ private:
 	void DoInteraction();
 
 	void SelectInventorySlot();
+	
 private:
 	CFarm* m_farm;
 
@@ -45,4 +46,5 @@ private:
 
 	short m_activeTool;
 	bool m_shouldSleep : 1;
+	bool m_isInputLocked : 1;
 };

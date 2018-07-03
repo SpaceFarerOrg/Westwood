@@ -30,6 +30,7 @@ void CFullscreenFader::Update(float a_dt)
 
 		if (m_alpha == 0.f)
 		{
+			CGameEventMaster::GetInstance().SendGameEvent(EGameEvent::FadeFinished);
 			m_isFading = false;
 		}
 		else if (m_alpha == 255.f)

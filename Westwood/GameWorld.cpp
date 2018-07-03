@@ -11,6 +11,9 @@ CGameWorld::CGameWorld()
 
 	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::PauseTime, [&timeFreezed = m_timeFreezed]() { timeFreezed = true; });
 	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::ContinueTime, [&timeFreezed = m_timeFreezed]() {timeFreezed = false; });
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::PlayerSleep, [&timeFreezed = m_timeFreezed]() { timeFreezed = true; });
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::PlayerWakeup, [&timeFreezed = m_timeFreezed]() {timeFreezed = false; });
+	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeReachBlack, [this] {this->m_calendar.Sleep(); });
 
 	m_allAvatars.push_back(&m_player);
 
@@ -102,12 +105,6 @@ void CGameWorld::Update(float a_deltaTime)
 	UpdateAllAvatars(deltaTime);
 	m_avatarCollection.RenderAvatars();
 	m_worldZones[m_currentZone].CheckPlayerAgainstItems(m_player);
-
-	if (m_player.GetShouldSleep())
-	{
-		m_calendar.Sleep();
-		m_player.WakeUp();
-	}
 }
 
 CWorldZone & CGameWorld::GetCurrentZone()
