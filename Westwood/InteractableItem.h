@@ -11,6 +11,7 @@ public:
 	virtual void Interact(CPlayer& a_user) = 0;
 	bool IsColliding(const sf::Vector2f& a_point);
 	void SetPosition(const sf::Vector2f& a_position);
+	const sf::Vector2f& GetPosition() const;
 	void Render();
 private:
 	sf::Vector2f m_position;

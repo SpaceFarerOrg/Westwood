@@ -27,6 +27,11 @@ void CInteractableItem::SetPosition(const sf::Vector2f & a_position)
 	m_collisionRect.top = m_position.y;
 }
 
+const sf::Vector2f & CInteractableItem::GetPosition() const
+{
+	return m_position;
+}
+
 void CInteractableItem::Render()
 {
 	sf::Sprite sprite;
