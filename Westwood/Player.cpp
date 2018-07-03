@@ -123,7 +123,7 @@ void CPlayer::Faint()
 void CPlayer::DoInteraction()
 {
 	short heldItem = m_inventory.GetActiveSlotItemID();
-
+	short targetedTile = m_currentZone->GetTileMap().ConvertPositionToTileIndex(GetInteractPosition());
 	CInteractableItem* interactableObject = m_currentZone->GetTargetedObject(GetInteractPosition());
 
 	if (interactableObject != nullptr)
@@ -134,15 +134,17 @@ void CPlayer::DoInteraction()
 	{
 		CAudioManager::GetInstance().PlaySound(m_toolBank.GetActiveToolName());
 	}
+	else if (m_farm->TryHarvest(targetedTile, m_currentZone))
+	{
+
+	}
 	else if (CItemBank::GetInstance().GetItem(heldItem).IsSeed())
 	{
 		short seedID = CItemBank::GetInstance().GetItem(heldItem).GetSeedID();
 
-		short tileIndex = m_currentZone->GetTileMap().ConvertPositionToTileIndex(GetInteractPosition());
-
-		if (m_currentZone->GetTileMap().TileIsPlowed(tileIndex) && m_farm->TileContainsSeed(tileIndex) == false)
+		if (m_currentZone->GetTileMap().TileIsPlowed(targetedTile) && m_farm->TileContainsSeed(targetedTile) == false)
 		{
-			m_farm->PlantSeed(seedID, tileIndex);
+			m_farm->PlantSeed(seedID, targetedTile);
 			m_inventory.AddItemToInventory(heldItem, -1);
 		}
 	}

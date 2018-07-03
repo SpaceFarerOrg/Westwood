@@ -19,7 +19,6 @@ CGameWorld::CGameWorld()
 
 	m_avatarCollection.AddPlayer(m_player);
 
-	m_player.BindFarm(m_farm);
 }
 
 void CGameWorld::Load(const char * a_worldPath)
@@ -50,6 +49,9 @@ void CGameWorld::Load(const char * a_worldPath)
 
 	m_avatarCollection.BindGameWorld(*this);
 	m_avatarCollection.FinalizeAvatarCreation();
+
+	m_farm.Init();
+	m_player.BindFarm(m_farm);
 }
 
 void CGameWorld::Render()

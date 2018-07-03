@@ -52,6 +52,24 @@
       "indexInSheet": 7,
       "sellable": false,
       "seedData": 1
+    },
+    {
+      "name": "Potato",
+      "description": "At inte sista potaten",
+      "indexInSheet": 8,
+      "sellable": true,
+      "sellData": {
+        "sell": 15
+      }
+    },
+    {
+      "name": "Flower",
+      "description": "A flower",
+      "indexInSheet": 9,
+      "sellable": true,
+      "sellData": {
+        "sell": 30
+      }
     }
   ]
 }
