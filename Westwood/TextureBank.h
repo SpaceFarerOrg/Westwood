@@ -42,6 +42,7 @@ private:
 	void LoadFont(EFonts a_font, const sf::String& a_pathRelativeToFonts);
 	static std::unordered_map<std::string, ETextures> m_textureNameToIndexLUT;
 	static std::array<sf::Texture, static_cast<size_t>(ETextures::Count)> m_bank;
+	static std::unordered_map<std::string, short> m_unorderedTexturesLUT;
 
 	static std::array<sf::Font, static_cast<size_t>(EFonts::Count)> m_fontBank;
 

@@ -3,6 +3,7 @@
 std::array<sf::Texture, static_cast<size_t>(ETextures::Count)> CTextureBank::m_bank;
 std::array<sf::Font, static_cast<size_t>(EFonts::Count)> CTextureBank::m_fontBank;
 std::unordered_map<std::string, ETextures> CTextureBank::m_textureNameToIndexLUT;
+std::unordered_map<std::string, short> CTextureBank::m_unorderedTexturesLUT;
 std::vector<sf::Texture> CTextureBank::m_unorderedBank;
 
 CTextureBank::CTextureBank()
@@ -25,11 +26,19 @@ void CTextureBank::LoadAllFonts()
 
 short CTextureBank::LoadUnorderedTexture(const char * a_textureName)
 {
+	if (m_unorderedTexturesLUT.find(a_textureName) != m_unorderedTexturesLUT.end())
+	{
+		return m_unorderedTexturesLUT[a_textureName];
+	}
+
 	sf::String textureName = a_textureName;
 	sf::String completePath = "graphics/" + textureName + ".png";
 
 	m_unorderedBank.push_back(sf::Texture());
 	m_unorderedBank.back().loadFromFile(completePath);
+
+	m_unorderedTexturesLUT[textureName.toAnsiString().c_str()] = static_cast<short>(m_unorderedBank.size() - 1);
+
 
 	return static_cast<short>(m_unorderedBank.size() - 1);
 }
