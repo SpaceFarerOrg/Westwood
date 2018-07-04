@@ -2,12 +2,47 @@
 #include "Math.h"
 #include "Renderer.h"
 #include <SFML\Graphics\Sprite.hpp>
+#include "CommonUtilities.h"
+#include "TextureBank.h"
 
 CAnimation::CAnimation()
 {
 	Stop();
 }
 
+
+void CAnimation::LoadFromJson(const char* a_filePath)
+{
+	nlohmann::json json = OpenJson(a_filePath);
+
+	std::string textureName = json["texture"];
+	short textureIndex = CTextureBank::LoadUnorderedTexture(textureName.c_str());
+	m_texture = &CTextureBank::GetUnorderedTexture(textureIndex);
+
+	short frameSizeX = json["width"].get<short>();
+	short frameSizeY = json["height"].get<short>();
+	short frameCountX = m_texture->getSize().x / frameSizeX;
+
+	sf::IntRect rect;
+	rect.width = frameSizeX;
+	rect.height = frameSizeY;
+
+	for (size_t i = 0; i < json["frames"].size(); ++i)
+	{
+		short frameIndex = json["frames"][i]["frameIndex"].get<short>();
+		short frameX = frameIndex % frameCountX;
+		short frameY = frameIndex / frameCountX;
+
+		rect.left = frameX;
+		rect.top = frameY;
+
+		SFrame frameToAdd;
+		frameToAdd.m_rect = rect;
+		frameToAdd.m_timeToShow = json["frames"][i]["time"].get<float>();
+
+		AddFrame(frameToAdd);
+	}
+}
 
 void CAnimation::AddFrame(const SFrame & a_frame)
 {

@@ -20,6 +20,7 @@ public:
 	};
 public:
 	CAnimation();
+	void LoadFromJson(const char* a_filePath);
 	void AddFrame(const SFrame& a_frame);
 	void BindTexture(const sf::Texture& a_texture);
 	void Update(float a_dt);
