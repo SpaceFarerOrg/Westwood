@@ -109,6 +109,9 @@
     <ClCompile Include="Farm.cpp">
       <Filter>Game Systems\Farm</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Engine\gfx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />

@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarCollection.cpp" />
