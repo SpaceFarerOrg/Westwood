@@ -112,6 +112,7 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\gfx</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationCollection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />
@@ -249,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="PlantBank.h">
       <Filter>Game Systems\Farm</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationCollection.h">
+      <Filter>Engine\gfx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationCollection.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="AvatarCollection.cpp" />
@@ -177,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationCollection.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Avatar.h" />
     <ClInclude Include="AvatarCollection.h" />
