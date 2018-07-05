@@ -31,9 +31,9 @@ void CPlayer::Init()
 
 	m_characterCollection.AddCharacterToCollection("testCharacter", "data/animations/characterRunning.json", (size_t)EAnimationState::MoveLeft, -1);
 	m_characterCollection.AddCharacterToCollection("testCharacter", "data/animations/characterRunning.json", (size_t)EAnimationState::MoveRight, 1);
-	
-	m_animationCollection.SetCurrentState((size_t)EAnimationState::Idle);
 
+	m_characterCollection.SetCurrentState((size_t)EAnimationState::MoveLeft);
+	
 
 	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeFinished, [this] {this->WakeUp(); });
 
@@ -42,23 +42,13 @@ void CPlayer::Init()
 
 void CPlayer::Update()
 {
-	m_character.Update(m_currentDeltaTime);
+	m_characterCollection.Update(m_currentDeltaTime);
 
 	CInputManager& input = CInputManager::GetInstance();
 	sf::Vector2f direction;
 
-	if (input.IsKeyPressed(EKeyCode::U))
-	{
-		m_character.OverrideBodyPart(CCharacter::EBodyParts::LeftArm, 180.f);
-		m_character.OverrideBodyPart(CCharacter::EBodyParts::RightArm, 180.f);
-	}
-	if (input.IsKeyPressed(EKeyCode::O))
-	{
-		m_character.HandBackBodyPart(CCharacter::EBodyParts::LeftArm);
-		m_character.HandBackBodyPart(CCharacter::EBodyParts::RightArm);
-	}
 
-	m_character.HoldItem(m_inventory.GetActiveSlotItemID());
+	m_characterCollection.GetCurrentCharacter().HoldItem(m_inventory.GetActiveSlotItemID());
 
 	if (m_isInputLocked == false)
 	{

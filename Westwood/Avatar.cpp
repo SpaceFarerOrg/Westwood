@@ -95,7 +95,7 @@ void CAvatar::Draw()
 {
 	//m_animationCollection.Render(m_position);
 
-	m_character.Render(m_position);
+	m_characterCollection.Render(m_position);
 }
 
 void CAvatar::UpdateAnimationCollection()
