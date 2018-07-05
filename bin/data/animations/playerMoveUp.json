@@ -1,22 +1,22 @@
 {
-  "texture": "debugPlayerSpritesheet",
+  "texture": "playerSpritesheet",
   "width": 128,
   "height": 128,
   "frames": [
     {
-      "frameIndex": 4,
+      "frameIndex": 8,
       "time": 0.2
     },
     {
-      "frameIndex": 5,
+      "frameIndex": 9,
       "time": 0.2
     },
     {
-      "frameIndex": 6,
+      "frameIndex": 10,
       "time": 0.2
     },
     {
-      "frameIndex": 7,
+      "frameIndex": 11,
       "time": 0.2
     }
   ]
