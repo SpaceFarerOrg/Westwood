@@ -58,4 +58,5 @@ private:
 	short m_activeTool;
 	bool m_shouldSleep : 1;
 	bool m_isInputLocked : 1;
+	bool m_isGod : 1;
 };
