@@ -101,6 +101,15 @@ void CGameCalendar::SetTime(const CClock::STimePoint & a_timePoint, ESeason a_se
 	m_currentDate = a_day;
 }
 
+float CGameCalendar::GetPercentageOfDay() const
+{
+	float rv = 0;
+
+	rv += (m_clock.GetCurrentTime().m_hour * 60.f + m_clock.GetCurrentTime().m_minute) / (24.f * 60.f);
+
+	return rv;
+}
+
 CGameCalendar::EDay CGameCalendar::GetCurrentDay() const
 {
 	return m_currentDay;

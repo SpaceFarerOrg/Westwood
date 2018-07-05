@@ -36,6 +36,7 @@ public:
 
 	void SetTime(const CClock::STimePoint& a_timePoint, ESeason a_season, unsigned short a_day);
 
+	float GetPercentageOfDay() const;
 	EDay GetCurrentDay() const;
 	ESeason GetCurrentSeason() const;
 	short GetCurrentDate() const;

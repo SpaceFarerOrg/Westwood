@@ -37,6 +37,9 @@ void CGame::Initialize()
 	m_shouldRun = true;
 
 	m_gameWorld.ChangeZone(0);
+
+	CAudioManager::GetInstance().PlayMusic("sounds/music/theme.wav");
+	CAudioManager::GetInstance().SetMusicVolume(25);
 }
 
 void CGame::Update()

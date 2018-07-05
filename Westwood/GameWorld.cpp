@@ -4,6 +4,7 @@
 #include "Avatar.h"
 #include "GameEventMaster.h"
 #include "Math.h"
+#include "Renderer.h"
 
 CGameWorld::CGameWorld()
 {
@@ -107,6 +108,10 @@ void CGameWorld::Update(float a_deltaTime)
 	UpdateAllAvatars(deltaTime);
 	m_avatarCollection.RenderAvatars();
 	m_worldZones[m_currentZone].CheckPlayerAgainstItems(m_player);
+
+	float time = m_calendar.GetPercentageOfDay();
+
+	CRenderer::GetInstance().SetUniform("timeOfDay", time);
 }
 
 CWorldZone & CGameWorld::GetCurrentZone()
