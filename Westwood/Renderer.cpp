@@ -200,17 +200,8 @@ void CRenderer::ApplyFullscreenPasses()
 	};
 
 	m_daytimeShader.setUniform("texture", m_renderTarget0.getTexture());
-	//sprite.setTexture(m_renderTarget0.getTexture());
 
 	// Swap render targets between passes
 	m_currentRenderTarget = &m_renderWindow;
 	m_currentRenderTarget->draw(vertices, 4, sf::PrimitiveType::Quads, &m_daytimeShader);
-	//m_currentRenderTarget->draw(sprite, &m_daytimeShader);
-
-	// Finish and draw to render window
-	m_currentRenderTarget = &m_renderWindow;
-	
-	//sprite.setTexture(m_renderTarget1.getTexture()); // Should match the last draw call
-
-	//m_currentRenderTarget->draw(sprite);
 }

@@ -13,6 +13,11 @@ CAvatar::CAvatar()
 	m_collisionPoints[3] = { 32.f, 32.f };
 }
 
+CAvatar::CAvatar(const CAvatar & a_avatar)
+{
+	// This just needed to exist
+}
+
 void CAvatar::SetDirection(const sf::Vector2f & a_direction)
 {
 	if (a_direction != m_currentDirection)
