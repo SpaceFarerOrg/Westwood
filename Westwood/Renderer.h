@@ -5,6 +5,8 @@
 #include <SFML\Graphics\RectangleShape.hpp>
 #include <SFML\Graphics\Text.hpp>
 #include <SFML\Graphics\RenderWindow.hpp>
+#include <SFML\Graphics\RenderTexture.hpp>
+#include <SFML\Graphics\Shader.hpp>
 #include <SFML\System\Vector2.hpp>
 
 #include <array>
@@ -32,6 +34,7 @@ public:
 	void PushUIRenderCommand(const sf::RectangleShape& a_renderCommand, int a_layer = 0);
 	void PushUIRenderCommand(const sf::Text& a_renderCommand, int a_layer = 0);
 
+	void SetUniform(const sf::String& a_uniformName, float a_value);
 
 	void RenderTileMap(const class CTileMap& a_tileMap);
 
@@ -68,6 +71,7 @@ private:
 	};
 
 	void RenderQueue(std::vector<SRenderCommand>& a_renderQueue);
+	void ApplyFullscreenPasses();
 	
 	std::array<std::vector<SRenderCommand>, 4> m_renderCommands;
 
@@ -76,9 +80,15 @@ private:
 	sf::Vector2f m_currentWindowDimensions;
 
 	sf::RenderWindow m_renderWindow;
+
+	sf::RenderTexture m_renderTarget0;
+	sf::RenderTexture m_renderTarget1;
+
 	sf::RenderTarget* m_currentRenderTarget;
 
 	sf::Vector2f m_cameraTarget;
 	sf::View m_camera;
 	bool m_shouldIgnoreCameraTarget;
+
+	sf::Shader m_daytimeShader;
 };

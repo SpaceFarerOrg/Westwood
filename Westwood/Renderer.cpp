@@ -30,12 +30,15 @@ void CRenderer::Initialize()
 
 	m_camera.setSize(m_currentWindowDimensions);
 	m_shouldIgnoreCameraTarget = false;
+
+	m_renderTarget0.create(m_currentWindowDimensions.x, m_currentWindowDimensions.y);
+	m_renderTarget1.create(m_currentWindowDimensions.x, m_currentWindowDimensions.y);
+
+	m_daytimeShader.loadFromFile("shaders/daytime.vfx", sf::Shader::Type::Fragment);
 }
 
 void CRenderer::RenderToWindow()
 {
-	m_currentRenderTarget = &m_renderWindow;
-
 	/*Camera space rendering*/
 	m_renderWindow.setView(m_camera);
 
@@ -46,7 +49,12 @@ void CRenderer::RenderToWindow()
 		RenderQueue(m_renderCommands[i]);
 	}
 
+	m_renderTarget0.display();
 	/*End camera space rendering*/
+
+	//*Fullscreen passes*
+	ApplyFullscreenPasses();
+	//End fullscreen passes
 
 	/*Screen space rendering*/
 	sf::View view = m_renderWindow.getView();
@@ -148,9 +156,15 @@ void CRenderer::PushUIRenderCommand(const sf::Text & a_renderCommand, int a_laye
 	m_UIRenderCommands.push_back(rc);
 }
 
+void CRenderer::SetUniform(const sf::String & a_uniformName, float a_value)
+{
+	m_daytimeShader.setUniform(a_uniformName, a_value);
+}
+
 void CRenderer::RenderTileMap(const CTileMap & a_tileMap)
 {
-	m_renderWindow.draw(a_tileMap);
+	m_currentRenderTarget = &m_renderTarget0;
+	m_currentRenderTarget->draw(a_tileMap);
 }
 
 void CRenderer::RenderQueue(std::vector<SRenderCommand>& a_renderQueue)
@@ -174,4 +188,29 @@ void CRenderer::RenderQueue(std::vector<SRenderCommand>& a_renderQueue)
 	}
 
 	a_renderQueue.clear();
+}
+
+void CRenderer::ApplyFullscreenPasses()
+{
+	sf::Vertex vertices[4] = {
+		sf::Vertex({0,0}, {0,1}),
+		sf::Vertex({ m_currentWindowDimensions.x,0 },{ 1,1 }),
+		sf::Vertex({ m_currentWindowDimensions.x,m_currentWindowDimensions.y },{ 1,0 }),
+		sf::Vertex({ 0,m_currentWindowDimensions.y },{ 0,0 }),
+	};
+
+	m_daytimeShader.setUniform("texture", m_renderTarget0.getTexture());
+	//sprite.setTexture(m_renderTarget0.getTexture());
+
+	// Swap render targets between passes
+	m_currentRenderTarget = &m_renderWindow;
+	m_currentRenderTarget->draw(vertices, 4, sf::PrimitiveType::Quads, &m_daytimeShader);
+	//m_currentRenderTarget->draw(sprite, &m_daytimeShader);
+
+	// Finish and draw to render window
+	m_currentRenderTarget = &m_renderWindow;
+	
+	//sprite.setTexture(m_renderTarget1.getTexture()); // Should match the last draw call
+
+	//m_currentRenderTarget->draw(sprite);
 }

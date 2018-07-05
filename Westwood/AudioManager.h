@@ -26,7 +26,7 @@ private:
 
 	CSoundBank m_soundBank;
 
-	std::array<sf::Sound, 250> m_soundBuffer;
+	std::array<sf::Sound, 255> m_soundBuffer;
 	short m_availableIndex;
 
 	sf::Vector2f m_positionOffset;
