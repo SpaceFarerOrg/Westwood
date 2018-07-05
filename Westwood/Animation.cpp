@@ -77,6 +77,17 @@ void CAnimation::Render(const sf::Vector2f& a_position)
 	CRenderer::GetInstance().PushRenderCommand(sprite, LAYER_OBJECT);
 }
 
+sf::Vector2f CAnimation::GetCenterOfCurrentFrame(const sf::Vector2f& a_worldPosition) const
+{
+	sf::Vector2f returnVector;
+	returnVector.x = static_cast<float>(m_frames[m_currentFrame].m_rect.width / 2);
+	returnVector.y = static_cast<float>(m_frames[m_currentFrame].m_rect.height / 2);
+
+	returnVector += a_worldPosition;
+
+	return std::move(returnVector);
+}
+
 bool CAnimation::IsPlaying() const
 {
 	return m_isPlaying;

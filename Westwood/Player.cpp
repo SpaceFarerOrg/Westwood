@@ -262,7 +262,7 @@ void CPlayer::SetShouldSleep()
 sf::Vector2f CPlayer::GetInteractPosition() const
 {
 	sf::Vector2f interactPosition;
-	interactPosition = GetPosition() + sf::Vector2f(16.f,32.f) + GetFacingDirection() * 64.f;
+	interactPosition = m_animationCollection.GetCurrentAnimation().GetCenterOfCurrentFrame(m_position) + sf::Vector2f(16.f,32.f) + GetFacingDirection() * 64.f;
 
 	return std::move(interactPosition);
 }
