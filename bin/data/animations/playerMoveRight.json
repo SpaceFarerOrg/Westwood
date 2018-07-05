@@ -5,19 +5,19 @@
   "frames": [
     {
       "frameIndex": 0,
-      "time": 0.2
+      "time": 0.1
     },
     {
       "frameIndex": 1,
-      "time": 0.2
+      "time": 0.1
     },
     {
       "frameIndex": 2,
-      "time": 0.2
+      "time": 0.1
     },
     {
       "frameIndex": 3,
-      "time": 0.2
+      "time": 0.1
     }
   ]
 }
