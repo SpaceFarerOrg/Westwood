@@ -43,8 +43,6 @@ protected:
 
 	std::array<sf::Vector2f, 4> m_collisionPoints;
 
-	CAnimationCollection m_animationCollection;
-
 	float m_currentDeltaTime;
 
 	float m_movementSpeed;

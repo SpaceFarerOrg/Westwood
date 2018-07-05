@@ -100,7 +100,6 @@ void CAvatar::Draw()
 
 void CAvatar::UpdateAnimationCollection()
 {
-	m_animationCollection.Update(m_currentDeltaTime);
 }
 
 

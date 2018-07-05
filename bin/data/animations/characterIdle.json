@@ -1,0 +1,16 @@
+{
+  "frames": [
+    {
+      "rArmTargetRot": 20.0,
+      "lArmTargetRot": 20.0,
+      "rLegTargetRot": 0.0,
+      "lLegTargetRot": 0.0
+    },
+    {
+      "rArmTargetRot": -20.0,
+      "lArmTargetRot": -20.0,
+      "rLegTargetRot": 0.0,
+      "lLegTargetRot": 0.0
+    }
+  ]
+}
