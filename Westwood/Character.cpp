@@ -104,7 +104,8 @@ void CCharacter::Render(const sf::Vector2f & a_position)
 	m_renderTexture.display();
 	m_sprite.setTexture(m_renderTexture.getTexture());
 	m_sprite.setPosition(a_position);
-	m_sprite.setRotation(180.f * (m_direction == 1));
+	//m_sprite.setRotation(180.f * (m_direction == 1));
+	m_sprite.setScale(m_direction, 1);
 	CRenderer::GetInstance().PushRenderCommand(m_sprite, LAYER_OBJECT);
 
 	m_carryPosition = a_position + m_sprites[EBodyParts::RightArm].getTransform().transformPoint(32.f, 64.f - 16.f);
