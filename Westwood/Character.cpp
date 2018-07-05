@@ -50,8 +50,8 @@ void CCharacter::LoadCharacter(const char * a_textureFile, const char * a_charac
 		frameToLoad[EBodyParts::RightLeg] = characterJson["frames"][i]["rLegTargetRot"].get<float>();
 	}
 
-	m_sprite.setOrigin(16, 32);
-	m_renderTexture.create(64, 128);
+	m_sprite.setOrigin(32, 0);
+	m_renderTexture.create(128, 128);
 	m_renderTexture.clear(sf::Color::Transparent);
 }
 
@@ -96,7 +96,7 @@ void CCharacter::Render(const sf::Vector2f & a_position)
 	for (size_t i = 0; i < EBodyParts::Count; ++i)
 	{
 		m_sprites[i].setRotation(m_rotations[i]);
-
+		m_sprites[i].move(m_sprite.getOrigin());
 		m_renderTexture.draw(m_sprites[i]);
 
 		//CRenderer::GetInstance().PushRenderCommand(m_sprites[i]);
@@ -105,7 +105,7 @@ void CCharacter::Render(const sf::Vector2f & a_position)
 	m_sprite.setTexture(m_renderTexture.getTexture());
 	m_sprite.setPosition(a_position);
 	m_sprite.setRotation(180.f * m_direction == 1);
-	CRenderer::GetInstance().PushRenderCommand(m_sprite);
+	CRenderer::GetInstance().PushRenderCommand(m_sprite, LAYER_OBJECT);
 
 	m_carryPosition = a_position + m_sprites[EBodyParts::RightArm].getTransform().transformPoint(32.f, 64.f - 16.f);
 
