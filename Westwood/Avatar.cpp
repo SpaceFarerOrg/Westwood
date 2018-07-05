@@ -40,6 +40,8 @@ void CAvatar::SetMovementSpeed(float a_movementSpeed)
 void CAvatar::SetDeltaTime(float a_deltaTime)
 {
 	m_currentDeltaTime = a_deltaTime;
+
+	UpdateAnimationCollection();
 }
 
 const sf::Vector2f & CAvatar::GetPosition() const
@@ -81,12 +83,12 @@ const sf::Vector2f & CAvatar::GetFacingDirection() const
 }
 void CAvatar::Draw()
 {
-	sf::Sprite sprite;
-	sprite.setTexture(CTextureBank::GetTexture(ETextures::PlayerCharacter));
+	m_animationCollection.Render(m_position);
+}
 
-	sprite.setPosition(m_position);
-
-	CRenderer::GetInstance().PushRenderCommand(sprite, LAYER_OBJECT);
+void CAvatar::UpdateAnimationCollection()
+{
+	m_animationCollection.Update(m_currentDeltaTime);
 }
 
 

@@ -112,7 +112,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\gfx</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationCollection.cpp" />
+    <ClCompile Include="AnimationCollection.cpp">
+      <Filter>Engine\gfx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />

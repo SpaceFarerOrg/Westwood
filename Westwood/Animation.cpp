@@ -33,8 +33,8 @@ void CAnimation::LoadFromJson(const char* a_filePath)
 		short frameX = frameIndex % frameCountX;
 		short frameY = frameIndex / frameCountX;
 
-		rect.left = frameX;
-		rect.top = frameY;
+		rect.left = frameX * frameSizeX;
+		rect.top = frameY * frameSizeY;
 
 		SFrame frameToAdd;
 		frameToAdd.m_rect = rect;
@@ -85,6 +85,7 @@ bool CAnimation::IsPlaying() const
 void CAnimation::Play(EPlayMode a_playMode)
 {
 	m_isPlaying = true;
+	m_currentPlayMode = a_playMode;
 }
 
 void CAnimation::Pause()

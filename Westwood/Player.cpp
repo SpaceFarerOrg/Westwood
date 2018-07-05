@@ -23,6 +23,15 @@ void CPlayer::Init()
 	m_energyStatus.Init(100.f, 32.f, 128.f, CStatusBar::EType::vertical);
 	m_energyStatus.BindCallbackToOnEmpty([this] { this->Faint(); });
 
+	m_animationCollection.LoadAnimationIntoCollection("data/animations/playerMoveUp.json", (size_t)EAnimationState::MoveUp);
+	m_animationCollection.LoadAnimationIntoCollection("data/animations/playerMoveDown.json", (size_t)EAnimationState::MoveDown);
+	m_animationCollection.LoadAnimationIntoCollection("data/animations/playerMoveLeft.json", (size_t)EAnimationState::MoveLeft);
+	m_animationCollection.LoadAnimationIntoCollection("data/animations/playerMoveRight.json", (size_t)EAnimationState::MoveRight);
+	m_animationCollection.LoadAnimationIntoCollection("data/animations/playerIdle.json", (size_t)EAnimationState::Idle);
+	
+	m_animationCollection.SetCurrentState((size_t)EAnimationState::Idle);
+
+
 	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeFinished, [this] {this->WakeUp(); });
 }
 
@@ -44,11 +53,14 @@ void CPlayer::Update()
 		if (input.IsKeyDown(EKeyCode::W))
 		{
 			direction.y -= 1.f;
+
 		}
 		if (input.IsKeyDown(EKeyCode::S))
 		{
 			direction.y += 1.f;
 		}
+
+		SetAnimationState(direction);
 		
 		if (input.IsKeyPressed(EKeyCode::Space))
 		{
@@ -173,6 +185,36 @@ void CPlayer::SelectInventorySlot()
 	if (input.IsKeyPressed(EKeyCode::Eight)) { m_inventory.TrySetActiveSlot(7); }
 	if (input.IsKeyPressed(EKeyCode::Nine)) { m_inventory.TrySetActiveSlot(8); }
 	if (input.IsKeyPressed(EKeyCode::Zero)) { m_inventory.TrySetActiveSlot(9); }
+}
+
+void CPlayer::SetAnimationState(const sf::Vector2f & a_direction)
+{
+	if (fabs(a_direction.x) != 0.f)
+	{
+		if (a_direction.x < 0.f)
+		{
+			m_animationCollection.SetCurrentState((size_t)EAnimationState::MoveLeft);
+		}
+		if (a_direction.x > 0.f)
+		{
+			m_animationCollection.SetCurrentState((size_t)EAnimationState::MoveRight);
+		}
+	}
+	else if (fabs(a_direction.y) != 0.f)
+	{
+		if (a_direction.y < 0.f)
+		{
+			m_animationCollection.SetCurrentState((size_t)EAnimationState::MoveUp);
+		}
+		if (a_direction.y > 0.f)
+		{
+			m_animationCollection.SetCurrentState((size_t)EAnimationState::MoveDown);
+		}
+	}
+	else
+	{
+		m_animationCollection.SetCurrentState((size_t)EAnimationState::Idle);
+	}
 }
 
 CInventory & CPlayer::GetInventory()
