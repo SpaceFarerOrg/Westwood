@@ -74,7 +74,7 @@ void CAnimation::Render(const sf::Vector2f& a_position)
 	sprite.setTextureRect(m_frames[m_currentFrame].m_rect);
 	sprite.setPosition(a_position);
 
-	CRenderer::GetInstance().PushRenderCommand(sprite);
+	CRenderer::GetInstance().PushRenderCommand(sprite, LAYER_OBJECT);
 }
 
 bool CAnimation::IsPlaying() const
