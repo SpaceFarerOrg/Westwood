@@ -116,6 +116,7 @@
       <Filter>Engine\gfx</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterCollection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />
@@ -258,6 +259,7 @@
       <Filter>Engine\gfx</Filter>
     </ClInclude>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterCollection.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
