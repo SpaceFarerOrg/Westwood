@@ -37,3 +37,8 @@ CAnimation & CAnimationCollection::GetCurrentAnimation()
 	return m_animations[m_currentState];
 }
 
+const CAnimation & CAnimationCollection::GetCurrentAnimation() const
+{
+	return m_animations.at(m_currentState);
+}
+

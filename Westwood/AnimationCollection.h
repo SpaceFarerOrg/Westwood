@@ -11,6 +11,7 @@ public:
 	void Render(const sf::Vector2f& a_position);
 
 	CAnimation& GetCurrentAnimation();
+	const CAnimation& GetCurrentAnimation() const;
 private:
 	std::unordered_map<size_t, CAnimation> m_animations;
 	size_t m_currentState;

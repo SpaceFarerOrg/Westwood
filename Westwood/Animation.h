@@ -26,6 +26,8 @@ public:
 	void Update(float a_dt);
 	void Render(const sf::Vector2f& a_position);
 
+	sf::Vector2f GetCenterOfCurrentFrame(const sf::Vector2f& a_worldPosition = { 0.f, 0.f }) const;
+
 	bool IsPlaying() const;
 	void Play(EPlayMode a_playMode);
 	void Pause();
