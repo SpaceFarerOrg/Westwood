@@ -86,6 +86,11 @@ void CPlayer::Update()
 	interactTile.setSize({ 64, 64 });
 	CRenderer::GetInstance().PushRenderCommand(interactTile, LAYER_UI);
 
+	sf::RectangleShape debugDot;
+	debugDot.setSize({ 2,2 });
+	debugDot.setPosition(GetInteractPosition());
+	CRenderer::GetInstance().PushRenderCommand(debugDot, LAYER_UI);
+
 	CRenderer::GetInstance().SetCameraTarget(GetPosition());
 
 	m_inventory.RenderInventory();
@@ -204,7 +209,7 @@ void CPlayer::SetShouldSleep()
 sf::Vector2f CPlayer::GetInteractPosition() const
 {
 	sf::Vector2f interactPosition;
-	interactPosition = GetPosition() + GetFacingDirection() * 64.f;
+	interactPosition = GetPosition() + sf::Vector2f(16.f,32.f) + GetFacingDirection() * 64.f;
 
 	return std::move(interactPosition);
 }
