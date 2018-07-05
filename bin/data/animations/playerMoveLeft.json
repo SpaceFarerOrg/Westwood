@@ -1,0 +1,23 @@
+{
+  "texture": "debugPlayerSpritesheet",
+  "width": 128,
+  "height": 128,
+  "frames": [
+    {
+      "frameIndex": 12,
+      "time": 0.2
+    },
+    {
+      "frameIndex": 13,
+      "time": 0.2
+    },
+    {
+      "frameIndex": 14,
+      "time": 0.2
+    },
+    {
+      "frameIndex": 15,
+      "time": 0.2
+    }
+  ]
+}

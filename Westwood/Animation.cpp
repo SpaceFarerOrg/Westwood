@@ -33,8 +33,8 @@ void CAnimation::LoadFromJson(const char* a_filePath)
 		short frameX = frameIndex % frameCountX;
 		short frameY = frameIndex / frameCountX;
 
-		rect.left = frameX;
-		rect.top = frameY;
+		rect.left = frameX * frameSizeX;
+		rect.top = frameY * frameSizeY;
 
 		SFrame frameToAdd;
 		frameToAdd.m_rect = rect;
@@ -74,7 +74,7 @@ void CAnimation::Render(const sf::Vector2f& a_position)
 	sprite.setTextureRect(m_frames[m_currentFrame].m_rect);
 	sprite.setPosition(a_position);
 
-	CRenderer::GetInstance().PushRenderCommand(sprite);
+	CRenderer::GetInstance().PushRenderCommand(sprite, LAYER_OBJECT);
 }
 
 bool CAnimation::IsPlaying() const
@@ -85,6 +85,7 @@ bool CAnimation::IsPlaying() const
 void CAnimation::Play(EPlayMode a_playMode)
 {
 	m_isPlaying = true;
+	m_currentPlayMode = a_playMode;
 }
 
 void CAnimation::Pause()

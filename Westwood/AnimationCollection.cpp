@@ -7,10 +7,19 @@ void CAnimationCollection::LoadAnimationIntoCollection(const char * a_animationF
 
 void CAnimationCollection::SetCurrentState(size_t a_state)
 {
+	if (a_state == m_currentState)
+	{
+		return;
+	}
+
+	m_animations[m_currentState].Stop();
+
 	if (m_animations.find(a_state) != m_animations.end())
 	{
 		m_currentState = a_state;
 	}
+
+	m_animations[m_currentState].Play(CAnimation::EPlayMode::Looping);
 }
 
 void CAnimationCollection::Update(float a_deltaTime)

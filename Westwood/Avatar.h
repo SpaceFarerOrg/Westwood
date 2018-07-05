@@ -2,12 +2,13 @@
 #include <SFML\System\Vector2.hpp>
 #include "TileInteraction.h"
 #include <array>
+#include "AnimationCollection.h"
 
 class CAvatar
 {
 public:
 	CAvatar();
-
+	
 	void SetDirection(const sf::Vector2f& a_direction);
 	void SetMovementSpeed(float a_movementSpeed);
 
@@ -25,7 +26,9 @@ public:
 
 	const sf::Vector2f& GetFacingDirection() const;
 	void Draw();
-private:
+protected:
+	void UpdateAnimationCollection();
+
 	sf::Vector2f CalculateFuturePositionOfCollisionPoint(short a_collisionPoint) const;
 
 	sf::Vector2f m_position;
@@ -35,6 +38,8 @@ private:
 	sf::Vector2f m_interactedPosition;
 
 	std::array<sf::Vector2f, 4> m_collisionPoints;
+
+	CAnimationCollection m_animationCollection;
 
 	float m_currentDeltaTime;
 

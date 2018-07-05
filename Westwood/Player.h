@@ -12,6 +12,16 @@
 
 class CPlayer : public CAvatar
 {
+private:
+	enum class EAnimationState
+	{
+		MoveUp,
+		MoveRight,
+		MoveLeft,
+		MoveDown,
+		Idle
+	};
+
 public:
 	CPlayer();
 	void Init();
@@ -34,6 +44,7 @@ private:
 
 	void SelectInventorySlot();
 	
+	void SetAnimationState(const sf::Vector2f& a_direction);
 private:
 	CFarm* m_farm;
 
