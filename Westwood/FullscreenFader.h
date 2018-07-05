@@ -13,6 +13,7 @@ private:
 
 	sf::Color m_currentColor;
 	float m_alpha;
+	float m_originalMusicVolume;
 	bool m_isFadingOut : 1;
 	bool m_isFading : 1;
 };

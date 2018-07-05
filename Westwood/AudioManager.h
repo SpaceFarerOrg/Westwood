@@ -16,14 +16,21 @@ public:
 	void PlaySound(const std::string& a_soundName);
 	void PlaySoundAtPosition(const std::string& a_soundName, const sf::Vector2f& a_position);
 
+	void PlayMusic(const std::string& a_musicName);
+
+	void SetMusicVolume(float a_MusicVolume);
+	float GetMusicVolume();
+
 private:
 	~CAudioManager();
 
 	CSoundBank m_soundBank;
 
-	std::array<sf::Sound, 256> m_soundBuffer;
+	std::array<sf::Sound, 250> m_soundBuffer;
 	short m_availableIndex;
 
 	sf::Vector2f m_positionOffset;
+
+	sf::Music m_music;
 };
 

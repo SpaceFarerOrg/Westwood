@@ -44,6 +44,22 @@ void CAudioManager::PlaySoundAtPosition(const std::string& a_soundName, const sf
 	}
 }
 
+void CAudioManager::PlayMusic(const std::string & a_musicName)
+{
+	m_music.openFromFile(a_musicName);
+	m_music.play();
+}
+
+void CAudioManager::SetMusicVolume(float a_MusicVolume)
+{
+	m_music.setVolume(a_MusicVolume);
+}
+
+float CAudioManager::GetMusicVolume()
+{
+	return m_music.getVolume();
+}
+
 
 CAudioManager::~CAudioManager()
 {

@@ -3,6 +3,7 @@
 #include "Math.h"
 #include <SFML\Graphics\Rect.hpp>
 #include "Renderer.h"
+#include "AudioManager.h"
 
 CFullscreenFader::CFullscreenFader()
 {
@@ -26,6 +27,8 @@ void CFullscreenFader::Update(float a_dt)
 		}
 
 		m_alpha = Math::Clamp<float>(m_alpha, 0.f, 255.f);
+
+		CAudioManager::GetInstance().SetMusicVolume((1.f-(m_alpha / 255.f)) * m_originalMusicVolume);
 
 		m_currentColor.a = static_cast<short>(m_alpha);
 
@@ -60,4 +63,5 @@ void CFullscreenFader::StartFade()
 	m_isFadingOut = false;
 	m_currentColor.a = 0;
 	m_alpha = 0.f;
+	m_originalMusicVolume = CAudioManager::GetInstance().GetMusicVolume();
 }
