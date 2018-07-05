@@ -24,6 +24,8 @@ void CPlayer::Init()
 	m_energyStatus.BindCallbackToOnEmpty([this] { this->Faint(); });
 
 	CGameEventMaster::GetInstance().SubscribeToEvent(EGameEvent::FadeFinished, [this] {this->WakeUp(); });
+
+	m_isGod = false;
 }
 
 void CPlayer::Update()
@@ -61,6 +63,13 @@ void CPlayer::Update()
 		}
 	}
 
+	// DEBUG CODE
+	if (input.IsKeyPressed(EKeyCode::F5))
+	{
+		m_isGod = !m_isGod;
+	}
+	// END
+
 	SelectInventorySlot();
 
 
@@ -86,10 +95,12 @@ void CPlayer::Update()
 	interactTile.setSize({ 64, 64 });
 	CRenderer::GetInstance().PushRenderCommand(interactTile, LAYER_UI);
 
+	// DEBUG CODE
 	sf::RectangleShape debugDot;
 	debugDot.setSize({ 2,2 });
 	debugDot.setPosition(GetInteractPosition());
 	CRenderer::GetInstance().PushRenderCommand(debugDot, LAYER_UI);
+	// END
 
 	CRenderer::GetInstance().SetCameraTarget(GetPosition());
 
@@ -216,7 +227,10 @@ sf::Vector2f CPlayer::GetInteractPosition() const
 
 void CPlayer::DrainEnergy(float a_drainage)
 {
-	m_energyStatus.AddToValue(a_drainage * -1.f);
+	if (!m_isGod)
+	{
+		m_energyStatus.AddToValue(a_drainage * -1.f);
+	}
 }
 
 
