@@ -10,9 +10,10 @@ void CCharacterCollection::Render(const sf::Vector2f & a_position)
 	m_collection[m_currentState].Render(a_position);
 }
 
-void CCharacterCollection::AddCharacterToCollection(const char * a_textureFile, const char * a_characterFile, size_t a_stateToBindTo)
+void CCharacterCollection::AddCharacterToCollection(const char * a_textureFile, const char * a_characterFile, size_t a_stateToBindTo, short a_direction)
 {
 	m_collection[a_stateToBindTo].LoadCharacter(a_textureFile, a_characterFile);
+	m_collection[a_stateToBindTo].SetDirection(a_direction);
 	m_currentState = a_stateToBindTo;
 }
 

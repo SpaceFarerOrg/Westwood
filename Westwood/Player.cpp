@@ -29,7 +29,8 @@ void CPlayer::Init()
 	m_animationCollection.LoadAnimationIntoCollection("data/animations/playerMoveRight.json", (size_t)EAnimationState::MoveRight);
 	m_animationCollection.LoadAnimationIntoCollection("data/animations/playerIdle.json", (size_t)EAnimationState::Idle);
 
-	m_character.LoadCharacter("testCharacter", "data/animations/characterRunning.json");
+	m_characterCollection.AddCharacterToCollection("testCharacter", "data/animations/characterRunning.json", (size_t)EAnimationState::MoveLeft, -1);
+	m_characterCollection.AddCharacterToCollection("testCharacter", "data/animations/characterRunning.json", (size_t)EAnimationState::MoveRight, 1);
 	
 	m_animationCollection.SetCurrentState((size_t)EAnimationState::Idle);
 
