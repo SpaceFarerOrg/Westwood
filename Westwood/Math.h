@@ -77,4 +77,33 @@ namespace Math
 		float l = GetLength(a_Vec);
 		a_Vec /= l;
 	}
+
+	static float MoveTowards(float a_currentValue, float a_TargetValue, float a_changeFactor)
+	{
+		float returnVal = 0.f;
+
+		float changeFactor = a_changeFactor;
+
+		float currentTargetDelta = fabs(a_currentValue - a_TargetValue);
+
+		if (currentTargetDelta < a_changeFactor)
+		{
+			changeFactor = currentTargetDelta;
+		}
+
+		if (a_currentValue > a_TargetValue)
+		{
+			returnVal = a_currentValue - changeFactor;
+		}
+		else if (a_currentValue < a_TargetValue)
+		{
+			returnVal = a_currentValue + changeFactor;
+		}
+		else
+		{
+			returnVal = a_TargetValue;
+		}
+
+		return returnVal;
+	}
 }

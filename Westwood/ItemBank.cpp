@@ -70,6 +70,19 @@ void CItemBank::RenderItem(short a_itemID, const sf::Vector2f & a_position, bool
 	}
 }
 
+void CItemBank::RenderItemAsHeld(short a_itemID, const sf::Vector2f & a_position, float a_rotation)
+{
+	sf::Sprite sprite;
+	sprite.setTexture(CTextureBank::GetTexture(ETextures::Items));
+	sprite.setTextureRect(m_items[a_itemID].GetRenderRect());
+	sprite.setOrigin(sprite.getGlobalBounds().width / 2.f, sprite.getGlobalBounds().height);
+	sprite.setPosition(a_position);
+	sprite.setRotation(a_rotation - 90.f);
+
+	CRenderer::GetInstance().PushRenderCommand(sprite);
+
+}
+
 float CItemBank::GetItemsSpriteSize() const
 {
 	return m_itemSpriteSize;

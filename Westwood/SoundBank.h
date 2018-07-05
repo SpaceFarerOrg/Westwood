@@ -13,7 +13,6 @@ public:
 	bool SoundExists(const std::string& a_soundName);
 
 private:
-
 	struct SSoundBufferGroup
 	{
 		std::vector<sf::SoundBuffer> m_soundBuffers;

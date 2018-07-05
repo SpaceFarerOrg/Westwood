@@ -141,6 +141,7 @@
     <ClCompile Include="Axe.cpp" />
     <ClCompile Include="Bed.cpp" />
     <ClCompile Include="ButtonManager.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Farm.cpp" />
     <ClCompile Include="FullscreenFader.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Axe.h" />
     <ClInclude Include="Bed.h" />
     <ClInclude Include="ButtonManager.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Farm.h" />
     <ClInclude Include="CommonUtilities.h" />
     <ClInclude Include="FullscreenFader.h" />

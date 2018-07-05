@@ -3,6 +3,7 @@
 #include "TileInteraction.h"
 #include <array>
 #include "AnimationCollection.h"
+#include "Character.h"
 
 class CAvatar
 {
@@ -28,6 +29,8 @@ public:
 	void Draw();
 protected:
 	void UpdateAnimationCollection();
+
+	CCharacter m_character;
 
 	sf::Vector2f CalculateFuturePositionOfCollisionPoint(short a_collisionPoint) const;
 
