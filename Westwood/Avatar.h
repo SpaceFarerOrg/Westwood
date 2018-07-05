@@ -9,7 +9,8 @@ class CAvatar
 {
 public:
 	CAvatar();
-	
+	CAvatar(const CAvatar& a_avatar);
+
 	void SetDirection(const sf::Vector2f& a_direction);
 	void SetMovementSpeed(float a_movementSpeed);
 

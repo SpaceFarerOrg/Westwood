@@ -2,6 +2,7 @@
 #include <SFML\Graphics\Sprite.hpp>
 #include <vector>
 #include <array>
+#include <SFML\Graphics\RenderTexture.hpp>
 
 class CCharacter
 {
@@ -9,10 +10,10 @@ public:
 	enum EBodyParts
 	{
 		LeftArm,
-		RightArm,
-		LeftLeg,
 		RightLeg,
 		Torso,
+		LeftLeg,
+		RightArm,
 		Count,
 	};
 private:
@@ -42,6 +43,8 @@ public:
 	void OverrideBodyPart(EBodyParts a_partToOverride, float a_rotation);
 	void HandBackBodyPart(EBodyParts a_partToHandBack);
 
+	void SetDirection(short a_direction);
+
 	void HoldItem(short a_itemID);
 private:
 	void UpdatePart(size_t a_part, float a_dt);
@@ -56,10 +59,14 @@ private:
 	std::vector<SFrame> m_frames;
 
 	sf::Vector2f m_carryPosition;
+	sf::Sprite m_sprite;
+	sf::RenderTexture m_renderTexture;
 
 	short m_carriedObject;
 	
 	short m_currentFrame;
+
+	short m_direction;
 
 	float m_rotationSpeed;
 
