@@ -42,6 +42,11 @@ void CAvatar::SetDeltaTime(float a_deltaTime)
 	m_currentDeltaTime = a_deltaTime;
 }
 
+float CAvatar::GetDeltaTime()
+{
+	return m_currentDeltaTime;
+}
+
 const sf::Vector2f & CAvatar::GetPosition() const
 {
 	return m_position;

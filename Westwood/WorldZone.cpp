@@ -54,12 +54,17 @@ CTileMap & CWorldZone::GetTileMap()
 void CWorldZone::CheckPlayerAgainstItems(CPlayer& a_player)
 {
 	std::vector<size_t> removedItems;
+	static float playerPickUpRadius = 10.f;
+	static float playerAttractionRadius = 150.f;
+	static float toPlayerDuration = 0.1f;
 
 	for (size_t i = 0; i < m_items.size(); ++i)
 	{
 		SItemInWorldData& item = m_items[i];
 		
-		if (Math::GetLenght2(item.m_position - a_player.GetPosition()) < 10.f * 10.f)
+		float lengthBetween2 = Math::GetLenght2(item.m_position - a_player.GetPosition());
+
+		if (lengthBetween2 < playerPickUpRadius * playerPickUpRadius)
 		{
 			CInventory& playerInventory = a_player.GetInventory();
 
@@ -71,6 +76,10 @@ void CWorldZone::CheckPlayerAgainstItems(CPlayer& a_player)
 			removedItems.push_back(i);
 
 			playerInventory.AddItemToInventory(m_items[i].a_itemID);
+		}
+		else if (lengthBetween2 < playerAttractionRadius * playerAttractionRadius)
+		{
+			item.m_position = Math::Lerp(item.m_position, a_player.GetPosition(), a_player.GetDeltaTime() / toPlayerDuration);
 		}
 	}
 

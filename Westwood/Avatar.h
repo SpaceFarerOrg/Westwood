@@ -12,6 +12,7 @@ public:
 	void SetMovementSpeed(float a_movementSpeed);
 
 	void SetDeltaTime(float a_deltaTime);
+	float GetDeltaTime();
 
 	const sf::Vector2f& GetPosition() const;
 	void SetPosition(const sf::Vector2f& a_position);

@@ -13,15 +13,16 @@ CFullscreenFader::CFullscreenFader()
 
 void CFullscreenFader::Update(float a_dt)
 {
+
 	if (GetIsFading())
 	{
 		if (!m_isFadingOut)
 		{
-			m_alpha += a_dt * 50.f;
+			m_alpha += a_dt * 255.f;
 		}
 		else
 		{
-			m_alpha -= a_dt * 50.f;
+			m_alpha -= a_dt * 255.f;
 		}
 
 		m_alpha = Math::Clamp<float>(m_alpha, 0.f, 255.f);

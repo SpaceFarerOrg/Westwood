@@ -5,10 +5,6 @@
 
 namespace Math
 {
-	static float GetLenght2(const sf::Vector2f& a_vector)
-	{
-		return a_vector.x * a_vector.x + a_vector.y * a_vector.y;
-	}
 
 	static short RandomInRange(short a_min, short a_max)
 	{
@@ -48,5 +44,37 @@ namespace Math
 		}
 
 		return clampedVal;
+	}
+
+	static float Lerp(float a_Start, float a_Target, float a_Percentage)
+	{
+		return (1 - a_Percentage) * a_Start + a_Percentage * a_Target;
+	}
+
+	static sf::Vector2f Lerp(const sf::Vector2f& a_Start, const sf::Vector2f& a_End, float a_Percentage)
+	{
+		sf::Vector2f returnVector;
+
+		returnVector.x = Lerp(a_Start.x, a_End.x, a_Percentage);
+		returnVector.y = Lerp(a_Start.y, a_End.y, a_Percentage);
+
+		return std::move(returnVector);
+	}
+
+
+	static float GetLenght2(const sf::Vector2f& a_vector)
+	{
+		return a_vector.x * a_vector.x + a_vector.y * a_vector.y;
+	}
+
+	static float GetLength(const sf::Vector2f& a_Vector)
+	{
+		return sqrtf(GetLenght2(a_Vector));
+	}
+
+	static void Normalize(sf::Vector2f& a_Vec)
+	{
+		float l = GetLength(a_Vec);
+		a_Vec /= l;
 	}
 }
