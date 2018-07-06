@@ -271,7 +271,7 @@ sf::Vector2f CPlayer::GetInteractPosition() const
 	sf::Vector2f characterDimensions = m_characterCollection.GetCurrentCharacter().GetCharacterDimensions();
 
 	interactPosition = m_position;
-	interactPosition.y += characterDimensions.y * 0.75f;
+	interactPosition.y -= characterDimensions.y * 0.2f;
 
 	interactPosition.x += GetFacingDirection().x * characterDimensions.x * 0.5f;
 	interactPosition.y += GetFacingDirection().y * characterDimensions.y * 0.5f;

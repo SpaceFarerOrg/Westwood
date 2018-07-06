@@ -57,7 +57,7 @@ void CCharacter::LoadCharacter(const char * a_textureFile, const char * a_charac
 		m_offsets[i] = m_frames[0].m_targetOffsets[i];
 	}
 
-	m_sprite.setOrigin(64, 0);
+	m_sprite.setOrigin(64, 128);
 	m_renderTexture.create(128, 128);
 	m_renderTexture.clear(sf::Color::Transparent);
 	m_sprite.setTexture(m_renderTexture.getTexture());
