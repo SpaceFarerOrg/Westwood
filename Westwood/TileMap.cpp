@@ -64,6 +64,12 @@ sf::Vector2f CTileMap::CheckForAllowedMove(const sf::Vector2f & a_targetPosition
 {
 	sf::Vector2f allowedMove;
 
+	if (a_targetPosition.x < 0.f || a_targetPosition.x > m_width * m_tileWidth ||
+		a_targetPosition.y < 0.f || a_targetPosition.y > m_height * m_tileHeight)
+	{
+		return std::move(allowedMove);
+	}
+
 	if (IsTileWalkable({ a_targetPosition.x, a_currentPosition.y }))
 	{
 		allowedMove.x = a_targetPosition.x - a_currentPosition.x;
