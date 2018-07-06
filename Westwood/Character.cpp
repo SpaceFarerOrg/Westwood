@@ -111,14 +111,30 @@ void CCharacter::Render(const sf::Vector2f & a_position)
 	for (size_t i = 0; i < EBodyParts::Count; ++i)
 	{
 		m_sprites[i].setRotation(m_rotations[i]);
-		m_renderTexture.draw(m_sprites[i]);
 
+		if (m_direction != 0)
+		{
+			m_renderTexture.draw(m_sprites[i]);
+		}
 		//CRenderer::GetInstance().PushRenderCommand(m_sprites[i]);
 	}
+
+	if (m_direction == 0)
+	{
+		m_renderTexture.draw(m_sprites[EBodyParts::Torso]);
+		m_renderTexture.draw(m_sprites[EBodyParts::LeftArm]);
+		m_renderTexture.draw(m_sprites[EBodyParts::RightArm]);
+		m_renderTexture.draw(m_sprites[EBodyParts::LeftLeg]);
+		m_renderTexture.draw(m_sprites[EBodyParts::RightLeg]);
+	}
+
 	m_renderTexture.display();
 	m_sprite.setPosition(a_position);
 	//m_sprite.setRotation(180.f * (m_direction == 1));
-	m_sprite.setScale(m_direction, 1);
+	if (m_direction != 0)
+	{
+		m_sprite.setScale(m_direction, 1);
+	}
 	CRenderer::GetInstance().PushRenderCommand(m_sprite, LAYER_OBJECT);
 
 	m_carryPosition = a_position - m_sprite.getOrigin() + m_sprites[EBodyParts::RightArm].getTransform().transformPoint(32.f, 64.f - 16.f);
