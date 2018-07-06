@@ -80,16 +80,17 @@ void CCharacter::Update(float a_dt)
 
 void CCharacter::Render(const sf::Vector2f & a_position)
 {
-	m_sprites[EBodyParts::Torso].setPosition(0, 0);
+	m_sprites[EBodyParts::Torso].setPosition(m_sprite.getOrigin().x - m_sprites[EBodyParts::Torso].getGlobalBounds().width / 2, 0);
 
 	sf::Vector2f armPosition;
-	armPosition.x = (m_sprites[EBodyParts::Torso].getGlobalBounds().width / 2.f);
+	armPosition.x = (m_sprite.getGlobalBounds().width / 2.f);
 	armPosition.y = (m_sprites[EBodyParts::Torso].getGlobalBounds().height / 2.f);
+
 	m_sprites[EBodyParts::LeftArm].setPosition(armPosition);
 	m_sprites[EBodyParts::RightArm].setPosition(armPosition);
 
 	sf::Vector2f legPosition;
-	legPosition.x = m_sprites[EBodyParts::Torso].getGlobalBounds().width / 2.f;
+	legPosition.x = m_sprite.getGlobalBounds().width / 2.f;
 	legPosition.y = m_sprites[EBodyParts::Torso].getGlobalBounds().height - 8.f;
 	m_sprites[EBodyParts::LeftLeg].setPosition(legPosition);
 	m_sprites[EBodyParts::RightLeg].setPosition(legPosition);
@@ -98,7 +99,6 @@ void CCharacter::Render(const sf::Vector2f & a_position)
 	for (size_t i = 0; i < EBodyParts::Count; ++i)
 	{
 		m_sprites[i].setRotation(m_rotations[i]);
-		m_sprites[i].move(40.f, 0);
 		m_renderTexture.draw(m_sprites[i]);
 
 		//CRenderer::GetInstance().PushRenderCommand(m_sprites[i]);
@@ -109,9 +109,9 @@ void CCharacter::Render(const sf::Vector2f & a_position)
 	m_sprite.setScale(m_direction, 1);
 	CRenderer::GetInstance().PushRenderCommand(m_sprite, LAYER_OBJECT);
 
-	m_carryPosition = a_position + m_sprites[EBodyParts::RightArm].getTransform().transformPoint(32.f, 64.f - 16.f);
+	m_carryPosition = a_position - m_sprite.getOrigin() + m_sprites[EBodyParts::RightArm].getTransform().transformPoint(32.f, 64.f - 16.f);
 
-	CItemBank::GetInstance().RenderItemAsHeld(m_carriedObject, m_carryPosition, m_rotations[EBodyParts::RightArm]);
+	CItemBank::GetInstance().RenderItemAsHeld(m_carriedObject, m_carryPosition, m_rotations[EBodyParts::RightArm], m_direction);
 }
 
 void CCharacter::OverrideBodyPart(EBodyParts a_partToOverride, float a_rotation)
