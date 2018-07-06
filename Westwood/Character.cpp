@@ -50,9 +50,10 @@ void CCharacter::LoadCharacter(const char * a_textureFile, const char * a_charac
 		frameToLoad[EBodyParts::RightLeg] = characterJson["frames"][i]["rLegTargetRot"].get<float>();
 	}
 
-	m_sprite.setOrigin(32, 0);
+	m_sprite.setOrigin(64, 0);
 	m_renderTexture.create(128, 128);
 	m_renderTexture.clear(sf::Color::Transparent);
+	m_sprite.setTexture(m_renderTexture.getTexture());
 }
 
 void CCharacter::Update(float a_dt)
@@ -78,7 +79,7 @@ void CCharacter::Update(float a_dt)
 
 void CCharacter::Render(const sf::Vector2f & a_position)
 {
-	m_sprites[EBodyParts::Torso].setPosition(0,0);
+	m_sprites[EBodyParts::Torso].setPosition(0, 0);
 
 	sf::Vector2f armPosition;
 	armPosition.x = (m_sprites[EBodyParts::Torso].getGlobalBounds().width / 2.f);
@@ -96,13 +97,12 @@ void CCharacter::Render(const sf::Vector2f & a_position)
 	for (size_t i = 0; i < EBodyParts::Count; ++i)
 	{
 		m_sprites[i].setRotation(m_rotations[i]);
-		m_sprites[i].move(m_sprite.getOrigin());
+		m_sprites[i].move(40.f, 0);
 		m_renderTexture.draw(m_sprites[i]);
 
 		//CRenderer::GetInstance().PushRenderCommand(m_sprites[i]);
 	}
 	m_renderTexture.display();
-	m_sprite.setTexture(m_renderTexture.getTexture());
 	m_sprite.setPosition(a_position);
 	//m_sprite.setRotation(180.f * (m_direction == 1));
 	m_sprite.setScale(m_direction, 1);
