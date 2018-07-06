@@ -8,6 +8,8 @@ std::vector<sf::Texture> CTextureBank::m_unorderedBank;
 
 CTextureBank::CTextureBank()
 {
+	m_unorderedBank.reserve(256);
+
 }
 
 void CTextureBank::LoadAllTextures()

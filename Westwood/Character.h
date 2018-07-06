@@ -68,7 +68,7 @@ private:
 
 	short m_direction;
 
-	float m_rotationSpeed;
+	float m_animationSpeed;
 
 	bool m_isCarryingObject;
 };

@@ -9,7 +9,6 @@
 void CCharacter::LoadCharacter(const char * a_textureFile, const char * a_characterFile)
 {
 	m_carriedObject = 0;
-	m_rotationSpeed = 150.f;
 	m_direction = 1;
 
 	short textureIndex = CTextureBank::LoadUnorderedTexture(a_textureFile);
@@ -39,6 +38,7 @@ void CCharacter::LoadCharacter(const char * a_textureFile, const char * a_charac
 
 	nlohmann::json characterJson = OpenJson(a_characterFile);
 
+	m_animationSpeed = characterJson["speed"].get<float>();
 	for (size_t i = 0; i < characterJson["frames"].size(); ++i)
 	{
 		m_frames.push_back(SFrame());
@@ -49,6 +49,12 @@ void CCharacter::LoadCharacter(const char * a_textureFile, const char * a_charac
 		LoadFrameData(EBodyParts::LeftArm, characterJson["frames"][i]["lArm"], frameToLoad);
 		LoadFrameData(EBodyParts::RightLeg, characterJson["frames"][i]["rLeg"], frameToLoad);
 		LoadFrameData(EBodyParts::LeftLeg, characterJson["frames"][i]["lLeg"], frameToLoad);
+	}
+
+	//Set all starting offsets to the first frames offsets
+	for (size_t i = 0; i < EBodyParts::Count; ++i)
+	{
+		m_offsets[i] = m_frames[0].m_targetOffsets[i];
 	}
 
 	m_sprite.setOrigin(64, 0);
@@ -80,20 +86,26 @@ void CCharacter::Update(float a_dt)
 
 void CCharacter::Render(const sf::Vector2f & a_position)
 {
-	m_sprites[EBodyParts::Torso].setPosition(m_sprite.getOrigin().x - m_sprites[EBodyParts::Torso].getGlobalBounds().width / 2, 0);
+	sf::Vector2f torsoPosition;
+	torsoPosition.x = m_sprite.getOrigin().x - m_sprites[EBodyParts::Torso].getGlobalBounds().width / 2;
+	torsoPosition.y = 0.f;
 
+	m_sprites[EBodyParts::Torso].setPosition(m_offsets[EBodyParts::Torso] + torsoPosition);
+
+	sf::Vector2f lArmPosition = m_offsets[EBodyParts::LeftArm];
+	sf::Vector2f rArmPosition = m_offsets[EBodyParts::RightArm];
 	sf::Vector2f armPosition;
 	armPosition.x = (m_sprite.getGlobalBounds().width / 2.f);
-	armPosition.y = (m_sprites[EBodyParts::Torso].getGlobalBounds().height / 2.f);
 
-	m_sprites[EBodyParts::LeftArm].setPosition(armPosition);
-	m_sprites[EBodyParts::RightArm].setPosition(armPosition);
+	m_sprites[EBodyParts::LeftArm].setPosition(armPosition + lArmPosition);
+	m_sprites[EBodyParts::RightArm].setPosition(armPosition + rArmPosition);
 
+	sf::Vector2f lLegPosition = m_offsets[EBodyParts::LeftLeg];
+	sf::Vector2f rLegPosition = m_offsets[EBodyParts::RightLeg];
 	sf::Vector2f legPosition;
 	legPosition.x = m_sprite.getGlobalBounds().width / 2.f;
-	legPosition.y = m_sprites[EBodyParts::Torso].getGlobalBounds().height - 8.f;
-	m_sprites[EBodyParts::LeftLeg].setPosition(legPosition);
-	m_sprites[EBodyParts::RightLeg].setPosition(legPosition);
+	m_sprites[EBodyParts::LeftLeg].setPosition(lLegPosition + legPosition);
+	m_sprites[EBodyParts::RightLeg].setPosition(rLegPosition + legPosition);
 
 	m_renderTexture.clear(sf::Color::Transparent);
 	for (size_t i = 0; i < EBodyParts::Count; ++i)
@@ -145,16 +157,16 @@ void CCharacter::LoadFrameData(EBodyParts a_part, nlohmann::json & a_partFrameJs
 
 void CCharacter::UpdatePart(size_t a_part, float a_dt)
 {
-	m_offsets[a_part].x = Math::MoveTowards(m_offsets[a_part].x, m_frames[m_currentFrame].m_targetOffsets[a_part].x, a_dt * m_rotationSpeed);
-	m_offsets[a_part].y = Math::MoveTowards(m_offsets[a_part].y, m_frames[m_currentFrame].m_targetOffsets[a_part].y, a_dt * m_rotationSpeed);
+	m_offsets[a_part].x = Math::MoveTowards(m_offsets[a_part].x, m_frames[m_currentFrame].m_targetOffsets[a_part].x, a_dt * m_animationSpeed);
+	m_offsets[a_part].y = Math::MoveTowards(m_offsets[a_part].y, m_frames[m_currentFrame].m_targetOffsets[a_part].y, a_dt * m_animationSpeed);
 
 	if (m_isOverride[a_part])
 	{
-		m_rotations[a_part] = Math::MoveTowards(m_rotations[a_part], m_overrideRotations[a_part], a_dt * m_rotationSpeed);
+		m_rotations[a_part] = Math::MoveTowards(m_rotations[a_part], m_overrideRotations[a_part], a_dt * m_animationSpeed);
 	}
 	else
 	{
-		m_rotations[a_part] = Math::MoveTowards(m_rotations[a_part], m_frames[m_currentFrame].m_targetRotations[a_part], a_dt * m_rotationSpeed);
+		m_rotations[a_part] = Math::MoveTowards(m_rotations[a_part], m_frames[m_currentFrame].m_targetRotations[a_part], a_dt * m_animationSpeed);
 
 		if (m_rotations[a_part] == m_frames[m_currentFrame].m_targetRotations[a_part])
 		{

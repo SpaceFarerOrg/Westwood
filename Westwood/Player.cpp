@@ -25,6 +25,8 @@ void CPlayer::Init()
 
 	m_characterCollection.AddCharacterToCollection("testCharacterSide", "data/animations/characterRunningSide.json", (size_t)EAnimationState::MoveLeft, 1);
 	m_characterCollection.AddCharacterToCollection("testCharacterSide", "data/animations/characterRunningSide.json", (size_t)EAnimationState::MoveRight, -1);
+	m_characterCollection.AddCharacterToCollection("testCharacterFront", "data/animations/characterRunningUp.json", (size_t)EAnimationState::MoveUp, 1);
+	m_characterCollection.AddCharacterToCollection("testCharacterFront", "data/animations/characterRunningUp.json", (size_t)EAnimationState::MoveDown, -1);
 	m_characterCollection.AddCharacterToCollection("testCharacterSide", "data/animations/characterIdle.json", (size_t)EAnimationState::Idle, -1);
 
 	m_characterCollection.SetCurrentState((size_t)EAnimationState::MoveLeft);
@@ -223,9 +225,11 @@ void CPlayer::SetAnimationState(const sf::Vector2f & a_direction)
 	{
 		if (a_direction.y < 0.f)
 		{
+			m_characterCollection.SetCurrentState((size_t)EAnimationState::MoveUp);
 		}
 		if (a_direction.y > 0.f)
 		{
+			m_characterCollection.SetCurrentState((size_t)EAnimationState::MoveDown);
 		}
 	}
 	else

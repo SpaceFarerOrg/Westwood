@@ -1,58 +1,58 @@
 {
-  "speed": 10.0,
+  "speed": 50.0,
   "frames": [
     {
       "torso": {
-        "targetRot": 0.0,
+        "targetRot": 3.0,
         "offsetX": 0.0,
         "offsetY": 0.0
       },
       "rArm": {
         "targetRot": 0.0,
-        "offsetX": 0,
+        "offsetX": 16,
         "offsetY": 32
       },
       "lArm": {
         "targetRot": 0.0,
-        "offsetX": 0,
+        "offsetX": -16,
         "offsetY": 32
       },
       "rLeg": {
         "targetRot": 0.0,
-        "offsetX": 0,
-        "offsetY": 64
+        "offsetX": 8,
+        "offsetY": 60
       },
       "lLeg": {
         "targetRot": 0.0,
-        "offsetX": 0,
+        "offsetX": -8,
         "offsetY": 64
       }
     },
     {
       "torso": {
-        "targetRot": 0.0,
+        "targetRot": -3.0,
         "offsetX": 0.0,
-        "offsetY": 2.0
+        "offsetY": 0.0
       },
       "rArm": {
         "targetRot": 0.0,
-        "offsetX": 0,
-        "offsetY": 42
+        "offsetX": 16,
+        "offsetY": 36
       },
       "lArm": {
         "targetRot": 0.0,
-        "offsetX": 0,
-        "offsetY": 42
+        "offsetX": -8,
+        "offsetY": 36
       },
       "rLeg": {
         "targetRot": 0.0,
-        "offsetX": 0,
+        "offsetX": 8,
         "offsetY": 64
       },
       "lLeg": {
         "targetRot": 0.0,
-        "offsetX": 0,
-        "offsetY": 64
+        "offsetX": -16,
+        "offsetY": 60
       }
     }
   ]
