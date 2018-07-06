@@ -3,6 +3,7 @@
 #include <vector>
 #include <array>
 #include <SFML\Graphics\RenderTexture.hpp>
+#include <json.hpp>
 
 class CCharacter
 {
@@ -27,12 +28,8 @@ private:
 			}
 		}
 
-		float& operator[](size_t a_index)
-		{
-			return m_targetRotations[a_index];
-		}
-
 		std::array<float, EBodyParts::Count> m_targetRotations;
+		std::array<sf::Vector2f, EBodyParts::Count> m_targetOffsets;
 	};
 public:
 	void LoadCharacter(const char* a_textureFile, const char* a_characterFile);
@@ -47,11 +44,14 @@ public:
 
 	void HoldItem(short a_itemID);
 private:
+	void LoadFrameData(EBodyParts a_part, nlohmann::json& a_partFrameJson, SFrame& a_frame);
+
 	void UpdatePart(size_t a_part, float a_dt);
 	bool IsFrameDoneForPart(size_t a_part);
 
 	std::array < sf::Sprite, static_cast<size_t>(EBodyParts::Count)> m_sprites;
 	std::array<float, static_cast<size_t>(EBodyParts::Count)> m_rotations;
+	std::array<sf::Vector2f, EBodyParts::Count> m_offsets;
 	std::array<float, EBodyParts::Count> m_overrideRotations;
 	std::array<bool, EBodyParts::Count> m_isOverride;
 	std::array<bool, EBodyParts::Count> m_isHandedBack;

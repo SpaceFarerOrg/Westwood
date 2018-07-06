@@ -44,10 +44,11 @@ void CCharacter::LoadCharacter(const char * a_textureFile, const char * a_charac
 		m_frames.push_back(SFrame());
 		SFrame& frameToLoad = m_frames.back();
 
-		frameToLoad[EBodyParts::LeftArm] = characterJson["frames"][i]["lArmTargetRot"].get<float>();
-		frameToLoad[EBodyParts::RightArm] = characterJson["frames"][i]["rArmTargetRot"].get<float>();
-		frameToLoad[EBodyParts::LeftLeg] = characterJson["frames"][i]["lLegTargetRot"].get<float>();
-		frameToLoad[EBodyParts::RightLeg] = characterJson["frames"][i]["rLegTargetRot"].get<float>();
+		LoadFrameData(EBodyParts::Torso, characterJson["frames"][i]["torso"], frameToLoad);
+		LoadFrameData(EBodyParts::RightArm, characterJson["frames"][i]["rArm"], frameToLoad);
+		LoadFrameData(EBodyParts::LeftArm, characterJson["frames"][i]["lArm"], frameToLoad);
+		LoadFrameData(EBodyParts::RightLeg, characterJson["frames"][i]["rLeg"], frameToLoad);
+		LoadFrameData(EBodyParts::LeftLeg, characterJson["frames"][i]["lLeg"], frameToLoad);
 	}
 
 	m_sprite.setOrigin(64, 0);
@@ -135,17 +136,27 @@ void CCharacter::HoldItem(short a_itemID)
 	m_carriedObject = a_itemID;
 }
 
+void CCharacter::LoadFrameData(EBodyParts a_part, nlohmann::json & a_partFrameJson, SFrame & a_frame)
+{
+	a_frame.m_targetRotations[a_part] = a_partFrameJson["targetRot"].get<float>();
+	a_frame.m_targetOffsets[a_part].x  = a_partFrameJson["offsetX"].get<float>();
+	a_frame.m_targetOffsets[a_part].y = a_partFrameJson["offsetY"].get<float>();
+}
+
 void CCharacter::UpdatePart(size_t a_part, float a_dt)
 {
+	m_offsets[a_part].x = Math::MoveTowards(m_offsets[a_part].x, m_frames[m_currentFrame].m_targetOffsets[a_part].x, a_dt * m_rotationSpeed);
+	m_offsets[a_part].y = Math::MoveTowards(m_offsets[a_part].y, m_frames[m_currentFrame].m_targetOffsets[a_part].y, a_dt * m_rotationSpeed);
+
 	if (m_isOverride[a_part])
 	{
 		m_rotations[a_part] = Math::MoveTowards(m_rotations[a_part], m_overrideRotations[a_part], a_dt * m_rotationSpeed);
 	}
 	else
 	{
-		m_rotations[a_part] = Math::MoveTowards(m_rotations[a_part], m_frames[m_currentFrame][a_part], a_dt * m_rotationSpeed);
+		m_rotations[a_part] = Math::MoveTowards(m_rotations[a_part], m_frames[m_currentFrame].m_targetRotations[a_part], a_dt * m_rotationSpeed);
 
-		if (m_rotations[a_part] == m_frames[m_currentFrame][a_part])
+		if (m_rotations[a_part] == m_frames[m_currentFrame].m_targetRotations[a_part])
 		{
 			m_isHandedBack[a_part] = false;
 		}
@@ -158,11 +169,13 @@ bool CCharacter::IsFrameDoneForPart(size_t a_part)
 
 	if (m_isOverride[a_part] || m_isHandedBack[a_part])
 	{
+		if(m_offsets[a_part] == m_frames[m_currentFrame].m_targetOffsets[a_part])
 		returnValue = true;
 	}
 	else
 	{
-		if (m_rotations[a_part] == m_frames[m_currentFrame][a_part])
+		if (m_rotations[a_part] == m_frames[m_currentFrame].m_targetRotations[a_part] && 
+			m_offsets[a_part] == m_frames[m_currentFrame].m_targetOffsets[a_part])
 		{
 			returnValue = true;
 		}

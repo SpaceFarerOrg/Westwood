@@ -1,16 +1,58 @@
 {
   "frames": [
     {
-      "rArmTargetRot": 20.0,
-      "lArmTargetRot": 20.0,
-      "rLegTargetRot": 0.0,
-      "lLegTargetRot": 0.0
+      "torso": {
+        "targetRot": 0.0,
+        "offsetX": 0.0,
+        "offsetY": 0.0
+      },
+      "rArm": {
+        "targetRot": 0.0,
+        "offsetX": 32,
+        "offsetY": 32
+      },
+      "lArm": {
+        "targetRot": 0.0,
+        "offsetX": 32,
+        "offsetY": 32
+      },
+      "rLeg": {
+        "targetRot": 0.0,
+        "offsetX": 0,
+        "offsetY": 64
+      },
+      "lLeg": {
+        "targetRot": 0.0,
+        "offsetX": 0,
+        "offsetY": 64
+      }
     },
     {
-      "rArmTargetRot": -20.0,
-      "lArmTargetRot": -20.0,
-      "rLegTargetRot": 0.0,
-      "lLegTargetRot": 0.0
+      "torso": {
+        "targetRot": 0.0,
+        "offsetX": 0.0,
+        "offsetY": 0.0
+      },
+      "rArm": {
+        "targetRot": 0.0,
+        "offsetX": 32,
+        "offsetY": 42
+      },
+      "lArm": {
+        "targetRot": 0.0,
+        "offsetX": 32,
+        "offsetY": 42
+      },
+      "rLeg": {
+        "targetRot": 0.0,
+        "offsetX": 0,
+        "offsetY": 64
+      },
+      "lLeg": {
+        "targetRot": 0.0,
+        "offsetX": 0,
+        "offsetY": 64
+      }
     }
   ]
 }
