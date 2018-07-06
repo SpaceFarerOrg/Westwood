@@ -18,7 +18,7 @@ public:
 	size_t GetItemCount() const;
 
 	void RenderItem(short a_itemID, const sf::Vector2f& a_position, bool a_shouldRenderAsUI = false) const;
-	void RenderItemAsHeld(short a_itemID, const sf::Vector2f& a_position, float a_rotation);
+	void RenderItemAsHeld(short a_itemID, const sf::Vector2f& a_position, float a_rotation, short a_direction);
 
 	float GetItemsSpriteSize() const;
 private:
