@@ -26,3 +26,8 @@ CCharacter & CCharacterCollection::GetCurrentCharacter()
 {
 	return m_collection[m_currentState];
 }
+
+const CCharacter& CCharacterCollection::GetCurrentCharacter() const
+{
+	return m_collection.at(m_currentState);
+}

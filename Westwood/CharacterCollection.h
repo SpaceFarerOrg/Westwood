@@ -12,6 +12,7 @@ public:
 
 	void SetCurrentState(size_t a_state);
 	CCharacter& GetCurrentCharacter();
+	const CCharacter& GetCurrentCharacter() const;
 private:
 
 	std::unordered_map<size_t, CCharacter> m_collection;

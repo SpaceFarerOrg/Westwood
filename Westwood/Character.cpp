@@ -164,6 +164,15 @@ void CCharacter::HoldItem(short a_itemID)
 	m_carriedObject = a_itemID;
 }
 
+sf::Vector2f CCharacter::GetCharacterDimensions() const
+{
+	sf::Vector2f characterDimensions;
+	characterDimensions.x = static_cast<float>(m_renderTexture.getSize().x);
+	characterDimensions.y = static_cast<float>(m_renderTexture.getSize().y);
+
+	return std::move(characterDimensions);
+}
+
 void CCharacter::LoadFrameData(EBodyParts a_part, nlohmann::json & a_partFrameJson, SFrame & a_frame)
 {
 	a_frame.m_targetRotations[a_part] = a_partFrameJson["targetRot"].get<float>();

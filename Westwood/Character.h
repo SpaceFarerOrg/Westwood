@@ -43,6 +43,8 @@ public:
 	void SetDirection(short a_direction);
 
 	void HoldItem(short a_itemID);
+
+	sf::Vector2f GetCharacterDimensions() const; 
 private:
 	void LoadFrameData(EBodyParts a_part, nlohmann::json& a_partFrameJson, SFrame& a_frame);
 
