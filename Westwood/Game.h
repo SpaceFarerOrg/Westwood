@@ -7,6 +7,7 @@
 #include "WorldEditor.h"
 #include "TilesetBank.h"
 #include "FullscreenFader.h"
+#include "EngineInfo.h"
 
 class CGame
 {
@@ -17,6 +18,7 @@ public:
 
 	bool ShouldRun() const;
 private:
+	CEngineInfo m_engineInfo;
 	CWindowEventHandler m_windowEventHandler;
 	CGameWorld m_gameWorld;
 

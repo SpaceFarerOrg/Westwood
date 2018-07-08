@@ -117,6 +117,9 @@
     </ClCompile>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterCollection.cpp" />
+    <ClCompile Include="EngineInfo.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonManager.h" />
@@ -260,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterCollection.h" />
+    <ClInclude Include="EngineInfo.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game World">
